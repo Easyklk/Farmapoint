@@ -59,8 +59,8 @@
     <Compile Include=".xaml.cs">
       <DependentUpon>VentanaBusquedaPaciente.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VentanaMedicamentosDispensables.xaml.cs">
-      <DependentUpon>VentanaMedicamentosDispensables.xaml</DependentUpon>
+    <Compile Include="Window2.xaml.cs">
+      <DependentUpon>Window2.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -78,7 +78,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="VentanaMedicamentosDispensables.xaml">
+    <Page Include="Window2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
