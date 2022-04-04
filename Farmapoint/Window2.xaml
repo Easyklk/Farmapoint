@@ -8,9 +8,16 @@
         Title="Window2"
         WindowState="Maximized"
         Background="WhiteSmoke">
-    <Grid>
-        <Label x:Name="Title" Content="Farmapoint" HorizontalAlignment="Center" VerticalAlignment="Top" Height="64" Width="auto" FontSize="36" FontWeight="Bold" FontStyle="Italic" Margin="278,43,277.6,0" />
-        <Button Content="Volver" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="25,0,0,25" Width="auto" Height="auto" Click="Button_Volver"/>
-        <DataGrid x:Name="grdDatos" HorizontalAlignment="Center" Width="auto" MinWidth="500" MaxHeight="300" MinHeight="250" VerticalAlignment="Center" Loaded="DataRow_Loaded" IsReadOnly="True"/>
+    <Grid Width="700" Height="400">
+        <Border BorderBrush="Black"
+                Background="White"
+                BorderThickness="1"
+                CornerRadius="10">
+            <Border.Effect>
+                <DropShadowEffect />
+            </Border.Effect>
+        </Border>
+        <Label x:Name="Title" Content="Farmapoint" HorizontalAlignment="Center" VerticalAlignment="Top" Height="64" Width="auto" FontSize="36" FontWeight="Bold" FontStyle="Italic"/>
+        <DataGrid x:Name="grdDatos" HorizontalAlignment="Center" Width="550" Height="250" VerticalAlignment="Center" Loaded="DataRow_Loaded" IsReadOnly="True"/>
     </Grid>
 </Window>
