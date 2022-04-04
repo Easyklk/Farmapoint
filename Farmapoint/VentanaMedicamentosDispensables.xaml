@@ -18,6 +18,6 @@
             </Border.Effect>
         </Border>
         <Label x:Name="Title" Content="Farmapoint" HorizontalAlignment="Center" VerticalAlignment="Top" Height="64" Width="auto" FontSize="36" FontWeight="Bold" FontStyle="Italic"/>
-        <DataGrid x:Name="grdDatos" HorizontalAlignment="Center" Width="550" Height="250" VerticalAlignment="Center" Loaded="DataRow_Loaded" IsReadOnly="True"/>
+        <DataGrid x:Name="grdDatos" HorizontalAlignment="Center" Width="550" Height="250" VerticalAlignment="Center" Loaded="DataRow_Loaded" IsReadOnly="True" AutoGenerateColumns="False" SelectionChanged="grdDatos_SelectionChanged" Background="White" BorderBrush="#FFA397A4" RowBackground="WhiteSmoke"/>
     </Grid>
 </Window>

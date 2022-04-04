@@ -59,5 +59,9 @@ namespace Farmapoint
             ventanaLogeado.Show();
         }
 
+        private void grdDatos_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
