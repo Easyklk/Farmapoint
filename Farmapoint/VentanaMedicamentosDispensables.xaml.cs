@@ -13,6 +13,7 @@ namespace Farmapoint
         private OleDbConnection conexion = ConexionDb.AbrirConexion();
         private OleDbDataAdapter adapter = new OleDbDataAdapter();
         private OleDbCommand command = new OleDbCommand();
+        private OleDbDataReader reader;
         DataSet d = new DataSet();
         private string codigoSns;
 
@@ -62,6 +63,40 @@ namespace Farmapoint
         private void grdDatos_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void label_nombre_Loaded(object sender, RoutedEventArgs e)
+        {
+            OleDbConnection con = ConexionDb.AbrirConexion();
+            string str = "SELECT Nombre " +
+                    "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns+"'";
+            command = new OleDbCommand(str, con);
+            OleDbDataReader reader = command.ExecuteReader();
+
+            if (reader.Read())
+            {
+                label_nombre.Text = reader["Nombre"].ToString();
+            }
+
+        }
+
+        private void label_apellido_Loaded(object sender, RoutedEventArgs e)
+        {
+            OleDbConnection con = ConexionDb.AbrirConexion();
+            string str = "SELECT Apellidos " +
+                    "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns + "'";
+            command = new OleDbCommand(str, con);
+            OleDbDataReader reader = command.ExecuteReader();
+
+            if (reader.Read())
+            {
+                label_apellido.Text = reader["Apellidos"].ToString();
+            }
+        }
+
+        private void label_codigosns_Loaded(object sender, RoutedEventArgs e)
+        {
+            label_sns.Text = codigoSns;
         }
     }
 }
