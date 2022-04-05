@@ -26,7 +26,7 @@ namespace Farmapoint
         private void rellenarDatos(OleDbConnection conexion, OleDbDataAdapter adapter, OleDbCommand command, DataSet d)
         {
             try
-            {                
+            {
                 d.Clear();
                 string qry = "SELECT CRecetaDispensable.* " +
                     "FROM(CRecetaDispensable LEFT JOIN CBusquedaReferenciasOUT " +
@@ -63,7 +63,7 @@ namespace Farmapoint
         {
             OleDbConnection con = ConexionDb.AbrirConexion();
             string str = "SELECT Nombre " +
-                    "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns+"'";
+                    "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns + "'";
             command = new OleDbCommand(str, con);
             OleDbDataReader reader = command.ExecuteReader();
 
@@ -95,11 +95,27 @@ namespace Farmapoint
 
         private void grdDatos_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            //DataRowView view = (DataRowView)grdDatos.SelectedItem;
+            //int index = grdDatos.CurrentCell.Column.DisplayIndex;
+            //string cellvalue = view.Row.ItemArray[index].ToString();
+            //MessageBox.Show(cellvalue);
 
-            string txt = grdDatos.SelectedItem.ToString(); 
-            //Rows["Column name"].Value.ToString();
+            DataRowView row = grdDatos.SelectedItem as DataRowView;
+            CRecetaDispensable recetaDispensable = new CRecetaDispensable();
+            recetaDispensable.propId_Repositorio = (String)row.Row.ItemArray[0];
+            recetaDispensable.propIdentificador_Receta = (String)row.Row.ItemArray[1];
+            recetaDispensable.propFecha_Prescripcion = (String)row.Row.ItemArray[2];
+            recetaDispensable.propCodigo_Producto_Prescrito = (String)row.Row.ItemArray[3];
+            recetaDispensable.propNombre_Producto_Prescrito = (String)row.Row.ItemArray[4];
+            recetaDispensable.propEs_Marca_Comercial = (bool)row.Row.ItemArray[5];
+            recetaDispensable.propNum_Envases = (int)row.Row.ItemArray[6];
+            recetaDispensable.propCodigo_Centro_Prescriptor = (String)row.Row.ItemArray[7];
+            recetaDispensable.propTipo_Centro_Prescriptor = (String)row.Row.ItemArray[8];
+            recetaDispensable.propEspecialidad_Medico = (String)row.Row.ItemArray[9];
+            recetaDispensable.propNombre_Medico = (String)row.Row.ItemArray[10];
 
-            MessageBox.Show(txt);
+            MessageBox.Show(recetaDispensable.propId_Repositorio);
+
         }
 
 

@@ -59,6 +59,7 @@
     <Compile Include=".xaml.cs">
       <DependentUpon>VentanaBusquedaPaciente.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CRecetaDispensable.cs" />
     <Compile Include="VentanaMedicamentosDispensables.xaml.cs">
       <DependentUpon>VentanaMedicamentosDispensables.xaml</DependentUpon>
     </Compile>
