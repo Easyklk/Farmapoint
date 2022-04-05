@@ -93,5 +93,15 @@ namespace Farmapoint
             label_sns.Text = codigoSns;
         }
 
+        private void grdDatos_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+            string txt = grdDatos.SelectedItem.ToString(); 
+            //Rows["Column name"].Value.ToString();
+
+            MessageBox.Show(txt);
+        }
+
+
     }
 }
