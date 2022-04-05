@@ -28,17 +28,16 @@ namespace Farmapoint
             try
             {                
                 d.Clear();
-                string qry = "SELECT CDetalleRecetaIN.Receta " +
-                    "FROM CPaciente INNER JOIN(CDetalleRecetaIN INNER JOIN CBusquedaPacienteOUT " +
-                    "ON (CDetalleRecetaIN.ID_Paciente = CBusquedaPacienteOUT.Paciente) " +
-                    "AND(CDetalleRecetaIN.ID_Consulta = CBusquedaPacienteOUT.ID_Consulta)) " +
-                    "ON(CDetalleRecetaIN.ID_Paciente = CPaciente.ID_Paciente) " +
-                    "AND(CPaciente.ID_Paciente = CBusquedaPacienteOUT.Paciente) " +
+                string qry = "SELECT CRecetaDispensable.* " +
+                    "FROM(CRecetaDispensable LEFT JOIN CBusquedaReferenciasOUT " +
+                    "ON CRecetaDispensable.Identificador_Receta = CBusquedaReferenciasOUT.RecetasDispensable) " +
+                    "INNER JOIN(CPaciente INNER JOIN CBusquedaReferenciasIN ON CPaciente.ID_Paciente = CBusquedaReferenciasIN.ID_Paciente) " +
+                    "ON CRecetaDispensable.Identificador_Receta = CBusquedaReferenciasIN.Receta_Dispensable " +
                     "WHERE CPaciente.Codigo_SNS = '" + codigoSns + "'";
                 command.CommandText = qry;
                 command.Connection = conexion;
                 adapter.SelectCommand = command;
-                adapter.Fill(d, "CDetalleRecetaIN" + "CPaciente" + "CReceta");
+                adapter.Fill(d, "CRecetaDispensable" + "CBusquedaReferenciasOUT" + "CPaciente");
                 conexion.Close();
             }
             catch (Exception ex)
@@ -51,18 +50,13 @@ namespace Farmapoint
         {
             grdDatos.ItemsSource = null;
             rellenarDatos(conexion, adapter, command, d);
-            grdDatos.ItemsSource = d.Tables["CDetalleRecetaIN" + "CPaciente" + "CReceta"].DefaultView;
+            grdDatos.ItemsSource = d.Tables["CRecetaDispensable" + "CBusquedaReferenciasOUT" + "CPaciente"].DefaultView;
         }
         private void Button_Volver(object sender, RoutedEventArgs e)
         {
             Window1 ventanaLogeado = new Window1();
             this.Close();
             ventanaLogeado.Show();
-        }
-
-        private void grdDatos_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-
         }
 
         private void label_nombre_Loaded(object sender, RoutedEventArgs e)
@@ -98,5 +92,6 @@ namespace Farmapoint
         {
             label_sns.Text = codigoSns;
         }
+
     }
 }
