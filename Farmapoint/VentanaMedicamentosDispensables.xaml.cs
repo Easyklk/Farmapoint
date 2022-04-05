@@ -28,7 +28,7 @@ namespace Farmapoint
             try
             {                
                 d.Clear();
-                string qry = "SELECT CPaciente.Nombre, CPaciente.Apellidos, CPaciente.Codigo_SNS AS SNS, CDetalleRecetaIN.Receta " +
+                string qry = "SELECT CDetalleRecetaIN.Receta " +
                     "FROM CPaciente INNER JOIN(CDetalleRecetaIN INNER JOIN CBusquedaPacienteOUT " +
                     "ON (CDetalleRecetaIN.ID_Paciente = CBusquedaPacienteOUT.Paciente) " +
                     "AND(CDetalleRecetaIN.ID_Consulta = CBusquedaPacienteOUT.ID_Consulta)) " +
