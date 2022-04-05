@@ -6,7 +6,7 @@ namespace Farmapoint
     {
         static public OleDbConnection AbrirConexion()
         {
-            OleDbConnection conexion = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0; Data Source=C:/Users/Practica/Documents/Farmapointdb.accdb");
+            OleDbConnection conexion = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0; Data Source=C:/Users/Easyklk/Documents/Farmapoint.accdb");
             conexion.Open();
             return conexion;
         }
