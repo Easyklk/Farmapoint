@@ -27,3 +27,4 @@
         <TextBlock x:Name="label_sns" HorizontalAlignment="Left" Margin="510,78,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top" Loaded="label_codigosns_Loaded"/>
     </Grid>
 </Window>
+    
