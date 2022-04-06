@@ -98,43 +98,47 @@ namespace Farmapoint
         private void grdDatos_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             DataRowView row = grdDatos.SelectedItem as DataRowView;
-            CRecetaDispensable recetaDispensable = new CRecetaDispensable();
-            recetaDispensable.propId_Repositorio = (String)row.Row.ItemArray[0];
-            recetaDispensable.propIdentificador_Receta = (String)row.Row.ItemArray[1];
-            recetaDispensable.propFecha_Prescripcion = row.Row.ItemArray[2].ToString();
-            recetaDispensable.propCodigo_Producto_Prescrito = (String)row.Row.ItemArray[3];
-            recetaDispensable.propNombre_Producto_Prescrito = (String)row.Row.ItemArray[4];
-            recetaDispensable.propEs_Marca_Comercial = (bool)row.Row.ItemArray[5];
-            recetaDispensable.propNum_Envases = Int16.Parse(row.Row.ItemArray[6].ToString());
-            recetaDispensable.propCodigo_Centro_Prescriptor = (String)row.Row.ItemArray[7];
-            recetaDispensable.propTipo_Centro_Prescriptor = (String)row.Row.ItemArray[8];
-            recetaDispensable.propEspecialidad_Medico = (String)row.Row.ItemArray[9];
-            recetaDispensable.propNombre_Medico = (String)row.Row.ItemArray[10];
-
-            if (listaRecestasDispensables.Count == 0)
+            CRecetaDispensable recetaDispensable = new CRecetaDispensable
             {
-                listaRecestasDispensables.Add(recetaDispensable);
-            }
-            else
-            {
-                for (int i = 0; i < listaRecestasDispensables.Count; i++)
-                {
-                    if (listaRecestasDispensables[i].propId_Repositorio != recetaDispensable.propId_Repositorio)
-                    {
-                        Console.WriteLine("ID Repositorio coinciden");
-                    }
-                    else
-                    {
-                        listaRecestasDispensables.Add(recetaDispensable);
-                    }
-                }
-            }
-            Console.WriteLine("Size: " + listaRecestasDispensables.Count);
+                propId_Repositorio = (string)row.Row.ItemArray[0],
+                propIdentificador_Receta = (string)row.Row.ItemArray[1],
+                propFecha_Prescripcion = row.Row.ItemArray[2].ToString(),
+                propCodigo_Producto_Prescrito = (string)row.Row.ItemArray[3],
+                propNombre_Producto_Prescrito = (string)row.Row.ItemArray[4],
+                propEs_Marca_Comercial = (bool)row.Row.ItemArray[5],
+                propNum_Envases = short.Parse(row.Row.ItemArray[6].ToString()),
+                propCodigo_Centro_Prescriptor = (string)row.Row.ItemArray[7],
+                propTipo_Centro_Prescriptor = (string)row.Row.ItemArray[8],
+                propEspecialidad_Medico = (string)row.Row.ItemArray[9],
+                propNombre_Medico = (string)row.Row.ItemArray[10]
+            };
+            //if (listaRecestasDispensables.Count == 0)
+            //{
+            //    listaRecestasDispensables.Add(recetaDispensable);
+            //}
+            //else
+            //{
+            //    for (int i = 0; i < listaRecestasDispensables.Count; i++)
+            //    {
+            //        Console.WriteLine("lista: " + listaRecestasDispensables[i].propId_Repositorio + "\nreceta: " + recetaDispensable.propId_Repositorio);
 
+            //        if (listaRecestasDispensables[i].propId_Repositorio != recetaDispensable.propId_Repositorio)
+            //        {
+            //            //listaRecestasDispensables.Add(recetaDispensable);
+            //            Console.WriteLine("ID DISTINTOS");
+            //        }
+            //        else
+            //        {
+            //            Console.WriteLine("ID Repositorio coinciden");
+            //        }
+            //    }
+            //}
+            //Console.WriteLine("Size: " + listaRecestasDispensables.Count);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            grdDatos.ItemsSource = listaRecestasDispensables;
         }
     }
 }

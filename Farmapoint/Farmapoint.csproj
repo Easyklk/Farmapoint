@@ -60,6 +60,9 @@
       <DependentUpon>VentanaBusquedaPaciente.xaml</DependentUpon>
     </Compile>
     <Compile Include="CRecetaDispensable.cs" />
+    <Compile Include="VentanaDetallesMedicamentosDispensables.xaml.cs">
+      <DependentUpon>VentanaDetallesMedicamentosDispensables.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VentanaMedicamentosDispensables.xaml.cs">
       <DependentUpon>VentanaMedicamentosDispensables.xaml</DependentUpon>
     </Compile>
@@ -76,6 +79,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="VentanaBusquedaPaciente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaDetallesMedicamentosDispensables.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
