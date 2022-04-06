@@ -19,10 +19,10 @@ namespace Farmapoint
         private string codigoSns;
         private CRecetaDispensable recetaDispensable;
 
-        public Window2(string CodigoSns)
+        public Window2(string codigoSns)
         {
             InitializeComponent();
-            this.codigoSns = CodigoSns;
+            this.codigoSns = codigoSns;
         }
 
         private void rellenarDatos(OleDbConnection conexion, OleDbDataAdapter adapter, OleDbCommand command, DataSet d)
@@ -44,7 +44,7 @@ namespace Farmapoint
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -120,7 +120,7 @@ namespace Farmapoint
 
         private void mostrar_RecetaDispensable(object sender, RoutedEventArgs e)
         {
-            VentanaDetallesMedicamentosDispensables ventanaDetallesMedicamentosDispensables = new VentanaDetallesMedicamentosDispensables(recetaDispensable);
+            VentanaDetallesMedicamentosDispensables ventanaDetallesMedicamentosDispensables = new VentanaDetallesMedicamentosDispensables(recetaDispensable, codigoSns);
             this.Hide();
             ventanaDetallesMedicamentosDispensables.Show();
         }

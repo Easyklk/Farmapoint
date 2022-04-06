@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace Farmapoint
 {
@@ -19,17 +7,45 @@ namespace Farmapoint
     /// </summary>
     public partial class VentanaDetallesMedicamentosDispensables : Window
     {
-        public VentanaDetallesMedicamentosDispensables(CRecetaDispensable recetaDispensable)
+        private string codigoSns;
+
+        public VentanaDetallesMedicamentosDispensables(CRecetaDispensable recetaDispensable, string codigoSns)
         {
             InitializeComponent();
             txt.Text = recetaDispensable.ToString();
+            this.codigoSns = codigoSns;
         }
 
         private void btn_volver_Click(object sender, RoutedEventArgs e)
         {
-            Window2 ventanaLogeado = new Window2();
+            Window2 ventanaLogeado = new Window2(codigoSns);
             this.Close();
             ventanaLogeado.Show();
+        }
+
+        private void DataRow_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void label_nombre_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void label_apellido_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void label_codigosns_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void grdDatos_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

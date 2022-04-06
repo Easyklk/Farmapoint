@@ -6,9 +6,24 @@
         xmlns:local="clr-namespace:Farmapoint"
         mc:Ignorable="d"
         Title="VentanaDetallesMedicamentosDispensables" Height="450" Width="800">
-    <Grid>
-        <TextBlock x:Name="txt" HorizontalAlignment="Left" Margin="217,95,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="239" Width="388"/>
-        <Button x:Name="btn_volver" Content="Button" HorizontalAlignment="Left" Margin="611,359,0,0" VerticalAlignment="Top" Width="75" Click="btn_volver_Click"/>
-
+    <Grid Width="700" Height="400">
+        <Border BorderBrush="Black"
+                Background="White"
+                BorderThickness="1"
+                CornerRadius="10">
+            <Border.Effect>
+                <DropShadowEffect />
+            </Border.Effect>
+        </Border>
+        <Label x:Name="Title" Content="Farmapoint" HorizontalAlignment="Center" VerticalAlignment="Top" Height="64" Width="auto" FontSize="36" FontWeight="Bold" FontStyle="Italic"/>
+        <DataGrid x:Name="grdDatos" Height="250" VerticalAlignment="Center" Loaded="DataRow_Loaded" IsReadOnly="True" BorderBrush="#FFA397A4" RowBackground="WhiteSmoke" Margin="75,119,75,31" SelectionChanged="grdDatos_SelectionChanged" />
+        <TextBlock HorizontalAlignment="Left" Margin="75,78,0,0" TextWrapping="Wrap" Text="Nombre:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="label_nombre" HorizontalAlignment="Left" Margin="124,78,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top" Loaded="label_nombre_Loaded"/>
+        <TextBlock HorizontalAlignment="Left" Margin="237,78,0,0" TextWrapping="Wrap" Text="Apellidos:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="label_apellido" HorizontalAlignment="Left" Margin="291,78,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top" Loaded="label_apellido_Loaded"/>
+        <TextBlock HorizontalAlignment="Left" Margin="469,78,0,0" TextWrapping="Wrap" Text="Código SNS:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="label_sns" HorizontalAlignment="Left" Margin="540,78,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top" Loaded="label_codigosns_Loaded"/>
+        <Button x:Name="btn_volver" Content="Volver" HorizontalAlignment="Left" Height="18" Margin="10,372,0,0" VerticalAlignment="Top" Width="59" Click="btn_volver_Click"/>
+        <TextBlock x:Name="txt" HorizontalAlignment="Left" Margin="-33,174,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="135" Width="507"/>
     </Grid>
 </Window>
