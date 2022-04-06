@@ -15,6 +15,7 @@ namespace Farmapoint
         private OleDbDataAdapter adapter = new OleDbDataAdapter();
         private OleDbCommand command = new OleDbCommand();
         private List<CRecetaDispensable> listaRecestasDispensables = new List<CRecetaDispensable>();
+        private DataSet d = new DataSet();
         private string codigoSns;
         private CRecetaDispensable recetaDispensable;
 
@@ -97,7 +98,7 @@ namespace Farmapoint
         private void grdDatos_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             DataRowView row = grdDatos.SelectedItem as DataRowView;
-             recetaDispensable = new CRecetaDispensable
+            recetaDispensable = new CRecetaDispensable
             {
                 propId_Repositorio = (string)row.Row.ItemArray[0],
                 propIdentificador_Receta = (string)row.Row.ItemArray[1],
@@ -111,9 +112,13 @@ namespace Farmapoint
                 propEspecialidad_Medico = (string)row.Row.ItemArray[9],
                 propNombre_Medico = (string)row.Row.ItemArray[10]
             };
+            if (recetaDispensable != null)
+            {
+                mostrarReceta.IsEnabled = true;
+            }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void mostrar_RecetaDispensable(object sender, RoutedEventArgs e)
         {
             VentanaDetallesMedicamentosDispensables ventanaDetallesMedicamentosDispensables = new VentanaDetallesMedicamentosDispensables(recetaDispensable);
             this.Hide();

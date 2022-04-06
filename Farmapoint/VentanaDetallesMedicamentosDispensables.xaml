@@ -8,6 +8,7 @@
         Title="VentanaDetallesMedicamentosDispensables" Height="450" Width="800">
     <Grid>
         <TextBlock x:Name="txt" HorizontalAlignment="Left" Margin="217,95,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="239" Width="388"/>
+        <Button x:Name="btn_volver" Content="Button" HorizontalAlignment="Left" Margin="611,359,0,0" VerticalAlignment="Top" Width="75" Click="btn_volver_Click"/>
 
     </Grid>
 </Window>

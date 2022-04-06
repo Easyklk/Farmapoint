@@ -24,5 +24,12 @@ namespace Farmapoint
             InitializeComponent();
             txt.Text = recetaDispensable.ToString();
         }
+
+        private void btn_volver_Click(object sender, RoutedEventArgs e)
+        {
+            Window2 ventanaLogeado = new Window2();
+            this.Close();
+            ventanaLogeado.Show();
+        }
     }
 }
