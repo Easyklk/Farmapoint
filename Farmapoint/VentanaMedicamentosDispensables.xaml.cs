@@ -18,6 +18,7 @@ namespace Farmapoint
         private List<CRecetaDispensable> listaRecestasDispensables = new List<CRecetaDispensable>();
         DataSet d = new DataSet();
         private string codigoSns;
+        private CRecetaDispensable recetaDispensable;
 
         public Window2(string CodigoSns)
         {
@@ -98,7 +99,7 @@ namespace Farmapoint
         private void grdDatos_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             DataRowView row = grdDatos.SelectedItem as DataRowView;
-            CRecetaDispensable recetaDispensable = new CRecetaDispensable
+             recetaDispensable = new CRecetaDispensable
             {
                 propId_Repositorio = (string)row.Row.ItemArray[0],
                 propIdentificador_Receta = (string)row.Row.ItemArray[1],
@@ -112,33 +113,13 @@ namespace Farmapoint
                 propEspecialidad_Medico = (string)row.Row.ItemArray[9],
                 propNombre_Medico = (string)row.Row.ItemArray[10]
             };
-            //if (listaRecestasDispensables.Count == 0)
-            //{
-            //    listaRecestasDispensables.Add(recetaDispensable);
-            //}
-            //else
-            //{
-            //    for (int i = 0; i < listaRecestasDispensables.Count; i++)
-            //    {
-            //        Console.WriteLine("lista: " + listaRecestasDispensables[i].propId_Repositorio + "\nreceta: " + recetaDispensable.propId_Repositorio);
-
-            //        if (listaRecestasDispensables[i].propId_Repositorio != recetaDispensable.propId_Repositorio)
-            //        {
-            //            //listaRecestasDispensables.Add(recetaDispensable);
-            //            Console.WriteLine("ID DISTINTOS");
-            //        }
-            //        else
-            //        {
-            //            Console.WriteLine("ID Repositorio coinciden");
-            //        }
-            //    }
-            //}
-            //Console.WriteLine("Size: " + listaRecestasDispensables.Count);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            grdDatos.ItemsSource = listaRecestasDispensables;
+            VentanaDetallesMedicamentosDispensables ventanaDetallesMedicamentosDispensables = new VentanaDetallesMedicamentosDispensables(recetaDispensable);
+            this.Hide();
+            ventanaDetallesMedicamentosDispensables.Show();
         }
     }
 }

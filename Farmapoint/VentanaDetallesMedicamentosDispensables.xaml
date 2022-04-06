@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="VentanaDetallesMedicamentosDispensables" Height="450" Width="800">
     <Grid>
-        
+        <TextBlock x:Name="txt" HorizontalAlignment="Left" Margin="217,95,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="239" Width="388"/>
+
     </Grid>
 </Window>

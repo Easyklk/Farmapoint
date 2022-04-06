@@ -22,6 +22,7 @@ namespace Farmapoint
         public VentanaDetallesMedicamentosDispensables(CRecetaDispensable recetaDispensable)
         {
             InitializeComponent();
+            txt.Text = recetaDispensable.ToString();
         }
     }
 }

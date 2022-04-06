@@ -1,6 +1,6 @@
 ﻿namespace Farmapoint
 {
-    class CRecetaDispensable
+    public class CRecetaDispensable
     {
         private string id_Repositorio;
         private string identificador_Receta;
