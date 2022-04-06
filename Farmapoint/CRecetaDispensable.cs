@@ -68,12 +68,12 @@
         public bool propEs_Marca_Comercial
         {
             get { return es_Marca_Comercial; }
-            set { es_Marca_Comercial= value; }
+            set { es_Marca_Comercial = value; }
         }
         public int propNum_Envases
         {
             get { return num_Envases; }
-            set { num_Envases= value; }
+            set { num_Envases = value; }
         }
         public string propCodigo_Centro_Prescriptor
         {
@@ -95,6 +95,12 @@
             get { return nombre_Medico; }
             set { nombre_Medico = value; }
         }
-
+        public override string ToString()
+        {
+            return "ID_Repositorio: " + id_Repositorio + " Identificador Receta: " + identificador_Receta + " Fecha de prescripcion: " + fecha_Prescripcion + "\n" + " Codigo de productor prescrito: "
+                + codigo_Producto_Prescrito + " Nombre de producto prescrito: " + nombre_Producto_Prescrito + " Marca comercial: " + es_Marca_Comercial + "\n" + " Numero de envases: " + num_Envases
+                + " Codigo centro prescriptor: " + codigo_Centro_Prescriptor + " Tipo de centro prescriptor: " + tipo_Centro_Prescriptor + "\n" + " Especialidad medico: " + especialidad_Medico +
+                " Nombre medico: " + nombre_Medico;
+        }
     }
 }

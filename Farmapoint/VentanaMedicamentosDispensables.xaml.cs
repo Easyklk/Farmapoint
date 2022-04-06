@@ -110,36 +110,31 @@ namespace Farmapoint
             recetaDispensable.propTipo_Centro_Prescriptor = (String)row.Row.ItemArray[8];
             recetaDispensable.propEspecialidad_Medico = (String)row.Row.ItemArray[9];
             recetaDispensable.propNombre_Medico = (String)row.Row.ItemArray[10];
-           
-            if (listaRecestasDispensables.Count != 0)
+
+            if (listaRecestasDispensables.Count == 0)
             {
-                //foreach (CRecetaDispensable receta in listaRecestasDispensables)
-                //{
-                //    if (receta.propId_Repositorio.CompareTo(recetaDispensable.propId_Repositorio)!=0)
-                //    {
-                //        //listaRecestasDispensables.Add(recetaDispensable);
-                //    }
-                //}
-                for (int i=0; i<listaRecestasDispensables.Count;i++)
+                listaRecestasDispensables.Add(recetaDispensable);
+            }
+            else
+            {
+                for (int i = 0; i < listaRecestasDispensables.Count; i++)
                 {
-                    if (listaRecestasDispensables[i].propId_Repositorio.CompareTo(recetaDispensable.propId_Repositorio) != 0)
+                    if (listaRecestasDispensables[i].propId_Repositorio != recetaDispensable.propId_Repositorio)
+                    {
+                        Console.WriteLine("ID Repositorio coinciden");
+                    }
+                    else
                     {
                         listaRecestasDispensables.Add(recetaDispensable);
                     }
                 }
             }
-            else
-            {
-                listaRecestasDispensables.Add(recetaDispensable);
-            }
-
-            MessageBox.Show(" Nº"+ listaRecestasDispensables.Count);
+            Console.WriteLine("Size: " + listaRecestasDispensables.Count);
 
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
         }
     }
 }
