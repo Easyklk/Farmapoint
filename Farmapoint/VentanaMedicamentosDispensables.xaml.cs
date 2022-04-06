@@ -14,9 +14,7 @@ namespace Farmapoint
         private OleDbConnection conexion = ConexionDb.AbrirConexion();
         private OleDbDataAdapter adapter = new OleDbDataAdapter();
         private OleDbCommand command = new OleDbCommand();
-        private OleDbDataReader reader;
         private List<CRecetaDispensable> listaRecestasDispensables = new List<CRecetaDispensable>();
-        DataSet d = new DataSet();
         private string codigoSns;
         private CRecetaDispensable recetaDispensable;
 
