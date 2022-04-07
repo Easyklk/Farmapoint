@@ -10,7 +10,7 @@
         Title="MainWindow"
         MinHeight="500"
         MinWidth="500"
-        Background="WhiteSmoke">
+        Background="#FFA6FF72">
     <Grid x:Name="panel_login" HorizontalAlignment="Center" VerticalAlignment="Center" Height="334" Width="227">
         <Border BorderBrush="Black"
                 Background="White"

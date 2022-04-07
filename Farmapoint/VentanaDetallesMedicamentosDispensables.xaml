@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="VentanaDetallesMedicamentosDispensables" Height="450" Width="800"
         WindowState="Maximized"
-        Background="WhiteSmoke">
+        Background="#FFA6FF72">
     <Grid Width="700" Height="400">
         <Border BorderBrush="Black"
                 Background="White"

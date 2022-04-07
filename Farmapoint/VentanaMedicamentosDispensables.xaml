@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Window2"
         WindowState="Maximized"
-        Background="WhiteSmoke">
+        Background="#FFA6FF72">
 	<Grid Width="700" Height="400">
 		<Border BorderBrush="Black"
                 Background="White"
