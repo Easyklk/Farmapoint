@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Farmapoint"
         mc:Ignorable="d"
-        Title="VentanaDetallesMedicamentosDispensables" Height="450" Width="800">
+        Title="VentanaDetallesMedicamentosDispensables" Height="450" Width="800"
+        WindowState="Maximized"
+        Background="WhiteSmoke">
     <Grid Width="700" Height="400">
         <Border BorderBrush="Black"
                 Background="White"
