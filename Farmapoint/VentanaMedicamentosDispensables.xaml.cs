@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
 using System.Windows;
@@ -14,7 +13,6 @@ namespace Farmapoint
         private OleDbConnection conexion = ConexionDb.AbrirConexion();
         private OleDbDataAdapter adapter = new OleDbDataAdapter();
         private OleDbCommand command = new OleDbCommand();
-        private List<CRecetaDispensable> listaRecestasDispensables = new List<CRecetaDispensable>();
         private DataSet d = new DataSet();
         private string codigoSns;
         private CRecetaDispensable recetaDispensable;
@@ -68,12 +66,11 @@ namespace Farmapoint
                     "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns + "'";
             command = new OleDbCommand(str, con);
             OleDbDataReader reader = command.ExecuteReader();
-
             if (reader.Read())
             {
                 label_nombre.Text = reader["Nombre"].ToString();
             }
-
+            con.Close();
         }
 
         private void label_apellido_Loaded(object sender, RoutedEventArgs e)
@@ -88,6 +85,7 @@ namespace Farmapoint
             {
                 label_apellido.Text = reader["Apellidos"].ToString();
             }
+            con.Close();
         }
 
         private void label_codigosns_Loaded(object sender, RoutedEventArgs e)
