@@ -1,4 +1,5 @@
-﻿using System.Data.OleDb;
+﻿using System;
+using System.Data.OleDb;
 using System.Windows;
 
 namespace Farmapoint
@@ -40,22 +41,29 @@ namespace Farmapoint
             }
             else
             {
-                OleDbCommand adapter = new OleDbCommand("SELECT * FROM CSOAPHeadUsr WHERE Usuario = '" + Txt_User.Text + "'" + "AND Farmacia= " + int.Parse(Txt_numFarmacia.Text)+";", conexion);
-                OleDbDataReader dr = adapter.ExecuteReader();
-                if (dr.Read())
+                try
                 {
-                    Window1 ventanaLogeado = new Window1();
-                    ventanaLogeado.Show();
+                    OleDbCommand adapter = new OleDbCommand("SELECT * FROM CSOAPHeadUsr WHERE Usuario = '" + Txt_User.Text + "'" + "AND Farmacia= " + int.Parse(Txt_numFarmacia.Text) + ";", conexion);
+                    OleDbDataReader dr = adapter.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        Window1 ventanaLogeado = new Window1();
+                        ventanaLogeado.Show();
 
-                    conexion.Close();
-                    this.Hide();
+                        conexion.Close();
+                        this.Hide();
 
+                    }
+                    else
+                    {
+                        Txt_numFarmacia.BorderBrush = System.Windows.Media.Brushes.Red;
+                        Txt_User.BorderBrush = System.Windows.Media.Brushes.Red;
+                        login_error.Text = "¡Nº Farmacia o Usuario incorrectos!";
+                    }
                 }
-                else
+                catch (FormatException ex)
                 {
-                    Txt_numFarmacia.BorderBrush = System.Windows.Media.Brushes.Red;
-                    Txt_User.BorderBrush = System.Windows.Media.Brushes.Red;
-                    login_error.Text = "¡Nº Farmacia o Usuario incorrectos!";
+                    MessageBox.Show(ex.ToString());
                 }
             }
 

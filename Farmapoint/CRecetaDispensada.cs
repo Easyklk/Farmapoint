@@ -69,8 +69,8 @@
 
         public decimal propPrecio_Unitario
         {
-            get { return propPrecio_Unitario; }
-            set { propPrecio_Unitario = value; }
+            get { return precio_Unitario; }
+            set { precio_Unitario = value; }
         }
         public decimal propAportacion_Unitaria
         {

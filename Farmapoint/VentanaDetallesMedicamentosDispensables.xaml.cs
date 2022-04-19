@@ -9,12 +9,12 @@ namespace Farmapoint
     /// </summary>
     public partial class VentanaDetallesMedicamentosDispensables : Window
     {
-        private OleDbConnection conexion = ConexionDb.AbrirConexion();
         private OleDbDataAdapter adapter = new OleDbDataAdapter();
         private OleDbCommand command = new OleDbCommand();
         private DataSet d = new DataSet();
         private string codigoSns;
         private CRecetaDispensable recetaDispensable;
+        private CRecetaDispensada recetaDispensada;
 
         public VentanaDetallesMedicamentosDispensables(CRecetaDispensable recetaDispensable, string codigoSns)
         {
@@ -27,7 +27,7 @@ namespace Farmapoint
         {
             try
             {
-                d.Clear();  
+                d.Clear();
                 string qry = "SELECT CRecetaDispensada.* FROM((CRecetaDispensable INNER JOIN CRecetaDispensada " +
                     "ON CRecetaDispensable.Identificador_Receta = CRecetaDispensada.Identificador_Receta) " +
                     "INNER JOIN CRecetaCDA ON CRecetaDispensable.Identificador_Receta = CRecetaCDA.Identificador_Receta) " +
@@ -56,8 +56,10 @@ namespace Farmapoint
         private void DataRow_Loaded(object sender, RoutedEventArgs e)
         {
             grdDatos.ItemsSource = null;
+            OleDbConnection conexion = ConexionDb.AbrirConexion();
             rellenarDatos(conexion, adapter, command, d);
-            grdDatos.ItemsSource = d.Tables["CRecetaCDA" ].DefaultView;
+            grdDatos.ItemsSource = d.Tables["CRecetaCDA"].DefaultView;
+            conexion.Close();
         }
 
         private void label_nombre_Loaded(object sender, RoutedEventArgs e)
@@ -96,7 +98,37 @@ namespace Farmapoint
 
         private void grdDatos_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            DataRowView row = grdDatos.SelectedItem as DataRowView;
+            recetaDispensada = new CRecetaDispensada();
+            recetaDispensada.propId_Repositorio = (string)row.Row.ItemArray[0];
+            recetaDispensada.propIdentificador_Receta = (string)row.Row.ItemArray[1];
+            recetaDispensada.propCodigo_Producto_Dispensado = (string)row.Row.ItemArray[2];
+            recetaDispensada.propNombre_Producto_Dispensado = (string)row.Row.ItemArray[3];
+            recetaDispensada.propNum_Envases = int.Parse(row.Row.ItemArray[4].ToString());
+            recetaDispensada.propPrecio_Unitario = Decimal.Parse(row.Row.ItemArray[5].ToString());
+            recetaDispensada.propAportacion_Unitaria = Decimal.Parse(row.Row.ItemArray[6].ToString());
+            recetaDispensada.propTipo_Contingencia = (string)row.Row.ItemArray[7];
+            recetaDispensada.propTipo_Aportacion = (string)row.Row.ItemArray[8];
+            recetaDispensada.propCodigo_Causa_Sustitucion = (string)row.Row.ItemArray[9];
+            recetaDispensada.propDescripcion_Causa_Sustitucion = Convert.ToString(row.Row.ItemArray[10] is DBNull ? 0 : row.Row.ItemArray[10]);
+            recetaDispensada.propObservaciones = (string)row.Row.ItemArray[11];
+        }
 
+        private void btn_dispensar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                OleDbConnection con = ConexionDb.AbrirConexion();
+                command.Connection = con;
+                command.CommandType = CommandType.Text;
+                command.CommandText = "INSERT INTO CSOAPHeadUsr (Farmacia, Usuario)" + "VALUES ( 2" + ",'" + "usuario" + "')";
+                command.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }
