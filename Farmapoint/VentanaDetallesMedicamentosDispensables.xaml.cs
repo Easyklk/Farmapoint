@@ -99,19 +99,25 @@ namespace Farmapoint
         private void grdDatos_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             DataRowView row = grdDatos.SelectedItem as DataRowView;
-            recetaDispensada = new CRecetaDispensada();
-            recetaDispensada.propId_Repositorio = (string)row.Row.ItemArray[0];
-            recetaDispensada.propIdentificador_Receta = (string)row.Row.ItemArray[1];
-            recetaDispensada.propCodigo_Producto_Dispensado = (string)row.Row.ItemArray[2];
-            recetaDispensada.propNombre_Producto_Dispensado = (string)row.Row.ItemArray[3];
-            recetaDispensada.propNum_Envases = int.Parse(row.Row.ItemArray[4].ToString());
-            recetaDispensada.propPrecio_Unitario = Decimal.Parse(row.Row.ItemArray[5].ToString());
-            recetaDispensada.propAportacion_Unitaria = Decimal.Parse(row.Row.ItemArray[6].ToString());
-            recetaDispensada.propTipo_Contingencia = (string)row.Row.ItemArray[7];
-            recetaDispensada.propTipo_Aportacion = (string)row.Row.ItemArray[8];
-            recetaDispensada.propCodigo_Causa_Sustitucion = (string)row.Row.ItemArray[9];
-            recetaDispensada.propDescripcion_Causa_Sustitucion = Convert.ToString(row.Row.ItemArray[10] is DBNull ? 0 : row.Row.ItemArray[10]);
-            recetaDispensada.propObservaciones = (string)row.Row.ItemArray[11];
+            recetaDispensada = new CRecetaDispensada
+            {
+                propId_Repositorio = (string)row.Row.ItemArray[0],
+                propIdentificador_Receta = (string)row.Row.ItemArray[1],
+                propCodigo_Producto_Dispensado = (string)row.Row.ItemArray[2],
+                propNombre_Producto_Dispensado = (string)row.Row.ItemArray[3],
+                propNum_Envases = int.Parse(row.Row.ItemArray[4].ToString()),
+                propPrecio_Unitario = Decimal.Parse(row.Row.ItemArray[5].ToString()),
+                propAportacion_Unitaria = Decimal.Parse(row.Row.ItemArray[6].ToString()),
+                propTipo_Contingencia = (string)row.Row.ItemArray[7],
+                propTipo_Aportacion = (string)row.Row.ItemArray[8],
+                propCodigo_Causa_Sustitucion = (string)row.Row.ItemArray[9],
+                propDescripcion_Causa_Sustitucion = Convert.ToString(row.Row.ItemArray[10] is DBNull ? 0 : row.Row.ItemArray[10]),
+                propObservaciones = (string)row.Row.ItemArray[11]
+            };
+            if (recetaDispensable != null)
+            {
+                btn_dispensar.IsEnabled = true;
+            }
         }
 
         private void btn_dispensar_Click(object sender, RoutedEventArgs e)
