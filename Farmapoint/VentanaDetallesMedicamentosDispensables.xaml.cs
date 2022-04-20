@@ -124,39 +124,38 @@ namespace Farmapoint
         {
             string id_paciente = "";
             string cite = "";
-            int id_consulta = 0;
+            string id_consulta = "";
             OleDbConnection con = ConexionDb.AbrirConexion();
             string consultaCPaciente = "SELECT ID_Paciente, CITE " +
                     "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns + "'";
-            command = new OleDbCommand(consultaCPaciente, con);
-            OleDbDataReader reader = command.ExecuteReader();
-            if (reader.Read())
+            OleDbCommand commandCPaciente = new OleDbCommand(consultaCPaciente, con);
+            OleDbDataReader readerPaciente = commandCPaciente.ExecuteReader();
+            if (readerPaciente.Read())
             {
-                id_paciente = reader["ID_Paciente"].ToString();
-                cite = reader["CITE"].ToString();
+                id_paciente = readerPaciente["ID_Paciente"].ToString();
+                cite = readerPaciente["CITE"].ToString();
             }
-            string consultaBusquedaPacienteOUT = "SELECT CBusquedaPacienteOUT.ID_Consulta " +
+            string consultaBusquedaPacienteOUT = "SELECT CBusquedaPacienteOUT.ID_Consulta, CBusquedaPacienteOUT.Descripcion " +
                 "FROM CPaciente INNER JOIN CBusquedaPacienteOUT ON CPaciente.ID_Paciente = CBusquedaPacienteOUT.Paciente " +
-                "WHERE(((CPaciente.ID_Paciente) = " + 1 + "));";
-            command = new OleDbCommand(consultaBusquedaPacienteOUT, con);
-            if (reader.Read())
+                "WHERE (((CPaciente.ID_Paciente) = '" + id_paciente + "')); ";
+            OleDbCommand commandBusquedaPaciente = new OleDbCommand(consultaBusquedaPacienteOUT, con);
+            OleDbDataReader readerConsulta = commandBusquedaPaciente.ExecuteReader();
+
+            if (readerConsulta.Read())
             {
-                id_consulta = short.Parse(reader["ID_Consulta"].ToString());
+                id_consulta = readerConsulta["Descripcion"].ToString();
             }
             else
             {
                 MessageBox.Show("HOLA");
             }
-
-            MessageBox.Show(id_consulta.ToString());
-
             try
             {
                 //int intId_consulta = short.Parse(id_consulta);
                 command.Connection = con;
                 command.CommandType = CommandType.Text;
-                command.CommandText = "INSERT INTO CNotificarDispensacionIN (ID_Paciente, CITE, ID_Consulta, Codigo_SNS, RecetaDispensada)" +
-                                      "VALUES ('" + id_paciente + "','" + cite + "','" + id_consulta + "', '" + codigoSns + "','" + recetaDispensada.propIdentificador_Receta + "')";
+                command.CommandText = "INSERT INTO CNotificarDispensacionIN (ID_Paciente, CITE, ID_Consulta, Codigo_SNS, RecetaDispensada, Localizador_Hoja)" +
+                                      "VALUES ('" + id_paciente + "','" + cite + "'," + 1 + ", '" + codigoSns + "','" + recetaDispensada.propIdentificador_Receta + "'," + 0 + ")";
                 command.ExecuteNonQuery();
                 con.Close();
             }
