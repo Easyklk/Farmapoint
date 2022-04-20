@@ -122,12 +122,41 @@ namespace Farmapoint
 
         private void btn_dispensar_Click(object sender, RoutedEventArgs e)
         {
+            string id_paciente = "";
+            string cite = "";
+            int id_consulta = 0;
+            OleDbConnection con = ConexionDb.AbrirConexion();
+            string consultaCPaciente = "SELECT ID_Paciente, CITE " +
+                    "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns + "'";
+            command = new OleDbCommand(consultaCPaciente, con);
+            OleDbDataReader reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                id_paciente = reader["ID_Paciente"].ToString();
+                cite = reader["CITE"].ToString();
+            }
+            string consultaBusquedaPacienteOUT = "SELECT CBusquedaPacienteOUT.ID_Consulta " +
+                "FROM CPaciente INNER JOIN CBusquedaPacienteOUT ON CPaciente.ID_Paciente = CBusquedaPacienteOUT.Paciente " +
+                "WHERE(((CPaciente.ID_Paciente) = " + 1 + "));";
+            command = new OleDbCommand(consultaBusquedaPacienteOUT, con);
+            if (reader.Read())
+            {
+                id_consulta = short.Parse(reader["ID_Consulta"].ToString());
+            }
+            else
+            {
+                MessageBox.Show("HOLA");
+            }
+
+            MessageBox.Show(id_consulta.ToString());
+
             try
             {
-                OleDbConnection con = ConexionDb.AbrirConexion();
+                //int intId_consulta = short.Parse(id_consulta);
                 command.Connection = con;
                 command.CommandType = CommandType.Text;
-                command.CommandText = "INSERT INTO CSOAPHeadUsr (Farmacia, Usuario)" + "VALUES ( 2" + ",'" + "usuario" + "')";
+                command.CommandText = "INSERT INTO CNotificarDispensacionIN (ID_Paciente, CITE, ID_Consulta, Codigo_SNS, RecetaDispensada)" +
+                                      "VALUES ('" + id_paciente + "','" + cite + "','" + id_consulta + "', '" + codigoSns + "','" + recetaDispensada.propIdentificador_Receta + "')";
                 command.ExecuteNonQuery();
                 con.Close();
             }
