@@ -112,7 +112,7 @@ namespace Farmapoint
                 propTipo_Aportacion = (string)row.Row.ItemArray[8],
                 propCodigo_Causa_Sustitucion = (string)row.Row.ItemArray[9],
                 propDescripcion_Causa_Sustitucion = Convert.ToString(row.Row.ItemArray[10] is DBNull ? 0 : row.Row.ItemArray[10]),
-                propObservaciones = (string)row.Row.ItemArray[11]
+                propObservaciones = Convert.ToString(row.Row.ItemArray[11] is DBNull ? 0 : row.Row.ItemArray[11])
             };
             if (recetaDispensable != null)
             {
