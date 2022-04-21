@@ -26,7 +26,7 @@
 		<TextBlock HorizontalAlignment="Left" Margin="469,78,0,0" TextWrapping="Wrap" Text="Código SNS:" VerticalAlignment="Top"/>
 		<TextBlock x:Name="label_sns" HorizontalAlignment="Left" Margin="540,78,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top" Loaded="label_codigosns_Loaded"/>
 		<Button Content="Volver" HorizontalAlignment="Left" Height="18" Margin="10,372,0,0" VerticalAlignment="Top" Width="59" Click="Button_Volver"/>
-		<Button x:Name="mostrarReceta" Content="Mostrar" IsEnabled="False" HorizontalAlignment="Left" Height="18" Margin="631,372,0,0" VerticalAlignment="Top" Width="59" Click="mostrar_RecetaDispensable"/>
+        <Button x:Name="btn_mostrar" Content="Mostrar" IsEnabled="False" HorizontalAlignment="Left" Height="18" Margin="631,372,0,0" VerticalAlignment="Top" Width="59" Click="mostrar_RecetaDispensable"/>
 	</Grid>
 </Window>
     

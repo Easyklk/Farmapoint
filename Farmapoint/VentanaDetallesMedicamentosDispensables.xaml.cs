@@ -59,6 +59,7 @@ namespace Farmapoint
             OleDbConnection conexion = ConexionDb.AbrirConexion();
             rellenarDatos(conexion, adapter, command, d);
             grdDatos.ItemsSource = d.Tables["CRecetaCDA"].DefaultView;
+
             conexion.Close();
         }
 
@@ -99,21 +100,24 @@ namespace Farmapoint
         private void grdDatos_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             DataRowView row = grdDatos.SelectedItem as DataRowView;
-            recetaDispensada = new CRecetaDispensada
+            if (row != null)
             {
-                propId_Repositorio = (string)row.Row.ItemArray[0],
-                propIdentificador_Receta = (string)row.Row.ItemArray[1],
-                propCodigo_Producto_Dispensado = (string)row.Row.ItemArray[2],
-                propNombre_Producto_Dispensado = (string)row.Row.ItemArray[3],
-                propNum_Envases = int.Parse(row.Row.ItemArray[4].ToString()),
-                propPrecio_Unitario = Decimal.Parse(row.Row.ItemArray[5].ToString()),
-                propAportacion_Unitaria = Decimal.Parse(row.Row.ItemArray[6].ToString()),
-                propTipo_Contingencia = (string)row.Row.ItemArray[7],
-                propTipo_Aportacion = (string)row.Row.ItemArray[8],
-                propCodigo_Causa_Sustitucion = (string)row.Row.ItemArray[9],
-                propDescripcion_Causa_Sustitucion = Convert.ToString(row.Row.ItemArray[10] is DBNull ? 0 : row.Row.ItemArray[10]),
-                propObservaciones = Convert.ToString(row.Row.ItemArray[11] is DBNull ? 0 : row.Row.ItemArray[11])
-            };
+                recetaDispensada = new CRecetaDispensada
+                {
+                    propId_Repositorio = (string)row.Row.ItemArray[0],
+                    propIdentificador_Receta = (string)row.Row.ItemArray[1],
+                    propCodigo_Producto_Dispensado = (string)row.Row.ItemArray[2],
+                    propNombre_Producto_Dispensado = (string)row.Row.ItemArray[3],
+                    propNum_Envases = int.Parse(row.Row.ItemArray[4].ToString()),
+                    propPrecio_Unitario = Decimal.Parse(row.Row.ItemArray[5].ToString()),
+                    propAportacion_Unitaria = Decimal.Parse(row.Row.ItemArray[6].ToString()),
+                    propTipo_Contingencia = (string)row.Row.ItemArray[7],
+                    propTipo_Aportacion = (string)row.Row.ItemArray[8],
+                    propCodigo_Causa_Sustitucion = (string)row.Row.ItemArray[9],
+                    propDescripcion_Causa_Sustitucion = Convert.ToString(row.Row.ItemArray[10] is DBNull ? 0 : row.Row.ItemArray[10]),
+                    propObservaciones = Convert.ToString(row.Row.ItemArray[11] is DBNull ? 0 : row.Row.ItemArray[11])
+                };
+            }
             if (recetaDispensable != null)
             {
                 btn_dispensar.IsEnabled = true;
@@ -135,27 +139,25 @@ namespace Farmapoint
                 id_paciente = readerPaciente["ID_Paciente"].ToString();
                 cite = readerPaciente["CITE"].ToString();
             }
-            string consultaBusquedaPacienteOUT = "SELECT CBusquedaPacienteOUT.ID_Consulta, CBusquedaPacienteOUT.Descripcion " +
-                "FROM CPaciente INNER JOIN CBusquedaPacienteOUT ON CPaciente.ID_Paciente = CBusquedaPacienteOUT.Paciente " +
-                "WHERE (((CPaciente.ID_Paciente) = '" + id_paciente + "')); ";
+            string consultaBusquedaPacienteOUT = "SELECT CBusquedaPacienteOUT.ID_Consulta " +
+           "FROM CPaciente INNER JOIN CBusquedaPacienteOUT ON CPaciente.ID_Paciente = CBusquedaPacienteOUT.Paciente " +
+           "WHERE (((CPaciente.ID_Paciente) = '" + id_paciente + "')); ";
             OleDbCommand commandBusquedaPaciente = new OleDbCommand(consultaBusquedaPacienteOUT, con);
             OleDbDataReader readerConsulta = commandBusquedaPaciente.ExecuteReader();
 
             if (readerConsulta.Read())
             {
-                id_consulta = readerConsulta["Descripcion"].ToString();
-            }
-            else
-            {
-                MessageBox.Show("HOLA");
+                id_consulta = readerConsulta["ID_Consulta"].ToString();
             }
             try
             {
-                //int intId_consulta = short.Parse(id_consulta);
                 command.Connection = con;
                 command.CommandType = CommandType.Text;
                 command.CommandText = "INSERT INTO CNotificarDispensacionIN (ID_Paciente, CITE, ID_Consulta, Codigo_SNS, RecetaDispensada, Localizador_Hoja)" +
-                                      "VALUES ('" + id_paciente + "','" + cite + "'," + 1 + ", '" + codigoSns + "','" + recetaDispensada.propIdentificador_Receta + "'," + 0 + ")";
+                                      "VALUES ('" + id_paciente + "','" + cite + "'," + id_consulta + ", '" + codigoSns + "','" + recetaDispensada.propIdentificador_Receta + "'," + 0 + ")";
+                command.ExecuteNonQuery();
+                command.CommandType = CommandType.Text;
+                command.CommandText = "UPDATE CRecetaDispensable SET Dispensada=TRUE WHERE Identificador_Receta='" + recetaDispensada.propIdentificador_Receta + "';";
                 command.ExecuteNonQuery();
                 con.Close();
             }
@@ -163,6 +165,9 @@ namespace Farmapoint
             {
                 MessageBox.Show(ex.ToString());
             }
+            DataRowView row = grdDatos.SelectedItem as DataRowView;
+            row.Row.Delete();
+            btn_dispensar.IsEnabled = false;
         }
     }
 }

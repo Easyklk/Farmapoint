@@ -51,6 +51,7 @@ namespace Farmapoint
             grdDatos.ItemsSource = null;
             rellenarDatos(conexion, adapter, command, d);
             grdDatos.ItemsSource = d.Tables["CRecetaDispensable" + "CBusquedaReferenciasOUT" + "CPaciente"].DefaultView;
+
         }
         private void Button_Volver(object sender, RoutedEventArgs e)
         {
@@ -80,7 +81,6 @@ namespace Farmapoint
                     "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns + "'";
             command = new OleDbCommand(str, con);
             OleDbDataReader reader = command.ExecuteReader();
-
             if (reader.Read())
             {
                 label_apellido.Text = reader["Apellidos"].ToString();
@@ -96,31 +96,68 @@ namespace Farmapoint
         private void grdDatos_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             DataRowView row = grdDatos.SelectedItem as DataRowView;
-            recetaDispensable = new CRecetaDispensable
+            if (row != null)
             {
-                propId_Repositorio = (string)row.Row.ItemArray[0],
-                propIdentificador_Receta = (string)row.Row.ItemArray[1],
-                propFecha_Prescripcion = row.Row.ItemArray[2].ToString(),
-                propCodigo_Producto_Prescrito = (string)row.Row.ItemArray[3],
-                propNombre_Producto_Prescrito = (string)row.Row.ItemArray[4],
-                propEs_Marca_Comercial = (bool)row.Row.ItemArray[5],
-                propNum_Envases = short.Parse(row.Row.ItemArray[6].ToString()),
-                propCodigo_Centro_Prescriptor = (string)row.Row.ItemArray[7],
-                propTipo_Centro_Prescriptor = (string)row.Row.ItemArray[8],
-                propEspecialidad_Medico = (string)row.Row.ItemArray[9],
-                propNombre_Medico = (string)row.Row.ItemArray[10]
-            };
-            if (recetaDispensable != null)
+                recetaDispensable = new CRecetaDispensable
+                {
+                    propId_Repositorio = (string)row.Row.ItemArray[0],
+                    propIdentificador_Receta = (string)row.Row.ItemArray[1],
+                    propFecha_Prescripcion = row.Row.ItemArray[2].ToString(),
+                    propCodigo_Producto_Prescrito = (string)row.Row.ItemArray[3],
+                    propNombre_Producto_Prescrito = (string)row.Row.ItemArray[4],
+                    propEs_Marca_Comercial = (bool)row.Row.ItemArray[5],
+                    propNum_Envases = short.Parse(row.Row.ItemArray[6].ToString()),
+                    propCodigo_Centro_Prescriptor = (string)row.Row.ItemArray[7],
+                    propTipo_Centro_Prescriptor = (string)row.Row.ItemArray[8],
+                    propEspecialidad_Medico = (string)row.Row.ItemArray[9],
+                    propNombre_Medico = (string)row.Row.ItemArray[10],
+                    propDispensada=(bool) row.Row.ItemArray[11]
+                };
+            }
+           
+            string id_paciente = "";
+            OleDbConnection con = ConexionDb.AbrirConexion();
+            string consultaCPaciente = "SELECT ID_Paciente " +
+                    "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns + "'";
+            OleDbCommand commandCPaciente = new OleDbCommand(consultaCPaciente, con);
+            OleDbDataReader readerPaciente = commandCPaciente.ExecuteReader();
+            if (readerPaciente.Read())
             {
-                mostrarReceta.IsEnabled = true;
+                id_paciente = readerPaciente["ID_Paciente"].ToString();
+            }
+            string consultaCRecetaDispensada = "SELECT CNotificarDispensacionIN.* " +
+                "FROM CNotificarDispensacionIN WHERE(((CNotificarDispensacionIN.ID_Paciente) = '" + id_paciente + "'));";
+            OleDbCommand commandCRecetaDispensada = new OleDbCommand(consultaCRecetaDispensada, con);
+            OleDbDataReader readerCRecetaDispensada = commandCRecetaDispensada.ExecuteReader();
+            if (recetaDispensable != null & !readerCRecetaDispensada.Read() )
+            {
+                btn_mostrar.IsEnabled = true;
             }
         }
 
         private void mostrar_RecetaDispensable(object sender, RoutedEventArgs e)
         {
-            VentanaDetallesMedicamentosDispensables ventanaDetallesMedicamentosDispensables = new VentanaDetallesMedicamentosDispensables(recetaDispensable, codigoSns);
-            this.Hide();
-            ventanaDetallesMedicamentosDispensables.Show();
+            string id_paciente = "";
+            OleDbConnection con = ConexionDb.AbrirConexion();
+            string consultaCPaciente = "SELECT ID_Paciente " +
+                    "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns + "'";
+            OleDbCommand commandCPaciente = new OleDbCommand(consultaCPaciente, con);
+            OleDbDataReader readerPaciente = commandCPaciente.ExecuteReader();
+            if (readerPaciente.Read())
+            {
+                id_paciente = readerPaciente["ID_Paciente"].ToString();
+            }
+
+            string consultaCRecetaDispensada = "SELECT CNotificarDispensacionIN.* " +
+                "FROM CNotificarDispensacionIN WHERE(((CNotificarDispensacionIN.ID_Paciente) = '" + id_paciente + "'));";
+            OleDbCommand commandCRecetaDispensada = new OleDbCommand(consultaCRecetaDispensada, con);
+            OleDbDataReader readerCRecetaDispensada = commandCRecetaDispensada.ExecuteReader();
+            if (!readerCRecetaDispensada.Read())
+            {
+                VentanaDetallesMedicamentosDispensables ventanaDetallesMedicamentosDispensables = new VentanaDetallesMedicamentosDispensables(recetaDispensable, codigoSns);
+                this.Hide();
+                ventanaDetallesMedicamentosDispensables.Show();
+            }
         }
     }
 }

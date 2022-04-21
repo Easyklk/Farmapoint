@@ -13,6 +13,7 @@
         private string tipo_Centro_Prescriptor;
         private string especialidad_Medico;
         private string nombre_Medico;
+        private bool dispensada;
 
         public CRecetaDispensable()
         {
@@ -24,7 +25,7 @@
             this.id_Repositorio = id_Repositorio;
         }
 
-        public CRecetaDispensable(string id_Repositorio, string identificador_Receta, string fecha_Prescripcion, string codigo_Producto_Prescrito, string nombre_Producto_Prescrito, bool es_Marca_Comercial, int num_Envases, string codigo_Centro_Prescriptor, string tipo_Centro_Prescriptor, string especialidad_Medico, string nombre_Medico)
+        public CRecetaDispensable(string id_Repositorio, string identificador_Receta, string fecha_Prescripcion, string codigo_Producto_Prescrito, string nombre_Producto_Prescrito, bool es_Marca_Comercial, int num_Envases, string codigo_Centro_Prescriptor, string tipo_Centro_Prescriptor, string especialidad_Medico, string nombre_Medico, bool dispensada)
         {
             this.id_Repositorio = id_Repositorio;
             this.identificador_Receta = identificador_Receta;
@@ -37,6 +38,7 @@
             this.tipo_Centro_Prescriptor = tipo_Centro_Prescriptor;
             this.especialidad_Medico = especialidad_Medico;
             this.nombre_Medico = nombre_Medico;
+            this.dispensada = dispensada;
         }
 
         public string propId_Repositorio
@@ -94,6 +96,11 @@
         {
             get { return nombre_Medico; }
             set { nombre_Medico = value; }
+        }
+        public bool propDispensada
+        {
+            get { return dispensada; }
+            set { dispensada = value; }
         }
         public override string ToString()
         {
