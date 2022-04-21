@@ -160,6 +160,7 @@ namespace Farmapoint
                 command.CommandText = "UPDATE CRecetaDispensable SET Dispensada=TRUE WHERE Identificador_Receta='" + recetaDispensada.propIdentificador_Receta + "';";
                 command.ExecuteNonQuery();
                 con.Close();
+               
             }
             catch (Exception ex)
             {
@@ -168,6 +169,10 @@ namespace Farmapoint
             DataRowView row = grdDatos.SelectedItem as DataRowView;
             row.Row.Delete();
             btn_dispensar.IsEnabled = false;
+
+            this.Close();
+            Window2 VentanaMedicamentoDispensable = new Window2(codigoSns);
+            VentanaMedicamentoDispensable.Show();
         }
     }
 }

@@ -38,8 +38,8 @@ namespace Farmapoint
                 {
                     conexion.Close();
                     this.Close();
-                    Window2 panelRecetas = new Window2(Txt_SNS.Text);
-                    panelRecetas.Show();
+                    Window2 VentanaMedicamentoDispensable = new Window2(Txt_SNS.Text);
+                    VentanaMedicamentoDispensable.Show();
                 }
                 else
                 {
