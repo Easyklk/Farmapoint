@@ -56,12 +56,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ConexionDb.cs" />
-    <Compile Include=".xaml.cs">
-      <DependentUpon>VentanaBusquedaPaciente.xaml</DependentUpon>
-    </Compile>
     <Compile Include="CPaciente.cs" />
     <Compile Include="CRecetaDispensable.cs" />
     <Compile Include="CRecetaDispensada.cs" />
+    <Compile Include="VentanaBusquedaPaciente.xaml.cs">
+      <DependentUpon>VentanaBusquedaPaciente.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VentanaDetallesMedicamentosDispensables.xaml.cs">
       <DependentUpon>VentanaDetallesMedicamentosDispensables.xaml</DependentUpon>
     </Compile>
