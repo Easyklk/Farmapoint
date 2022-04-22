@@ -166,5 +166,11 @@ namespace Farmapoint
                 (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
             }
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Application.Current.Shutdown();
+
+        }
     }
 }
