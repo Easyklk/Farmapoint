@@ -2,6 +2,8 @@
 using System.Data;
 using System.Data.OleDb;
 using System.Windows;
+using System.Windows.Controls;
+
 namespace Farmapoint
 {
     /// <summary>
@@ -59,7 +61,18 @@ namespace Farmapoint
             OleDbConnection conexion = ConexionDb.AbrirConexion();
             rellenarDatos(conexion, adapter, command, d);
             grdDatos.ItemsSource = d.Tables["CRecetaCDA"].DefaultView;
-
+            grdDatos.Columns[0].Visibility = Visibility.Hidden;
+            grdDatos.Columns[1].Visibility = Visibility.Hidden;
+            grdDatos.Columns[2].Header = "Codigo Producto";
+            grdDatos.Columns[3].Header = "Nombre Producto";
+            grdDatos.Columns[4].Header = "Nº Envases";
+            grdDatos.Columns[5].Header = "Precio Unitario";
+            grdDatos.Columns[6].Header = "Aportación Unitaria";
+            grdDatos.Columns[7].Header = "Tipo Contingencia";
+            grdDatos.Columns[8].Header = "Tipo Aportación";
+            grdDatos.Columns[9].Header = "Codigo Causa Sustitución";
+            grdDatos.Columns[10].Header = "Descripción Causa Sustitución";
+            grdDatos.Columns[11].Header = "Observaciones";
             conexion.Close();
         }
 
@@ -160,7 +173,7 @@ namespace Farmapoint
                 command.CommandText = "UPDATE CRecetaDispensable SET Dispensada=TRUE WHERE Identificador_Receta='" + recetaDispensada.propIdentificador_Receta + "';";
                 command.ExecuteNonQuery();
                 con.Close();
-               
+
             }
             catch (Exception ex)
             {
@@ -173,6 +186,14 @@ namespace Farmapoint
             this.Close();
             Window2 VentanaMedicamentoDispensable = new Window2(codigoSns);
             VentanaMedicamentoDispensable.Show();
+        }
+
+        private void grdDatos_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyType == typeof(DateTime))
+            {
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
+            }
         }
     }
 }

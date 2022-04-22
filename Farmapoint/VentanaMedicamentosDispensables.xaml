@@ -18,7 +18,7 @@
 			</Border.Effect>
 		</Border>
 		<Label x:Name="Title" Content="Farmapoint" HorizontalAlignment="Center" VerticalAlignment="Top" Height="64" Width="auto" FontSize="36" FontWeight="Bold" FontStyle="Italic"/>
-		<DataGrid x:Name="grdDatos" Height="250" VerticalAlignment="Center" Loaded="DataRow_Loaded" IsReadOnly="True" BorderBrush="#FFA397A4" RowBackground="WhiteSmoke" Margin="75,119,75,31" SelectionChanged="grdDatos_SelectionChanged" />
+        <DataGrid x:Name="grdDatos" AutoGeneratingColumn="grdDatos_AutoGeneratingColumn" Height="250" VerticalAlignment="Center" Loaded="DataRow_Loaded" IsReadOnly="True" BorderBrush="#FFA397A4" RowBackground="WhiteSmoke" Margin="75,119,75,31" SelectionChanged="grdDatos_SelectionChanged" />
 		<TextBlock HorizontalAlignment="Left" Margin="75,78,0,0" TextWrapping="Wrap" Text="Nombre:" VerticalAlignment="Top"/>
 		<TextBlock x:Name="label_nombre" HorizontalAlignment="Left" Margin="124,78,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top" Loaded="label_nombre_Loaded"/>
 		<TextBlock HorizontalAlignment="Left" Margin="237,78,0,0" TextWrapping="Wrap" Text="Apellidos:" VerticalAlignment="Top"/>

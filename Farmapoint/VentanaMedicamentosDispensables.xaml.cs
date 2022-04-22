@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.OleDb;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Farmapoint
 {
@@ -28,12 +29,11 @@ namespace Farmapoint
             try
             {
                 d.Clear();
-                string qry = "SELECT CRecetaDispensable.* " +
-                    "FROM(CRecetaDispensable LEFT JOIN CBusquedaReferenciasOUT " +
-                    "ON CRecetaDispensable.Identificador_Receta = CBusquedaReferenciasOUT.RecetasDispensable) " +
+                string qry = "SELECT CRecetaDispensable.*" +
+                    "FROM(CRecetaDispensable LEFT JOIN CBusquedaReferenciasOUT ON CRecetaDispensable.Identificador_Receta = CBusquedaReferenciasOUT.RecetasDispensable) " +
                     "INNER JOIN(CPaciente INNER JOIN CBusquedaReferenciasIN ON CPaciente.ID_Paciente = CBusquedaReferenciasIN.ID_Paciente) " +
                     "ON CRecetaDispensable.Identificador_Receta = CBusquedaReferenciasIN.Receta_Dispensable " +
-                    "WHERE CPaciente.Codigo_SNS = '" + codigoSns + "' AND CRecetaDispensable.Dispensada=False;";
+                    "WHERE CPaciente.Codigo_SNS = '" + codigoSns + "' AND CRecetaDispensable.Dispensada = FALSE";
                 command.CommandText = qry;
                 command.Connection = conexion;
                 adapter.SelectCommand = command;
@@ -51,7 +51,19 @@ namespace Farmapoint
             grdDatos.ItemsSource = null;
             rellenarDatos(conexion, adapter, command, d);
             grdDatos.ItemsSource = d.Tables["CRecetaDispensable" + "CBusquedaReferenciasOUT" + "CPaciente"].DefaultView;
-
+            grdDatos.Columns[0].Visibility = Visibility.Hidden;
+            grdDatos.Columns[1].Visibility = Visibility.Hidden;
+            grdDatos.Columns[2].Header = "Fecha Prescripcion";
+            grdDatos.Columns[3].Header = "Codigo Producto";
+            grdDatos.Columns[4].Header = "Nombre Producto";
+            grdDatos.Columns[5].Header = "Marca Comercial";
+            grdDatos.Columns[6].Header = "Nº Envases";
+            grdDatos.Columns[7].Header = "Codigo Centro";
+            grdDatos.Columns[8].Header = "Tipo Centro";
+            grdDatos.Columns[9].Header = "Especialidad Medico";
+            grdDatos.Columns[10].Header = "Nombre Medico";
+            grdDatos.Columns[11].Header = "Dispensada";
+            conexion.Close();
         }
         private void Button_Volver(object sender, RoutedEventArgs e)
         {
@@ -145,6 +157,14 @@ namespace Farmapoint
                 ventanaDetallesMedicamentosDispensables.Show();
             }
 
+        }
+
+        private void grdDatos_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyType == typeof(DateTime))
+            {
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
+            }
         }
     }
 }
