@@ -33,7 +33,7 @@ namespace Farmapoint
                     "ON CRecetaDispensable.Identificador_Receta = CBusquedaReferenciasOUT.RecetasDispensable) " +
                     "INNER JOIN(CPaciente INNER JOIN CBusquedaReferenciasIN ON CPaciente.ID_Paciente = CBusquedaReferenciasIN.ID_Paciente) " +
                     "ON CRecetaDispensable.Identificador_Receta = CBusquedaReferenciasIN.Receta_Dispensable " +
-                    "WHERE CPaciente.Codigo_SNS = '" + codigoSns + "'";
+                    "WHERE CPaciente.Codigo_SNS = '" + codigoSns + "' AND CRecetaDispensable.Dispensada=False;";
                 command.CommandText = qry;
                 command.Connection = conexion;
                 adapter.SelectCommand = command;
@@ -111,25 +111,10 @@ namespace Farmapoint
                     propTipo_Centro_Prescriptor = (string)row.Row.ItemArray[8],
                     propEspecialidad_Medico = (string)row.Row.ItemArray[9],
                     propNombre_Medico = (string)row.Row.ItemArray[10],
-                    propDispensada=(bool) row.Row.ItemArray[11]
+                    propDispensada = (bool)row.Row.ItemArray[11]
                 };
             }
-           
-            string id_paciente = "";
-            OleDbConnection con = ConexionDb.AbrirConexion();
-            string consultaCPaciente = "SELECT ID_Paciente " +
-                    "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns + "'";
-            OleDbCommand commandCPaciente = new OleDbCommand(consultaCPaciente, con);
-            OleDbDataReader readerPaciente = commandCPaciente.ExecuteReader();
-            if (readerPaciente.Read())
-            {
-                id_paciente = readerPaciente["ID_Paciente"].ToString();
-            }
-            string consultaCRecetaDispensada = "SELECT CNotificarDispensacionIN.* " +
-                "FROM CNotificarDispensacionIN WHERE(((CNotificarDispensacionIN.ID_Paciente) = '" + id_paciente + "'));";
-            OleDbCommand commandCRecetaDispensada = new OleDbCommand(consultaCRecetaDispensada, con);
-            OleDbDataReader readerCRecetaDispensada = commandCRecetaDispensada.ExecuteReader();
-            if (recetaDispensable != null & !readerCRecetaDispensada.Read() )
+            if (recetaDispensable != null)
             {
                 btn_mostrar.IsEnabled = true;
             }
@@ -147,17 +132,19 @@ namespace Farmapoint
             {
                 id_paciente = readerPaciente["ID_Paciente"].ToString();
             }
+            string str = "SELECT CNotificarDispensacionIN.* FROM CRecetaDispensable INNER JOIN CNotificarDispensacionIN ON CRecetaDispensable.Identificador_Receta = CNotificarDispensacionIN.RecetaDispensada" +
+                " WHERE'" + recetaDispensable.propIdentificador_Receta + "'= CNotificarDispensacionIN.RecetaDispensada; ";
+            command = new OleDbCommand(str, con);
+            OleDbDataReader reader = command.ExecuteReader();
 
-            string consultaCRecetaDispensada = "SELECT CNotificarDispensacionIN.* " +
-                "FROM CNotificarDispensacionIN WHERE(((CNotificarDispensacionIN.ID_Paciente) = '" + id_paciente + "'));";
-            OleDbCommand commandCRecetaDispensada = new OleDbCommand(consultaCRecetaDispensada, con);
-            OleDbDataReader readerCRecetaDispensada = commandCRecetaDispensada.ExecuteReader();
-            if (!readerCRecetaDispensada.Read())
+            if (!reader.Read())
             {
+                con.Close();
                 VentanaDetallesMedicamentosDispensables ventanaDetallesMedicamentosDispensables = new VentanaDetallesMedicamentosDispensables(recetaDispensable, codigoSns);
                 this.Hide();
                 ventanaDetallesMedicamentosDispensables.Show();
             }
+
         }
     }
 }
