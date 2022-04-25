@@ -51,7 +51,7 @@ namespace Farmapoint
         private void btn_volver_Click(object sender, RoutedEventArgs e)
         {
             Window2 ventanaLogeado = new Window2(codigoSns);
-            this.Close();
+            this.Hide();
             ventanaLogeado.Show();
         }
 
@@ -183,7 +183,7 @@ namespace Farmapoint
             row.Row.Delete();
             btn_dispensar.IsEnabled = false;
 
-            this.Close();
+            this.Hide();
             Window2 VentanaMedicamentoDispensable = new Window2(codigoSns);
             VentanaMedicamentoDispensable.Show();
         }

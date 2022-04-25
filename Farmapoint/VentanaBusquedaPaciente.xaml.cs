@@ -11,7 +11,6 @@ namespace Farmapoint
         public Window1()
         {
             InitializeComponent();
-            //this.Closed += (sender, e) => this.Dispatcher.InvokeShutdown();
         }
 
         private void Button_TarjetaSanitaria(object sender, RoutedEventArgs e)
@@ -37,7 +36,7 @@ namespace Farmapoint
                 if (dr.Read())
                 {
                     conexion.Close();
-                    this.Close();
+                    this.Hide();
                     Window2 VentanaMedicamentoDispensable = new Window2(Txt_SNS.Text);
                     VentanaMedicamentoDispensable.Show();
                 }

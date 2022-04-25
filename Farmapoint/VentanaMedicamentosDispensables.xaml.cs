@@ -68,7 +68,7 @@ namespace Farmapoint
         private void Button_Volver(object sender, RoutedEventArgs e)
         {
             Window1 ventanaLogeado = new Window1();
-            this.Close();
+            this.Hide();
             ventanaLogeado.Show();
         }
 

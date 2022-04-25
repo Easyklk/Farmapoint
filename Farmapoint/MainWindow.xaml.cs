@@ -52,7 +52,6 @@ namespace Farmapoint
 
                         conexion.Close();
                         this.Hide();
-
                     }
                     else
                     {
