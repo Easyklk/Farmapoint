@@ -139,7 +139,7 @@ namespace Farmapoint
 
         private void btn_dispensar_Click(object sender, RoutedEventArgs e)
         {
-            string id_paciente = "";
+            string id_paciente = "";    
             string cite = "";
             string id_consulta = "";
             OleDbConnection con = ConexionDb.AbrirConexion();
@@ -198,8 +198,7 @@ namespace Farmapoint
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-           Application.Current.Shutdown();
-
+           Application.Current.Shutdown(); 
         }
     }
 }

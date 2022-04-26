@@ -6,10 +6,9 @@
         xmlns:local="clr-namespace:Farmapoint"
         mc:Ignorable="d"
         WindowState="Maximized"
+        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow"
-        MinHeight="500"
-        MinWidth="500"
         Background="#FFA6FF72">
     <Grid x:Name="panel_login" HorizontalAlignment="Center" VerticalAlignment="Center" Height="334" Width="227">
         <Border BorderBrush="Black"

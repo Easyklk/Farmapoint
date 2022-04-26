@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Window1"
         WindowState="Maximized" 
+        ResizeMode="NoResize"
         Background="#FFA6FF72"
         Closing="Window_Closing">
     <Grid Width="700" Height="400" HorizontalAlignment="Center" VerticalAlignment="Center">
