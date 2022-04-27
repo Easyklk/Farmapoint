@@ -28,6 +28,8 @@
         <TextBlock HorizontalAlignment="Left" Margin="469,78,0,0" TextWrapping="Wrap" Text="Código SNS:" VerticalAlignment="Top"/>
         <TextBlock x:Name="label_sns" HorizontalAlignment="Left" Margin="540,78,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top" Loaded="label_codigosns_Loaded"/>
         <Button x:Name="btn_volver" Content="Volver" HorizontalAlignment="Left" Height="18" Margin="10,372,0,0" VerticalAlignment="Top" Width="59" Click="btn_volver_Click"/>
+        <TextBlock Text="Importe Total:" HorizontalAlignment="Left" Margin="237,374,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <Button x:Name="btn_dispensar" Content="Dispensar" IsEnabled="False" HorizontalAlignment="Right" Height="18" Margin="0,372,10,0" VerticalAlignment="Top" Width="59" Click="btn_dispensar_Click"/>
+        <TextBlock x:Name="importe"  HorizontalAlignment="Left" Margin="315,374,0,0" TextWrapping="NoWrap"  VerticalAlignment="Top"/>
     </Grid>
 </Window>

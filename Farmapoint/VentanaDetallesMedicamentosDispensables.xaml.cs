@@ -23,12 +23,30 @@ namespace Farmapoint
             InitializeComponent();
             this.codigoSns = codigoSns;
             this.recetaDispensable = recetaDispensable;
+            calcular_Importe();
         }
 
         private void rellenarDatos(OleDbConnection conexion, OleDbDataAdapter adapter, OleDbCommand command, DataSet d)
         {
+            string tipo_aportacion = "";
             try
             {
+                //OleDbConnection con = ConexionDb.AbrirConexion();
+                //string str = "SELECT Tipo_Aportacion " +
+                //        "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns + "'";
+                //command = new OleDbCommand(str, con);
+                //OleDbDataReader reader = command.ExecuteReader();
+                //if (reader.Read())
+                //{
+                //    tipo_aportacion = reader["Tipo_Aportacion"].ToString();
+                //}
+                //con.Close();
+
+                //command.ExecuteNonQuery();
+                //command.CommandType = CommandType.Text;
+                //command.CommandText = "UPDATE CRecetaDispensada SET Tipo_Aportacion=" + tipo_aportacion + " WHERE Identificador_Receta='" + recetaDispensada.propIdentificador_Receta + "';";
+                //command.ExecuteNonQuery();  
+
                 d.Clear();
                 string qry = "SELECT CRecetaDispensada.* FROM((CRecetaDispensable INNER JOIN CRecetaDispensada " +
                     "ON CRecetaDispensable.Identificador_Receta = CRecetaDispensada.Identificador_Receta) " +
@@ -139,7 +157,7 @@ namespace Farmapoint
 
         private void btn_dispensar_Click(object sender, RoutedEventArgs e)
         {
-            string id_paciente = "";    
+            string id_paciente = "";
             string cite = "";
             string id_consulta = "";
             OleDbConnection con = ConexionDb.AbrirConexion();
@@ -198,7 +216,86 @@ namespace Farmapoint
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-           Application.Current.Shutdown(); 
+            Application.Current.Shutdown();
+        }
+
+        private void calcular_Importe()
+        {
+            int num_Envases = 0;
+            decimal precio_Unitario = 0.0m;
+            decimal descuento = 0m;
+            decimal total = 0m;
+            string tipo_Aportacion = "";
+
+            OleDbConnection con = ConexionDb.AbrirConexion();
+            string consultaCRecetaDispensada = "SELECT CRecetaDispensada.Num_Envases, CRecetaDispensada.Precio_Unitario FROM((CRecetaDispensable INNER JOIN CRecetaDispensada " +
+                    "ON CRecetaDispensable.Identificador_Receta = CRecetaDispensada.Identificador_Receta) " +
+                    "INNER JOIN CRecetaCDA ON CRecetaDispensable.Identificador_Receta = CRecetaCDA.Identificador_Receta) " +
+                    "INNER JOIN(CPaciente INNER JOIN CBusquedaReferenciasIN ON CPaciente.ID_Paciente = CBusquedaReferenciasIN.ID_Paciente) " +
+                    "ON CRecetaDispensable.Identificador_Receta = CBusquedaReferenciasIN.Receta_Dispensable " +
+                    "WHERE(((CRecetaDispensada.Identificador_Receta) = '" + recetaDispensable.propIdentificador_Receta + "'));";
+            OleDbCommand commandCRecetaDispensada = new OleDbCommand(consultaCRecetaDispensada, con);
+            OleDbDataReader readerCRecetaDispensada = commandCRecetaDispensada.ExecuteReader();
+            if (readerCRecetaDispensada.Read())
+            {
+                num_Envases = int.Parse(readerCRecetaDispensada["Num_Envases"].ToString());
+                precio_Unitario = decimal.Parse(readerCRecetaDispensada["Precio_Unitario"].ToString());
+            }
+
+            string consultaCPaciente = "SELECT Tipo_Aportacion " +
+                    "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns + "'";
+            OleDbCommand commandCPaciente = new OleDbCommand(consultaCPaciente, con);
+            OleDbDataReader readerPaciente = commandCPaciente.ExecuteReader();
+            if (readerPaciente.Read())
+            {
+                tipo_Aportacion = readerPaciente["Tipo_Aportacion"].ToString();
+            }
+            con.Close();
+
+            switch (tipo_Aportacion)
+            {
+                case "TSI001":
+                    descuento = 0.00m;
+                    break;
+                case "TSI002_00":
+                    descuento = 0.10m;
+                    break;
+                case "TSI002_01":
+                    descuento = 0.10m;
+                    break;
+                case "TSI002_02":
+                    descuento = 0.10m;
+                    break;
+                case "TSI003":
+                    descuento = 0.40m;
+                    break;
+                case "TSI004":
+                    descuento = 0.50m;
+                    break;
+                case "TSI005":
+                    descuento = 0.60m;
+                    break;
+                case "TSI005_03":
+                    descuento = 0.60m;
+                    break;
+                case "TSI006":
+                    descuento = 0.30m;
+                    break;
+                case "F003":
+                    descuento = 0.40m;
+                    break;
+                case "F004":
+                    descuento = 0.50m;
+                    break;
+                case "NOFAR":
+                    descuento = 1.00m;
+                    break;
+            }
+
+            decimal precio_descontado = (precio_Unitario * descuento);
+            precio_descontado = precio_Unitario - precio_descontado;
+            total = num_Envases * precio_descontado;
+            importe.Text = total.ToString();
         }
     }
 }
