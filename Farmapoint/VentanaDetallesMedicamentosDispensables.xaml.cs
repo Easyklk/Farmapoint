@@ -79,6 +79,9 @@ namespace Farmapoint
             OleDbConnection conexion = ConexionDb.AbrirConexion();
             rellenarDatos(conexion, adapter, command, d);
             grdDatos.ItemsSource = d.Tables["CRecetaCDA"].DefaultView;
+            grdDatos.SelectAll();
+            DataRowView drv = grdDatos.SelectedItem as DataRowView;
+            DataRow dr = drv.Row;
             grdDatos.Columns[0].Visibility = Visibility.Hidden;
             grdDatos.Columns[1].Visibility = Visibility.Hidden;
             grdDatos.Columns[2].Header = "Codigo Producto";
@@ -91,6 +94,7 @@ namespace Farmapoint
             grdDatos.Columns[9].Header = "Codigo Causa Sustitución";
             grdDatos.Columns[10].Header = "Descripción Causa Sustitución";
             grdDatos.Columns[11].Header = "Observaciones";
+            dr.SetField<string>(8, "Hola");
             conexion.Close();
         }
 
@@ -297,5 +301,6 @@ namespace Farmapoint
             total = num_Envases * precio_descontado;
             importe.Text = total.ToString();
         }
+
     }
 }
