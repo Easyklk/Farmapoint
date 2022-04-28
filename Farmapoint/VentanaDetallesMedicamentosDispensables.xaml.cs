@@ -17,6 +17,7 @@ namespace Farmapoint
         private string codigoSns;
         private CRecetaDispensable recetaDispensable;
         private CRecetaDispensada recetaDispensada;
+        private string tipoAportacion;
 
         public VentanaDetallesMedicamentosDispensables(CRecetaDispensable recetaDispensable, string codigoSns)
         {
@@ -75,6 +76,7 @@ namespace Farmapoint
 
         private void DataRow_Loaded(object sender, RoutedEventArgs e)
         {
+            Obtener_Paciente();
             grdDatos.ItemsSource = null;
             OleDbConnection conexion = ConexionDb.AbrirConexion();
             rellenarDatos(conexion, adapter, command, d);
@@ -88,47 +90,20 @@ namespace Farmapoint
             grdDatos.Columns[3].Header = "Nombre Producto";
             grdDatos.Columns[4].Header = "Nº Envases";
             grdDatos.Columns[5].Header = "Precio Unitario";
-            grdDatos.Columns[6].Header = "Aportación Unitaria";
+            grdDatos.Columns[6].Visibility= Visibility.Hidden;
             grdDatos.Columns[7].Header = "Tipo Contingencia";
             grdDatos.Columns[8].Header = "Tipo Aportación";
             grdDatos.Columns[9].Header = "Codigo Causa Sustitución";
             grdDatos.Columns[10].Header = "Descripción Causa Sustitución";
             grdDatos.Columns[11].Header = "Observaciones";
-            dr.SetField<string>(8, "Hola");
+            dr.SetField(8, tipoAportacion);
             conexion.Close();
         }
 
-        private void label_nombre_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            OleDbConnection con = ConexionDb.AbrirConexion();
-            string str = "SELECT Nombre " +
-                    "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns + "'";
-            command = new OleDbCommand(str, con);
-            OleDbDataReader reader = command.ExecuteReader();
-            if (reader.Read())
-            {
-                label_nombre.Text = reader["Nombre"].ToString();
-            }
-            con.Close();
-        }
-
-        private void label_apellido_Loaded(object sender, RoutedEventArgs e)
-        {
-            OleDbConnection con = ConexionDb.AbrirConexion();
-            string str = "SELECT Apellidos " +
-                    "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns + "'";
-            command = new OleDbCommand(str, con);
-            OleDbDataReader reader = command.ExecuteReader();
-
-            if (reader.Read())
-            {
-                label_apellido.Text = reader["Apellidos"].ToString();
-            }
-            con.Close();
-        }
-
-        private void label_codigosns_Loaded(object sender, RoutedEventArgs e)
-        {
+            label_nombre.Text = Obtener_Paciente().propNombre;
+            label_apellido.Text = Obtener_Paciente().propApellidos;
             label_sns.Text = codigoSns;
         }
 
@@ -165,15 +140,9 @@ namespace Farmapoint
             string cite = "";
             string id_consulta = "";
             OleDbConnection con = ConexionDb.AbrirConexion();
-            string consultaCPaciente = "SELECT ID_Paciente, CITE " +
-                    "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns + "'";
-            OleDbCommand commandCPaciente = new OleDbCommand(consultaCPaciente, con);
-            OleDbDataReader readerPaciente = commandCPaciente.ExecuteReader();
-            if (readerPaciente.Read())
-            {
-                id_paciente = readerPaciente["ID_Paciente"].ToString();
-                cite = readerPaciente["CITE"].ToString();
-            }
+            id_paciente = Obtener_Paciente().propId_Paciente;
+            cite = Obtener_Paciente().propCite;
+
             string consultaBusquedaPacienteOUT = "SELECT CBusquedaPacienteOUT.ID_Consulta " +
            "FROM CPaciente INNER JOIN CBusquedaPacienteOUT ON CPaciente.ID_Paciente = CBusquedaPacienteOUT.Paciente " +
            "WHERE (((CPaciente.ID_Paciente) = '" + id_paciente + "')); ";
@@ -218,19 +187,12 @@ namespace Farmapoint
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
         private void calcular_Importe()
         {
             int num_Envases = 0;
             decimal precio_Unitario = 0.0m;
             decimal descuento = 0m;
             decimal total = 0m;
-            string tipo_Aportacion = "";
-
             OleDbConnection con = ConexionDb.AbrirConexion();
             string consultaCRecetaDispensada = "SELECT CRecetaDispensada.Num_Envases, CRecetaDispensada.Precio_Unitario FROM((CRecetaDispensable INNER JOIN CRecetaDispensada " +
                     "ON CRecetaDispensable.Identificador_Receta = CRecetaDispensada.Identificador_Receta) " +
@@ -245,18 +207,10 @@ namespace Farmapoint
                 num_Envases = int.Parse(readerCRecetaDispensada["Num_Envases"].ToString());
                 precio_Unitario = decimal.Parse(readerCRecetaDispensada["Precio_Unitario"].ToString());
             }
-
-            string consultaCPaciente = "SELECT Tipo_Aportacion " +
-                    "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns + "'";
-            OleDbCommand commandCPaciente = new OleDbCommand(consultaCPaciente, con);
-            OleDbDataReader readerPaciente = commandCPaciente.ExecuteReader();
-            if (readerPaciente.Read())
-            {
-                tipo_Aportacion = readerPaciente["Tipo_Aportacion"].ToString();
-            }
             con.Close();
 
-            switch (tipo_Aportacion)
+            tipoAportacion = Obtener_Paciente().propTipo_aportacion;
+            switch (tipoAportacion)
             {
                 case "TSI001":
                     descuento = 0.00m;
@@ -299,7 +253,36 @@ namespace Farmapoint
             decimal precio_descontado = (precio_Unitario * descuento);
             precio_descontado = precio_Unitario - precio_descontado;
             total = num_Envases * precio_descontado;
-            importe.Text = total.ToString();
+            importe.Text = total.ToString() + "€";
+        }
+
+        private CPaciente Obtener_Paciente()
+        {
+            CPaciente cPaciente = new CPaciente();
+            OleDbConnection con = ConexionDb.AbrirConexion();
+            string str = "SELECT * " +
+                    "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns + "'";
+            command = new OleDbCommand(str, con);
+            OleDbDataReader reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                cPaciente.propId_Paciente = reader["ID_Paciente"].ToString();
+                cPaciente.propCite = reader["CITE"].ToString();
+                cPaciente.propCodigo_sns = reader["Codigo_SNS"].ToString();
+                cPaciente.propTsi = reader["TSI"].ToString();
+                cPaciente.propNombre = reader["Nombre"].ToString();
+                cPaciente.propApellidos = reader["Apellidos"].ToString();
+                cPaciente.propFecha_Nacimiento = reader["Fecha_Nacimiento"].ToString();
+                cPaciente.propId_Mutua = reader["ID_Mutua"].ToString();
+                cPaciente.propTipo_aportacion = reader["Tipo_Aportacion"].ToString();
+            }
+            con.Close();
+            return cPaciente;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
 
     }
