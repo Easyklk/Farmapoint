@@ -11,13 +11,14 @@
         private string fecha_nacimiento;
         private string id_mutua;
         private string tipo_aportacion;
+        private decimal saldo;
 
         public CPaciente()
         {
 
         }
 
-        public CPaciente(string id_paciente, string cite, string codigo_sns, string tsi, string nombre, string apellidos, string fecha_nacimiento, string id_mutua, string tipo_aportacion)
+        public CPaciente(string id_paciente, string cite, string codigo_sns, string tsi, string nombre, string apellidos, string fecha_nacimiento, string id_mutua, string tipo_aportacion, decimal saldo)
         {
             this.id_paciente = id_paciente;
             this.cite = cite;
@@ -28,6 +29,7 @@
             this.fecha_nacimiento = fecha_nacimiento;
             this.id_mutua = id_mutua;
             this.tipo_aportacion = tipo_aportacion;
+            this.saldo = saldo;
         }
         public string propId_Paciente
         {
@@ -42,7 +44,7 @@
         public string propCodigo_sns
         {
             get { return codigo_sns; }
-            set { codigo_sns= value; }
+            set { codigo_sns = value; }
         }
         public string propTsi
         {
@@ -62,17 +64,22 @@
         public string propFecha_Nacimiento
         {
             get { return fecha_nacimiento; }
-            set { fecha_nacimiento= value; }
+            set { fecha_nacimiento = value; }
         }
         public string propId_Mutua
         {
             get { return id_mutua; }
-            set { id_mutua= value; }
+            set { id_mutua = value; }
         }
         public string propTipo_aportacion
         {
             get { return tipo_aportacion; }
             set { tipo_aportacion = value; }
+        }
+        public decimal propSaldo
+        {
+            get { return saldo; }
+            set { saldo = value; }
         }
     }
 }

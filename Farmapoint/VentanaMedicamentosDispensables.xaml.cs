@@ -65,44 +65,20 @@ namespace Farmapoint
             grdDatos.Columns[11].Header = "Dispensada";
             conexion.Close();
         }
+
+        private void grdDatos_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyType == typeof(DateTime))
+            {
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
+            }
+        }
+
         private void Button_Volver(object sender, RoutedEventArgs e)
         {
             Window1 ventanaLogeado = new Window1();
             this.Hide();
             ventanaLogeado.Show();
-        }
-
-        private void label_nombre_Loaded(object sender, RoutedEventArgs e)
-        {
-            OleDbConnection con = ConexionDb.AbrirConexion();
-            string str = "SELECT Nombre " +
-                    "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns + "'";
-            command = new OleDbCommand(str, con);
-            OleDbDataReader reader = command.ExecuteReader();
-            if (reader.Read())
-            {
-                label_nombre.Text = reader["Nombre"].ToString();
-            }
-            con.Close();
-        }
-
-        private void label_apellido_Loaded(object sender, RoutedEventArgs e)
-        {
-            OleDbConnection con = ConexionDb.AbrirConexion();
-            string str = "SELECT Apellidos " +
-                    "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns + "'";
-            command = new OleDbCommand(str, con);
-            OleDbDataReader reader = command.ExecuteReader();
-            if (reader.Read())
-            {
-                label_apellido.Text = reader["Apellidos"].ToString();
-            }
-            con.Close();
-        }
-
-        private void label_codigosns_Loaded(object sender, RoutedEventArgs e)
-        {
-            label_sns.Text = codigoSns;
         }
 
         private void grdDatos_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -134,21 +110,11 @@ namespace Farmapoint
 
         private void mostrar_RecetaDispensable(object sender, RoutedEventArgs e)
         {
-            string id_paciente = "";
             OleDbConnection con = ConexionDb.AbrirConexion();
-            string consultaCPaciente = "SELECT ID_Paciente " +
-                    "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns + "'";
-            OleDbCommand commandCPaciente = new OleDbCommand(consultaCPaciente, con);
-            OleDbDataReader readerPaciente = commandCPaciente.ExecuteReader();
-            if (readerPaciente.Read())
-            {
-                id_paciente = readerPaciente["ID_Paciente"].ToString();
-            }
             string str = "SELECT CNotificarDispensacionIN.* FROM CRecetaDispensable INNER JOIN CNotificarDispensacionIN ON CRecetaDispensable.Identificador_Receta = CNotificarDispensacionIN.RecetaDispensada" +
                 " WHERE'" + recetaDispensable.propIdentificador_Receta + "'= CNotificarDispensacionIN.RecetaDispensada; ";
             command = new OleDbCommand(str, con);
             OleDbDataReader reader = command.ExecuteReader();
-
             if (!reader.Read())
             {
                 con.Close();
@@ -159,18 +125,43 @@ namespace Farmapoint
 
         }
 
-        private void grdDatos_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        private CPaciente Obtener_Paciente()
         {
-            if (e.PropertyType == typeof(DateTime))
+            CPaciente cPaciente = new CPaciente();
+            OleDbConnection con = ConexionDb.AbrirConexion();
+            string str = "SELECT * " +
+                    "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns + "'";
+            command = new OleDbCommand(str, con);
+            OleDbDataReader reader = command.ExecuteReader();
+            if (reader.Read())
             {
-                (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
+                cPaciente.propId_Paciente = reader["ID_Paciente"].ToString();
+                cPaciente.propCite = reader["CITE"].ToString();
+                cPaciente.propCodigo_sns = reader["Codigo_SNS"].ToString();
+                cPaciente.propTsi = reader["TSI"].ToString();
+                cPaciente.propNombre = reader["Nombre"].ToString();
+                cPaciente.propApellidos = reader["Apellidos"].ToString();
+                cPaciente.propFecha_Nacimiento = reader["Fecha_Nacimiento"].ToString();
+                cPaciente.propId_Mutua = reader["ID_Mutua"].ToString();
+                cPaciente.propTipo_aportacion = reader["Tipo_Aportacion"].ToString();
+                cPaciente.propSaldo = Decimal.Parse(reader["Saldo"].ToString());
             }
+            con.Close();
+            return cPaciente;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            label_sns.Text = codigoSns;
+            label_nombre.Text = Obtener_Paciente().propNombre;
+            label_apellido.Text = Obtener_Paciente().propApellidos;
+            label_saldo.Text = Obtener_Paciente().propSaldo.ToString() + "€";
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Application.Current.Shutdown();
-
         }
+
     }
 }

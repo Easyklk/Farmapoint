@@ -18,6 +18,7 @@ namespace Farmapoint
         private CRecetaDispensable recetaDispensable;
         private CRecetaDispensada recetaDispensada;
         private string tipoAportacion;
+        private decimal total = 0m;
 
         public VentanaDetallesMedicamentosDispensables(CRecetaDispensable recetaDispensable, string codigoSns)
         {
@@ -29,25 +30,8 @@ namespace Farmapoint
 
         private void rellenarDatos(OleDbConnection conexion, OleDbDataAdapter adapter, OleDbCommand command, DataSet d)
         {
-            string tipo_aportacion = "";
             try
             {
-                //OleDbConnection con = ConexionDb.AbrirConexion();
-                //string str = "SELECT Tipo_Aportacion " +
-                //        "FROM CPaciente WHERE Codigo_SNS = '" + codigoSns + "'";
-                //command = new OleDbCommand(str, con);
-                //OleDbDataReader reader = command.ExecuteReader();
-                //if (reader.Read())
-                //{
-                //    tipo_aportacion = reader["Tipo_Aportacion"].ToString();
-                //}
-                //con.Close();
-
-                //command.ExecuteNonQuery();
-                //command.CommandType = CommandType.Text;
-                //command.CommandText = "UPDATE CRecetaDispensada SET Tipo_Aportacion=" + tipo_aportacion + " WHERE Identificador_Receta='" + recetaDispensada.propIdentificador_Receta + "';";
-                //command.ExecuteNonQuery();  
-
                 d.Clear();
                 string qry = "SELECT CRecetaDispensada.* FROM((CRecetaDispensable INNER JOIN CRecetaDispensada " +
                     "ON CRecetaDispensable.Identificador_Receta = CRecetaDispensada.Identificador_Receta) " +
@@ -76,7 +60,6 @@ namespace Farmapoint
 
         private void DataRow_Loaded(object sender, RoutedEventArgs e)
         {
-            Obtener_Paciente();
             grdDatos.ItemsSource = null;
             OleDbConnection conexion = ConexionDb.AbrirConexion();
             rellenarDatos(conexion, adapter, command, d);
@@ -90,7 +73,7 @@ namespace Farmapoint
             grdDatos.Columns[3].Header = "Nombre Producto";
             grdDatos.Columns[4].Header = "Nº Envases";
             grdDatos.Columns[5].Header = "Precio Unitario";
-            grdDatos.Columns[6].Visibility= Visibility.Hidden;
+            grdDatos.Columns[6].Visibility = Visibility.Hidden;
             grdDatos.Columns[7].Header = "Tipo Contingencia";
             grdDatos.Columns[8].Header = "Tipo Aportación";
             grdDatos.Columns[9].Header = "Codigo Causa Sustitución";
@@ -136,23 +119,22 @@ namespace Farmapoint
 
         private void btn_dispensar_Click(object sender, RoutedEventArgs e)
         {
-            string id_paciente = "";
-            string cite = "";
+            string id_paciente = Obtener_Paciente().propId_Paciente;
+            string cite = Obtener_Paciente().propCite;
             string id_consulta = "";
-            OleDbConnection con = ConexionDb.AbrirConexion();
-            id_paciente = Obtener_Paciente().propId_Paciente;
-            cite = Obtener_Paciente().propCite;
+            decimal saldo = Obtener_Paciente().propSaldo;
 
+            OleDbConnection con = ConexionDb.AbrirConexion();
             string consultaBusquedaPacienteOUT = "SELECT CBusquedaPacienteOUT.ID_Consulta " +
            "FROM CPaciente INNER JOIN CBusquedaPacienteOUT ON CPaciente.ID_Paciente = CBusquedaPacienteOUT.Paciente " +
            "WHERE (((CPaciente.ID_Paciente) = '" + id_paciente + "')); ";
             OleDbCommand commandBusquedaPaciente = new OleDbCommand(consultaBusquedaPacienteOUT, con);
             OleDbDataReader readerConsulta = commandBusquedaPaciente.ExecuteReader();
-
             if (readerConsulta.Read())
             {
                 id_consulta = readerConsulta["ID_Consulta"].ToString();
             }
+
             try
             {
                 command.Connection = con;
@@ -163,17 +145,19 @@ namespace Farmapoint
                 command.CommandType = CommandType.Text;
                 command.CommandText = "UPDATE CRecetaDispensable SET Dispensada=TRUE WHERE Identificador_Receta='" + recetaDispensada.propIdentificador_Receta + "';";
                 command.ExecuteNonQuery();
-                con.Close();
 
+                command.ExecuteNonQuery();
+                command.CommandType = CommandType.Text;
+                command.CommandText = "UPDATE CPaciente SET Saldo='" + (saldo - total) + "' WHERE Codigo_SNS='" + codigoSns + "';";
+                command.ExecuteNonQuery();
+                con.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
-            DataRowView row = grdDatos.SelectedItem as DataRowView;
-            row.Row.Delete();
-            btn_dispensar.IsEnabled = false;
 
+            btn_dispensar.IsEnabled = false;
             this.Hide();
             Window2 VentanaMedicamentoDispensable = new Window2(codigoSns);
             VentanaMedicamentoDispensable.Show();
@@ -192,7 +176,6 @@ namespace Farmapoint
             int num_Envases = 0;
             decimal precio_Unitario = 0.0m;
             decimal descuento = 0m;
-            decimal total = 0m;
             OleDbConnection con = ConexionDb.AbrirConexion();
             string consultaCRecetaDispensada = "SELECT CRecetaDispensada.Num_Envases, CRecetaDispensada.Precio_Unitario FROM((CRecetaDispensable INNER JOIN CRecetaDispensada " +
                     "ON CRecetaDispensable.Identificador_Receta = CRecetaDispensada.Identificador_Receta) " +
@@ -275,6 +258,7 @@ namespace Farmapoint
                 cPaciente.propFecha_Nacimiento = reader["Fecha_Nacimiento"].ToString();
                 cPaciente.propId_Mutua = reader["ID_Mutua"].ToString();
                 cPaciente.propTipo_aportacion = reader["Tipo_Aportacion"].ToString();
+                cPaciente.propSaldo = Decimal.Parse(reader["Saldo"].ToString());
             }
             con.Close();
             return cPaciente;
