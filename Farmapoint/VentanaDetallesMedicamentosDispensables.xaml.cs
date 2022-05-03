@@ -70,16 +70,19 @@ namespace Farmapoint
             grdDatos.Columns[0].Visibility = Visibility.Hidden;
             grdDatos.Columns[1].Visibility = Visibility.Hidden;
             grdDatos.Columns[2].Header = "Codigo Producto";
+            dr.SetField(2, recetaDispensable.propCodigo_Producto_Prescrito);
             grdDatos.Columns[3].Header = "Nombre Producto";
+            dr.SetField(3, recetaDispensable.propNombre_Producto_Prescrito);
             grdDatos.Columns[4].Header = "Nº Envases";
+            dr.SetField(4, recetaDispensable.propNum_Envases);
             grdDatos.Columns[5].Header = "Precio Unitario";
             grdDatos.Columns[6].Visibility = Visibility.Hidden;
             grdDatos.Columns[7].Header = "Tipo Contingencia";
             grdDatos.Columns[8].Header = "Tipo Aportación";
+            dr.SetField(8, tipoAportacion);
             grdDatos.Columns[9].Header = "Codigo Causa Sustitución";
             grdDatos.Columns[10].Header = "Descripción Causa Sustitución";
             grdDatos.Columns[11].Header = "Observaciones";
-            dr.SetField(8, tipoAportacion);
             conexion.Close();
         }
 
@@ -87,7 +90,7 @@ namespace Farmapoint
         {
             label_nombre.Text = Obtener_Paciente().propNombre;
             label_apellido.Text = Obtener_Paciente().propApellidos;
-            label_saldo.Text = Obtener_Paciente().propSaldo.ToString();
+            label_saldo.Text = Obtener_Paciente().propSaldo.ToString() + "€";
             label_sns.Text = codigoSns;
         }
 
@@ -142,7 +145,6 @@ namespace Farmapoint
             {
                 id_consulta = readerConsulta["ID_Consulta"].ToString();
             }
-            con.Close();
 
             try
             {
@@ -150,8 +152,8 @@ namespace Farmapoint
                 command.CommandType = CommandType.Text;
                 command.CommandText = "INSERT INTO CNotificarDispensacionIN (ID_Paciente, CITE, ID_Consulta, Codigo_SNS, RecetaDispensada, Localizador_Hoja)" +
                                       "VALUES ('" + id_paciente + "','" + cite + "'," + id_consulta + ", '" + codigoSns + "','" + recetaDispensada.propIdentificador_Receta + "'," + 0 + ")";
-
                 command.ExecuteNonQuery();
+
                 command.CommandType = CommandType.Text;
                 command.CommandText = "UPDATE CRecetaDispensable SET Dispensada=TRUE WHERE Identificador_Receta='" + recetaDispensada.propIdentificador_Receta + "';";
                 command.ExecuteNonQuery();
@@ -196,7 +198,7 @@ namespace Farmapoint
             OleDbDataReader readerCRecetaDispensada = commandCRecetaDispensada.ExecuteReader();
             if (readerCRecetaDispensada.Read())
             {
-                num_Envases = int.Parse(readerCRecetaDispensada["Num_Envases"].ToString());
+                num_Envases = int.Parse(recetaDispensable.propNum_Envases.ToString());
                 precio_Unitario = decimal.Parse(readerCRecetaDispensada["Precio_Unitario"].ToString());
             }
             con.Close();

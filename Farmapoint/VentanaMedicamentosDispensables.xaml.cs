@@ -51,9 +51,6 @@ namespace Farmapoint
             grdDatos.ItemsSource = null;
             rellenarDatos(conexion, adapter, command, d);
             grdDatos.ItemsSource = d.Tables["CRecetaDispensable" + "CBusquedaReferenciasOUT" + "CPaciente"].DefaultView;
-            grdDatos.SelectAll();
-            DataRowView drv = grdDatos.SelectedItem as DataRowView;
-            DataRow dr = drv.Row;
             grdDatos.Columns[0].Visibility = Visibility.Hidden;
             grdDatos.Columns[1].Visibility = Visibility.Hidden;
             grdDatos.Columns[2].Header = "Fecha Prescripcion";
@@ -61,7 +58,6 @@ namespace Farmapoint
             grdDatos.Columns[4].Header = "Nombre Producto";
             grdDatos.Columns[5].Header = "Marca Comercial";
             grdDatos.Columns[6].Header = "Nº Envases";
-            //dr.SetField(6, );
             grdDatos.Columns[7].Header = "Codigo Centro";
             grdDatos.Columns[8].Header = "Tipo Centro";
             grdDatos.Columns[9].Header = "Especialidad Medico";
