@@ -29,8 +29,8 @@
         <TextBlock x:Name="label_sns" HorizontalAlignment="Left" Margin="540,78,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top"/>
         <Button Content="Volver" HorizontalAlignment="Left" Height="18" Margin="10,372,0,0" VerticalAlignment="Top" Width="59" Click="Button_Volver"/>
         <Button x:Name="btn_mostrar" Content="Mostrar" IsEnabled="False" HorizontalAlignment="Left" Height="18" Margin="631,372,0,0" VerticalAlignment="Top" Width="59" Click="mostrar_RecetaDispensable"/>
-        <TextBlock Text="Saldo Restante:" HorizontalAlignment="Left" Margin="131,374,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock x:Name="label_saldo"  HorizontalAlignment="Left" Margin="215,374,0,0" TextWrapping="NoWrap"  VerticalAlignment="Top"/>
+        <TextBlock Text="Saldo Restante:" HorizontalAlignment="Left" Margin="102,374,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="label_saldo"  HorizontalAlignment="Left" Margin="186,374,0,0" TextWrapping="NoWrap"  VerticalAlignment="Top"/>
     </Grid>
 </Window>
     

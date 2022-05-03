@@ -18,7 +18,7 @@ namespace Farmapoint
         private CRecetaDispensable recetaDispensable;
         private CRecetaDispensada recetaDispensada;
         private string tipoAportacion;
-        private decimal total = 0m;
+        private decimal importeTotal = 0m;
 
         public VentanaDetallesMedicamentosDispensables(CRecetaDispensable recetaDispensable, string codigoSns)
         {
@@ -87,6 +87,7 @@ namespace Farmapoint
         {
             label_nombre.Text = Obtener_Paciente().propNombre;
             label_apellido.Text = Obtener_Paciente().propApellidos;
+            label_saldo.Text = Obtener_Paciente().propSaldo.ToString();
             label_sns.Text = codigoSns;
         }
 
@@ -113,7 +114,14 @@ namespace Farmapoint
             }
             if (recetaDispensable != null)
             {
-                btn_dispensar.IsEnabled = true;
+                if (Obtener_Paciente().propSaldo >= importeTotal)
+                {
+                    btn_dispensar.IsEnabled = true;
+                }
+                else
+                {
+                    label_error.Text = "¡SALDO INSUFICIENTE!";
+                }
             }
         }
 
@@ -134,6 +142,7 @@ namespace Farmapoint
             {
                 id_consulta = readerConsulta["ID_Consulta"].ToString();
             }
+            con.Close();
 
             try
             {
@@ -141,6 +150,7 @@ namespace Farmapoint
                 command.CommandType = CommandType.Text;
                 command.CommandText = "INSERT INTO CNotificarDispensacionIN (ID_Paciente, CITE, ID_Consulta, Codigo_SNS, RecetaDispensada, Localizador_Hoja)" +
                                       "VALUES ('" + id_paciente + "','" + cite + "'," + id_consulta + ", '" + codigoSns + "','" + recetaDispensada.propIdentificador_Receta + "'," + 0 + ")";
+
                 command.ExecuteNonQuery();
                 command.CommandType = CommandType.Text;
                 command.CommandText = "UPDATE CRecetaDispensable SET Dispensada=TRUE WHERE Identificador_Receta='" + recetaDispensada.propIdentificador_Receta + "';";
@@ -148,7 +158,7 @@ namespace Farmapoint
 
                 command.ExecuteNonQuery();
                 command.CommandType = CommandType.Text;
-                command.CommandText = "UPDATE CPaciente SET Saldo='" + (saldo - total) + "' WHERE Codigo_SNS='" + codigoSns + "';";
+                command.CommandText = "UPDATE CPaciente SET Saldo='" + (saldo - importeTotal) + "' WHERE Codigo_SNS='" + codigoSns + "';";
                 command.ExecuteNonQuery();
                 con.Close();
             }
@@ -157,7 +167,6 @@ namespace Farmapoint
                 MessageBox.Show(ex.ToString());
             }
 
-            btn_dispensar.IsEnabled = false;
             this.Hide();
             Window2 VentanaMedicamentoDispensable = new Window2(codigoSns);
             VentanaMedicamentoDispensable.Show();
@@ -235,8 +244,8 @@ namespace Farmapoint
 
             decimal precio_descontado = (precio_Unitario * descuento);
             precio_descontado = precio_Unitario - precio_descontado;
-            total = num_Envases * precio_descontado;
-            importe.Text = total.ToString() + "€";
+            importeTotal = num_Envases * precio_descontado;
+            importe.Text = importeTotal.ToString() + "€";
         }
 
         private CPaciente Obtener_Paciente()
