@@ -6,9 +6,9 @@ namespace Farmapoint
     /// <summary>
     /// Lógica de interacción para Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class VentanaBusquedaPaciente : Window
     {
-        public Window1()
+        public VentanaBusquedaPaciente()
         {
             InitializeComponent();
         }
@@ -37,7 +37,7 @@ namespace Farmapoint
                 {
                     conexion.Close();
                     this.Hide();
-                    Window2 VentanaMedicamentoDispensable = new Window2(Txt_SNS.Text);
+                    VentanaMedicamentosDispensables VentanaMedicamentoDispensable = new VentanaMedicamentosDispensables(Txt_SNS.Text);
                     VentanaMedicamentoDispensable.Show();
                 }
                 else

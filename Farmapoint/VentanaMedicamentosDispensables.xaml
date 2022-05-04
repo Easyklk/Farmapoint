@@ -1,15 +1,16 @@
-﻿<Window x:Class="Farmapoint.Window2"
+﻿<Window x:Class="Farmapoint.VentanaMedicamentosDispensables"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Farmapoint"
         mc:Ignorable="d"
-        Title="Window2"
+        Title="Receta Dispensables"
         WindowState="Maximized"
         ResizeMode="NoResize"
         Background="#FFA6FF72" 
-        Closing="Window_Closing" Loaded="Window_Loaded">
+        Closing="Window_Closing" 
+        Loaded="Window_Loaded">
     <Grid Width="700" Height="400">
         <Border BorderBrush="Black"
                 Background="White"

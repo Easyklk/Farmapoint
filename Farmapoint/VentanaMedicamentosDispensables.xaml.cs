@@ -9,7 +9,7 @@ namespace Farmapoint
     /// <summary>
     /// Lógica de interacción para Window2.xaml
     /// </summary>
-    public partial class Window2 : Window
+    public partial class VentanaMedicamentosDispensables : Window
     {
         private OleDbConnection conexion = ConexionDb.AbrirConexion();
         private OleDbDataAdapter adapter = new OleDbDataAdapter();
@@ -18,7 +18,7 @@ namespace Farmapoint
         private string codigoSns;
         private CRecetaDispensable recetaDispensable;
 
-        public Window2(string codigoSns)
+        public VentanaMedicamentosDispensables(string codigoSns)
         {
             InitializeComponent();
             this.codigoSns = codigoSns;
@@ -76,7 +76,7 @@ namespace Farmapoint
 
         private void Button_Volver(object sender, RoutedEventArgs e)
         {
-            Window1 ventanaLogeado = new Window1();
+            VentanaBusquedaPaciente ventanaLogeado = new VentanaBusquedaPaciente();
             this.Hide();
             ventanaLogeado.Show();
         }
@@ -88,17 +88,17 @@ namespace Farmapoint
             {
                 recetaDispensable = new CRecetaDispensable
                 {
-                    propId_Repositorio = (string)row.Row.ItemArray[0],
-                    propIdentificador_Receta = (string)row.Row.ItemArray[1],
+                    propId_Repositorio = Convert.ToString(row.Row.ItemArray[0] is DBNull ? 0 : row.Row.ItemArray[0]),
+                    propIdentificador_Receta = Convert.ToString(row.Row.ItemArray[1] is DBNull ? 0 : row.Row.ItemArray[1]),
                     propFecha_Prescripcion = row.Row.ItemArray[2].ToString(),
-                    propCodigo_Producto_Prescrito = (string)row.Row.ItemArray[3],
-                    propNombre_Producto_Prescrito = (string)row.Row.ItemArray[4],
+                    propCodigo_Producto_Prescrito = Convert.ToString(row.Row.ItemArray[3] is DBNull ? 0 : row.Row.ItemArray[3]),
+                    propNombre_Producto_Prescrito = Convert.ToString(row.Row.ItemArray[4] is DBNull ? 0 : row.Row.ItemArray[4]),
                     propEs_Marca_Comercial = (bool)row.Row.ItemArray[5],
                     propNum_Envases = short.Parse(row.Row.ItemArray[6].ToString()),
-                    propCodigo_Centro_Prescriptor = (string)row.Row.ItemArray[7],
-                    propTipo_Centro_Prescriptor = (string)row.Row.ItemArray[8],
-                    propEspecialidad_Medico = (string)row.Row.ItemArray[9],
-                    propNombre_Medico = (string)row.Row.ItemArray[10],
+                    propCodigo_Centro_Prescriptor = Convert.ToString(row.Row.ItemArray[7] is DBNull ? 0 : row.Row.ItemArray[7]),
+                    propTipo_Centro_Prescriptor = Convert.ToString(row.Row.ItemArray[8] is DBNull ? 0 : row.Row.ItemArray[8]),
+                    propEspecialidad_Medico = Convert.ToString(row.Row.ItemArray[9] is DBNull ? 0 : row.Row.ItemArray[9]),
+                    propNombre_Medico = Convert.ToString(row.Row.ItemArray[10] is DBNull ? 0 : row.Row.ItemArray[10]),
                     propDispensada = (bool)row.Row.ItemArray[11]
                 };
             }
@@ -152,6 +152,28 @@ namespace Farmapoint
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            DateTime fechaHoy = DateTime.Today;
+            string fechaPrescripcion = "";
+            OleDbConnection con = ConexionDb.AbrirConexion();
+            string consultaFechaPrescripcion = "SELECT CRecetaCDA.duracionTratamiento " +
+                "FROM CPaciente INNER JOIN((CReceta INNER JOIN CDetalleRecetaIN ON CReceta.Identificador_Receta = CDetalleRecetaIN.Receta) " +
+                "INNER JOIN CRecetaCDA ON CReceta.Identificador_Receta = CRecetaCDA.Identificador_Receta) ON CPaciente.ID_Paciente = CDetalleRecetaIN.ID_Paciente " +
+                " WHERE(((CPaciente.Codigo_SNS) = '" + codigoSns + "'));";
+            OleDbCommand commandFechaPrescripcion = new OleDbCommand(consultaFechaPrescripcion, con);
+            OleDbDataReader readerConsulta = commandFechaPrescripcion.ExecuteReader();
+            if (readerConsulta.HasRows)
+            {
+                while (readerConsulta.Read())
+                {
+                    fechaPrescripcion = readerConsulta["duracionTratamiento"].ToString();
+                    MessageBox.Show("FechaHoy: " + fechaHoy + " fechaPrescripcion: " + fechaPrescripcion);
+                    if (fechaPrescripcion.CompareTo(fechaHoy.ToString("d")) == -1)
+                    {
+                        MessageBox.Show("HOLA");
+                    }
+                }
+            }
+
             label_sns.Text = codigoSns;
             label_nombre.Text = Obtener_Paciente().propNombre;
             label_apellido.Text = Obtener_Paciente().propApellidos;

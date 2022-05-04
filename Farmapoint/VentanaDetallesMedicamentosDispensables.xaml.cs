@@ -53,7 +53,7 @@ namespace Farmapoint
 
         private void btn_volver_Click(object sender, RoutedEventArgs e)
         {
-            Window2 ventanaLogeado = new Window2(codigoSns);
+            VentanaMedicamentosDispensables ventanaLogeado = new VentanaMedicamentosDispensables(codigoSns);
             this.Hide();
             ventanaLogeado.Show();
         }
@@ -101,16 +101,16 @@ namespace Farmapoint
             {
                 recetaDispensada = new CRecetaDispensada
                 {
-                    propId_Repositorio = (string)row.Row.ItemArray[0],
-                    propIdentificador_Receta = (string)row.Row.ItemArray[1],
-                    propCodigo_Producto_Dispensado = (string)row.Row.ItemArray[2],
-                    propNombre_Producto_Dispensado = (string)row.Row.ItemArray[3],
+                    propId_Repositorio = Convert.ToString(row.Row.ItemArray[0] is DBNull ? 0 : row.Row.ItemArray[0]),
+                    propIdentificador_Receta = Convert.ToString(row.Row.ItemArray[1] is DBNull ? 0 : row.Row.ItemArray[1]),
+                    propCodigo_Producto_Dispensado = Convert.ToString(row.Row.ItemArray[2] is DBNull ? 0 : row.Row.ItemArray[2]),
+                    propNombre_Producto_Dispensado = Convert.ToString(row.Row.ItemArray[3] is DBNull ? 0 : row.Row.ItemArray[3]),
                     propNum_Envases = int.Parse(row.Row.ItemArray[4].ToString()),
                     propPrecio_Unitario = Decimal.Parse(row.Row.ItemArray[5].ToString()),
                     propAportacion_Unitaria = Decimal.Parse(row.Row.ItemArray[6].ToString()),
-                    propTipo_Contingencia = (string)row.Row.ItemArray[7],
-                    propTipo_Aportacion = (string)row.Row.ItemArray[8],
-                    propCodigo_Causa_Sustitucion = (string)row.Row.ItemArray[9],
+                    propTipo_Contingencia = Convert.ToString(row.Row.ItemArray[7] is DBNull ? 0 : row.Row.ItemArray[7]),
+                    propTipo_Aportacion = Convert.ToString(row.Row.ItemArray[8] is DBNull ? 0 : row.Row.ItemArray[8]),
+                    propCodigo_Causa_Sustitucion = Convert.ToString(row.Row.ItemArray[9] is DBNull ? 0 : row.Row.ItemArray[9]),
                     propDescripcion_Causa_Sustitucion = Convert.ToString(row.Row.ItemArray[10] is DBNull ? 0 : row.Row.ItemArray[10]),
                     propObservaciones = Convert.ToString(row.Row.ItemArray[11] is DBNull ? 0 : row.Row.ItemArray[11])
                 };
@@ -170,7 +170,7 @@ namespace Farmapoint
             }
 
             this.Hide();
-            Window2 VentanaMedicamentoDispensable = new Window2(codigoSns);
+            VentanaMedicamentosDispensables VentanaMedicamentoDispensable = new VentanaMedicamentosDispensables(codigoSns);
             VentanaMedicamentoDispensable.Show();
         }
 
