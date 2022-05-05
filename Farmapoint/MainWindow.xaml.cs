@@ -67,5 +67,10 @@ namespace Farmapoint
             }
 
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            label_fecha.Text = DateTime.Now.ToString("g");
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Data.OleDb;
+﻿using System;
+using System.Data.OleDb;
 using System.Windows;
 
 namespace Farmapoint
@@ -11,6 +12,11 @@ namespace Farmapoint
         public VentanaBusquedaPaciente()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            label_fecha.Text = DateTime.Now.ToString("g");
         }
 
         private void Button_TarjetaSanitaria(object sender, RoutedEventArgs e)
@@ -53,5 +59,6 @@ namespace Farmapoint
             Application.Current.Shutdown();
 
         }
+
     }
 }

@@ -152,31 +152,44 @@ namespace Farmapoint
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            DateTime fechaHoy = DateTime.Today;
-            string fechaPrescripcion = "";
-            OleDbConnection con = ConexionDb.AbrirConexion();
-            string consultaFechaPrescripcion = "SELECT CRecetaCDA.duracionTratamiento " +
-                "FROM CPaciente INNER JOIN((CReceta INNER JOIN CDetalleRecetaIN ON CReceta.Identificador_Receta = CDetalleRecetaIN.Receta) " +
-                "INNER JOIN CRecetaCDA ON CReceta.Identificador_Receta = CRecetaCDA.Identificador_Receta) ON CPaciente.ID_Paciente = CDetalleRecetaIN.ID_Paciente " +
-                " WHERE(((CPaciente.Codigo_SNS) = '" + codigoSns + "'));";
-            OleDbCommand commandFechaPrescripcion = new OleDbCommand(consultaFechaPrescripcion, con);
-            OleDbDataReader readerConsulta = commandFechaPrescripcion.ExecuteReader();
-            if (readerConsulta.HasRows)
-            {
-                while (readerConsulta.Read())
-                {
-                    fechaPrescripcion = readerConsulta["duracionTratamiento"].ToString();
-                    MessageBox.Show("FechaHoy: " + fechaHoy + " fechaPrescripcion: " + fechaPrescripcion);
-                    if (fechaPrescripcion.CompareTo(fechaHoy.ToString("d")) == -1)
-                    {
-                        MessageBox.Show("HOLA");
-                    }
-                }
-            }
+            //string id_paciente = Obtener_Paciente().propId_Paciente;
+            //string cite = Obtener_Paciente().propCite;
+            //string id_consulta = "";
+
+            ////OleDbConnection con = ConexionDb.AbrirConexion();
+            //DateTime fechaHoy = DateTime.Today;
+            //OleDbConnection con = ConexionDb.AbrirConexion();
+            //string consultaFechaPrescripcion = "SELECT CRecetaCDA.duracionTratamiento " +
+            //    "FROM CPaciente INNER JOIN((CReceta INNER JOIN CDetalleRecetaIN ON CReceta.Identificador_Receta = CDetalleRecetaIN.Receta) " +
+            //    "INNER JOIN CRecetaCDA ON CReceta.Identificador_Receta = CRecetaCDA.Identificador_Receta) ON CPaciente.ID_Paciente = CDetalleRecetaIN.ID_Paciente " +
+            //    " WHERE(((CPaciente.Codigo_SNS) = '" + codigoSns + "'));";
+            //OleDbCommand commandFechaPrescripcion = new OleDbCommand(consultaFechaPrescripcion, con);
+            //OleDbDataReader readerConsulta = commandFechaPrescripcion.ExecuteReader();
+            //if (readerConsulta.HasRows)
+            //{
+            //    while (readerConsulta.Read())
+            //    {
+            //        string duracionTratamiento = readerConsulta["duracionTratamiento"].ToString();
+            //        MessageBox.Show("FechaHoy: " + fechaHoy + " Duracion Tratamiento: " + duracionTratamiento);
+            //        if (duracionTratamiento.CompareTo(fechaHoy.ToString("d")) == -1)
+            //        {
+            //            command.Connection = con;
+            //            command.CommandType = CommandType.Text;
+            //            command.CommandText = "INSERT INTO CNotificarDispensacionIN (ID_Paciente, CITE, ID_Consulta, Codigo_SNS, RecetaDispensada, Localizador_Hoja)" +
+            //                                  "VALUES ('" + id_paciente + "','" + cite + "'," + id_consulta + ", '" + codigoSns + "','" + recetaDispensable.propIdentificador_Receta + "'," + 0 + ")";
+            //            command.ExecuteNonQuery();
+
+            //            command.CommandType = CommandType.Text;
+            //            command.CommandText = "UPDATE CRecetaDispensable SET Dispensada=TRUE WHERE Identificador_Receta='" + recetaDispensable.propIdentificador_Receta + "';";
+            //            command.ExecuteNonQuery();
+            //        }
+            //    }
+            //    }
 
             label_sns.Text = codigoSns;
             label_nombre.Text = Obtener_Paciente().propNombre;
             label_apellido.Text = Obtener_Paciente().propApellidos;
+            label_fecha.Text = DateTime.Now.ToString("g");
             label_saldo.Text = Obtener_Paciente().propSaldo.ToString() + "€";
         }
 

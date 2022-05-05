@@ -9,22 +9,33 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow"
-        Background="#FFA6FF72">
-    <Grid x:Name="panel_login" HorizontalAlignment="Center" VerticalAlignment="Center" Height="334" Width="227">
+        Background="#FFA6FF72" Loaded="Window_Loaded">
+
+    <Grid x:Name="panel_login" 
+          HorizontalAlignment="Center" 
+          VerticalAlignment="Center" 
+          Height="334" Width="600">
         <Border BorderBrush="Black"
                 Background="White"
                 BorderThickness="1"
-                CornerRadius="10" HorizontalAlignment="Left" Height="334" Width="227">
+                CornerRadius="10">
             <Border.Effect>
                 <DropShadowEffect />
             </Border.Effect>
         </Border>
-        <Label x:Name="Title" Content="Farmapoint" HorizontalAlignment="Center" VerticalAlignment="Top" Height="64" Width="auto" RenderTransformOrigin="0.5,0.5" FontSize="36" FontWeight="Bold" FontStyle="Italic" />
-        <TextBlock HorizontalAlignment="Center" Margin="0,103,0,0" TextWrapping="Wrap" Text="Nº Farmacia:" VerticalAlignment="Top" RenderTransformOrigin="-2.075,-0.375" FontSize="14"/>
-        <TextBox x:Name="Txt_numFarmacia" HorizontalAlignment="Center" Height="21" Margin="0,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" FontSize="14" />
-        <TextBlock HorizontalAlignment="Center" Margin="88,179,88,0" TextWrapping="Wrap" Text="Usuario:" VerticalAlignment="Top" FontSize="14" />
-        <TextBox x:Name="Txt_User" HorizontalAlignment="Center" Height="21" Margin="34,208,34,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" RenderTransformOrigin="0.52,-0.19" FontSize="14" />
+        <Image
+               Source="Ges_logo.png" 
+               Margin="34,128,445,99"/>
+        <Image
+               Source="Logo_Junta_Extremadura.svg.png" 
+               Margin="433,128,36,99"/>
+        <Label x:Name="Title" Content="FARMAPOINT" HorizontalAlignment="Center" VerticalAlignment="Top" Height="64" Width="auto" RenderTransformOrigin="0.5,0.5" FontSize="36" FontWeight="Bold" FontStyle="Italic" />
+        <TextBlock HorizontalAlignment="Center" Margin="261,131,261,0" TextWrapping="Wrap" Text="Nº Farmacia:" VerticalAlignment="Top" RenderTransformOrigin="-2.075,-0.375" FontSize="14"/>
+        <TextBox x:Name="Txt_numFarmacia" HorizontalAlignment="Center" Height="21" Margin="220,165,220,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" FontSize="14" />
+        <TextBlock HorizontalAlignment="Center" Margin="276,207,270,0" TextWrapping="Wrap" Text="Usuario:" VerticalAlignment="Top" FontSize="14" Width="auto" />
+        <TextBox x:Name="Txt_User" HorizontalAlignment="Center" Height="21" Margin="220,236,220,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" RenderTransformOrigin="0.52,-0.19" FontSize="14" />
         <Button x:Name="Btn_Loguear" Content="Conectar" HorizontalAlignment="Center" Margin="0,286,0,0" VerticalAlignment="Top" Width="159" Height="38" Click="Button_Login" FontSize="14" />
-        <TextBlock x:Name="login_error" TextWrapping="Wrap" Width="auto" Height="auto" Margin="-1,64,0,241" TextAlignment="Center" Foreground="#FFFF0101"/>
+        <TextBlock x:Name="login_error" TextWrapping="Wrap" Width="auto" Height="auto" Margin="-1,98,0,207" TextAlignment="Center" Foreground="#FFFF0101"/>
+        <TextBlock x:Name="label_fecha" Margin="292,62,292,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="14" Width="16"/>
     </Grid>
 </Window>

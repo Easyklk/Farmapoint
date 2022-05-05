@@ -125,6 +125,18 @@
   <ItemGroup>
     <Resource Include="Resource\icono.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resource\Ges_logo_largo.png" />
+    <Resource Include="Resource\Logo_Junta_Extremadura.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Ges_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ges_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Logo_Junta_Extremadura.svg.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

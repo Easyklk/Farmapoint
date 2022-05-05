@@ -90,6 +90,7 @@ namespace Farmapoint
         {
             label_nombre.Text = Obtener_Paciente().propNombre;
             label_apellido.Text = Obtener_Paciente().propApellidos;
+            label_fecha.Text = DateTime.Now.ToString("g");
             label_saldo.Text = Obtener_Paciente().propSaldo.ToString() + "€";
             label_sns.Text = codigoSns;
         }
@@ -244,7 +245,7 @@ namespace Farmapoint
                     break;
             }
 
-            decimal precio_descontado = (precio_Unitario * descuento);
+            decimal precio_descontado = precio_Unitario * descuento;
             precio_descontado = precio_Unitario - precio_descontado;
             importeTotal = num_Envases * precio_descontado;
             importe.Text = importeTotal.ToString() + "€";
