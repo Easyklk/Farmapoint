@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.OleDb;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace Farmapoint
 {
@@ -86,11 +87,22 @@ namespace Farmapoint
             conexion.Close();
         }
 
+        private void reloj()
+        {
+            DispatcherTimer dis = new DispatcherTimer();
+            dis.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            dis.Tick += (a, b) =>
+            {
+                label_fecha.Text = DateTime.Now.ToString();
+            };
+            dis.Start();
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             label_nombre.Text = Obtener_Paciente().propNombre;
             label_apellido.Text = Obtener_Paciente().propApellidos;
-            label_fecha.Text = DateTime.Now.ToString("g");
+            reloj();
             label_saldo.Text = Obtener_Paciente().propSaldo.ToString() + "€";
             label_sns.Text = codigoSns;
         }

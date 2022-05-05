@@ -126,7 +126,6 @@
     <Resource Include="Resource\icono.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resource\Ges_logo_largo.png" />
     <Resource Include="Resource\Logo_Junta_Extremadura.svg.png" />
   </ItemGroup>
   <ItemGroup>
