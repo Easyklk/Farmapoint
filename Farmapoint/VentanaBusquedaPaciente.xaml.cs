@@ -54,9 +54,9 @@ namespace Farmapoint
                 if (dr.Read())
                 {
                     conexion.Close();
-                    this.Hide();
-                    VentanaMedicamentosDispensables VentanaMedicamentoDispensable = new VentanaMedicamentosDispensables(Txt_SNS.Text);
-                    VentanaMedicamentoDispensable.Show();
+                    Hide();
+                    MenuPaciente menuPaciente = new MenuPaciente(Txt_SNS.Text);
+                    menuPaciente.Show();
                 }
                 else
                 {
