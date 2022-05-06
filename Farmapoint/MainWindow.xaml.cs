@@ -17,10 +17,6 @@ namespace Farmapoint
 
         private void Button_Login(object sender, RoutedEventArgs e)
         {
-            //this.Hide();
-            //Window1 ventanaLogeado = new Window1();
-            //ventanaLogeado.Show();
-
             OleDbConnection conexion = ConexionDb.AbrirConexion();
             if (string.IsNullOrEmpty(Txt_numFarmacia.Text) && string.IsNullOrEmpty(Txt_User.Text))
             {
@@ -71,7 +67,7 @@ namespace Farmapoint
         private void reloj()
         {
             DispatcherTimer dis = new DispatcherTimer();
-            dis.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            dis.Interval = new TimeSpan(0, 0, 0, 0, 0);
             dis.Tick += (a, b) =>
             {
                 label_fecha.Text = DateTime.Now.ToString();

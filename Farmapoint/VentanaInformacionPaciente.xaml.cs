@@ -45,7 +45,7 @@ namespace Farmapoint
         private void reloj()
         {
             DispatcherTimer dis = new DispatcherTimer();
-            dis.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            dis.Interval = new TimeSpan(0, 0, 0, 0, 0);
             dis.Tick += (a, b) =>
             {
                 label_fecha.Text = DateTime.Now.ToString();
@@ -61,7 +61,6 @@ namespace Farmapoint
             label_snsPaciente.Text = Obtener_Paciente().propCodigo_sns;
             label_saldoPaciente.Text = Obtener_Paciente().propSaldo.ToString() + "€";
         }
-
 
         private void btn_volver_Click(object sender, RoutedEventArgs e)
         {
