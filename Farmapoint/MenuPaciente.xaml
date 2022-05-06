@@ -26,5 +26,6 @@
         <Button x:Name="informacion" Content="Información Paciente" HorizontalAlignment="Center" Margin="171,99,171,0" VerticalAlignment="Top" Width="258" Height="58" FontSize="20" FontStyle="Italic" Click="informacion_Click"/>
         <Button x:Name="recetas" Content="Recetas" HorizontalAlignment="Center" Margin="171,212,171,0" VerticalAlignment="Top" Width="258" Height="58" FontSize="20" FontStyle="Italic" Click="recetas_Click"/>
         <TextBlock x:Name="label_fecha" Margin="0,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="14" Width="auto"/>
+        <Button Content="Salir" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="21,298,0,0" Click="Button_Click"/>
     </Grid>
 </Window>

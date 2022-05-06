@@ -62,5 +62,12 @@ namespace Farmapoint
             VentanaMedicamentosDispensables ventanaMedicamentoDispensable = new VentanaMedicamentosDispensables(codigoSns);
             ventanaMedicamentoDispensable.Show();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Hide();
+            VentanaBusquedaPaciente ventanaBusquedaPaciente = new VentanaBusquedaPaciente();
+            ventanaBusquedaPaciente.Show();
+        }
     }
 }

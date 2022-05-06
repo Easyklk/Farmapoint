@@ -56,15 +56,15 @@ namespace Farmapoint
             grdDatos.Columns[0].Visibility = Visibility.Hidden;
             grdDatos.Columns[1].Visibility = Visibility.Hidden;
             grdDatos.Columns[2].Header = "Fecha Prescripcion";
-            grdDatos.Columns[3].Header = "Codigo Producto";
+            grdDatos.Columns[3].Visibility = Visibility.Hidden;
             grdDatos.Columns[4].Header = "Nombre Producto";
-            grdDatos.Columns[5].Header = "Marca Comercial";
-            grdDatos.Columns[6].Header = "Nº Envases";
-            grdDatos.Columns[7].Header = "Codigo Centro";
+            grdDatos.Columns[5].Visibility = Visibility.Hidden;
+            grdDatos.Columns[6].Visibility = Visibility.Hidden;
+            grdDatos.Columns[7].Visibility = Visibility.Hidden;
             grdDatos.Columns[8].Header = "Tipo Centro";
-            grdDatos.Columns[9].Header = "Especialidad Medico";
+            grdDatos.Columns[9].Visibility = Visibility.Hidden;
             grdDatos.Columns[10].Header = "Nombre Medico";
-            grdDatos.Columns[11].Header = "Dispensada";
+            grdDatos.Columns[11].Visibility = Visibility.Hidden;
             conexion.Close();
         }
 
@@ -76,7 +76,7 @@ namespace Farmapoint
             }
         }
 
-        private void Button_Volver(object sender, RoutedEventArgs e)
+        private void btn_volver_click(object sender, RoutedEventArgs e)
         {
             VentanaBusquedaPaciente ventanaLogeado = new VentanaBusquedaPaciente();
             this.Hide();
@@ -217,6 +217,13 @@ namespace Farmapoint
                 }
             }
             con.Close();
+        }
+
+        private void btn_salir_click(object sender, RoutedEventArgs e)
+        {
+            Hide();
+            VentanaBusquedaPaciente ventanaBusquedaPaciente = new VentanaBusquedaPaciente();
+            ventanaBusquedaPaciente.Show();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

@@ -70,19 +70,18 @@ namespace Farmapoint
             DataRow dr = drv.Row;
             grdDatos.Columns[0].Visibility = Visibility.Hidden;
             grdDatos.Columns[1].Visibility = Visibility.Hidden;
-            grdDatos.Columns[2].Header = "Codigo Producto";
-            dr.SetField(2, recetaDispensable.propCodigo_Producto_Prescrito);
+            grdDatos.Columns[2].Visibility = Visibility.Hidden;
             grdDatos.Columns[3].Header = "Nombre Producto";
             dr.SetField(3, recetaDispensable.propNombre_Producto_Prescrito);
-            grdDatos.Columns[4].Header = "Nº Envases";
+            grdDatos.Columns[4].Header = "Num_Envases";
             dr.SetField(4, recetaDispensable.propNum_Envases);
             grdDatos.Columns[5].Header = "Precio Unitario";
             grdDatos.Columns[6].Visibility = Visibility.Hidden;
-            grdDatos.Columns[7].Header = "Tipo Contingencia";
+            grdDatos.Columns[7].Visibility = Visibility.Hidden;
             grdDatos.Columns[8].Header = "Tipo Aportación";
             dr.SetField(8, tipoAportacion);
-            grdDatos.Columns[9].Header = "Codigo Causa Sustitución";
-            grdDatos.Columns[10].Header = "Descripción Causa Sustitución";
+            grdDatos.Columns[9].Visibility = Visibility.Hidden;
+            grdDatos.Columns[10].Visibility = Visibility.Hidden;
             grdDatos.Columns[11].Header = "Observaciones";
             conexion.Close();
         }
@@ -260,7 +259,7 @@ namespace Farmapoint
             decimal precio_descontado = precio_Unitario * descuento;
             precio_descontado = precio_Unitario - precio_descontado;
             importeTotal = num_Envases * precio_descontado;
-            importe.Text = importeTotal.ToString() + "€";
+            importe.Text = Decimal.Round(importeTotal, 2).ToString() + "€";
         }
 
         private CPaciente Obtener_Paciente()
@@ -293,5 +292,11 @@ namespace Farmapoint
             Application.Current.Shutdown();
         }
 
+        private void btn_salir_click(object sender, RoutedEventArgs e)
+        {
+            Hide();
+            VentanaBusquedaPaciente ventanaBusquedaPaciente = new VentanaBusquedaPaciente();
+            ventanaBusquedaPaciente.Show();
+        }
     }
 }
