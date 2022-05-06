@@ -28,14 +28,29 @@
         <TextBlock x:Name="label_apellido" HorizontalAlignment="Left" Margin="291,78,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="469,78,0,0" TextWrapping="Wrap" Text="Código SNS:" VerticalAlignment="Top"/>
         <TextBlock x:Name="label_sns" HorizontalAlignment="Left" Margin="540,78,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top"/>
-        <Button Content="Volver" HorizontalAlignment="Left" Height="18" Margin="10,333,0,0" VerticalAlignment="Top" Width="59" Click="btn_volver_Click"/>
-        <TextBlock Text="Importe Total:" HorizontalAlignment="Left" Margin="490,374,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock x:Name="importe"  HorizontalAlignment="Left" Margin="568,374,0,0" TextWrapping="NoWrap"  VerticalAlignment="Top"/>
-        <Button x:Name="btn_dispensar" Content="Dispensar" IsEnabled="False" HorizontalAlignment="Right" Height="18" Margin="0,372,10,0" VerticalAlignment="Top" Width="59" Click="btn_dispensar_Click"/>
+        <Button HorizontalAlignment="Left" Margin="10,333,0,0" VerticalAlignment="Top" Width="59" Click="btn_volver_click">
+            <WrapPanel Width="58" HorizontalAlignment="Center">
+                <Image Source="Resource/back.png" Width="20" Height="20" Margin="2,0,1,0"/>
+                <TextBlock Text="Volver" VerticalAlignment="Center"/>
+            </WrapPanel>
+        </Button>
+        <TextBlock Text="Importe Total:" HorizontalAlignment="Left" Margin="477,374,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="importe"  HorizontalAlignment="Left" Margin="555,374,0,0" TextWrapping="NoWrap"  VerticalAlignment="Top"/>
+        <Button x:Name="btn_dispensar" IsEnabled="False" HorizontalAlignment="Right" Margin="0,372,10,0" VerticalAlignment="Top" Width="auto" Click="btn_dispensar_Click">
+            <WrapPanel HorizontalAlignment="Center">
+                <Image Source="Resource/show.png" Width="20"/>
+                <TextBlock Text="Dispensar" VerticalAlignment="Center"/>
+            </WrapPanel>
+        </Button>
         <TextBlock Text="Saldo Restante:" HorizontalAlignment="Left" Margin="102,374,0,0" TextWrapping="NoWrap" VerticalAlignment="Top"/>
         <TextBlock x:Name="label_saldo" HorizontalAlignment="Left" Margin="186,374,0,0" TextWrapping="NoWrap"  VerticalAlignment="Top"/>
         <TextBlock x:Name="label_error" HorizontalAlignment="Center" Margin="0,375,0,0" TextWrapping="NoWrap"  VerticalAlignment="Top" Foreground="Red"/>
         <TextBlock x:Name="label_fecha" HorizontalAlignment="Right" Margin="0,21,42,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14"/>
-        <Button Content="Salir" HorizontalAlignment="Left" VerticalAlignment="Top" Width="59" Margin="10,370,0,0" Click="btn_salir_click"/>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="59" Margin="10,370,0,0" Click="btn_salir_click">
+            <WrapPanel Width="58" HorizontalAlignment="Center">
+                <Image Source="Resource/logout.png" Height="20" Margin="0,0,5,0"/>
+                <TextBlock Text="Salir" VerticalAlignment="Center"/>
+            </WrapPanel>
+        </Button>
     </Grid>
 </Window>

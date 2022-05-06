@@ -28,12 +28,27 @@
         <TextBlock x:Name="label_apellido" HorizontalAlignment="Left" Margin="291,78,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="469,78,0,0" TextWrapping="Wrap" Text="Código SNS:" VerticalAlignment="Top"/>
         <TextBlock x:Name="label_sns" HorizontalAlignment="Left" Margin="540,78,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top"/>
-        <Button Content="Volver" HorizontalAlignment="Left" Height="18" Margin="10,333,0,0" VerticalAlignment="Top" Width="59" Click="btn_volver_click"/>
-        <Button x:Name="btn_mostrar" Content="Mostrar" IsEnabled="False" HorizontalAlignment="Left" Height="18" Margin="631,372,0,0" VerticalAlignment="Top" Width="59" Click="mostrar_RecetaDispensable"/>
+        <Button HorizontalAlignment="Left" Margin="10,333,0,0" VerticalAlignment="Top" Width="59" Click="btn_volver_click">
+            <WrapPanel Width="58" HorizontalAlignment="Center">
+                <Image Source="Resource/back.png" Width="20" Margin="0,0,4,0"/>
+                <TextBlock Text="Volver" VerticalAlignment="Center"/>
+            </WrapPanel>
+        </Button>
+        <Button x:Name="btn_mostrar" IsEnabled="False" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="auto" Margin="0,0,8,10" Click="mostrar_RecetaDispensable">
+            <WrapPanel HorizontalAlignment="Center">
+                <Image Source="Resource/show.png" Height="20"/>
+                <TextBlock Text="Mostrar" VerticalAlignment="Center"/>
+            </WrapPanel>
+        </Button>
         <TextBlock Text="Saldo Restante:" HorizontalAlignment="Left" Margin="102,374,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock x:Name="label_saldo"  HorizontalAlignment="Left" Margin="186,374,0,0" TextWrapping="NoWrap"  VerticalAlignment="Top"/>
         <TextBlock x:Name="label_fecha" HorizontalAlignment="Right" Margin="0,21,42,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14"/>
-        <Button Content="Salir" HorizontalAlignment="Left" VerticalAlignment="Top" Width="59" Margin="10,370,0,0" Click="btn_salir_click"/>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="59" Margin="10,0,0,10" Click="btn_salir_click">
+            <WrapPanel Width="58" HorizontalAlignment="Center">
+                <Image Source="Resource/logout.png" Height="20" Margin="0,0,5,0"/>
+                <TextBlock Text="Salir" VerticalAlignment="Center"/>
+            </WrapPanel>
+        </Button>
     </Grid>
 </Window>
     

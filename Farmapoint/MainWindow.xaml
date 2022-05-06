@@ -10,7 +10,6 @@
         WindowStartupLocation="CenterScreen"
         Title="MainWindow"
         Background="#FFA6FF72" Loaded="Window_Loaded">
-
     <Grid x:Name="panel_login" 
           HorizontalAlignment="Center" 
           VerticalAlignment="Center" 
@@ -35,8 +34,15 @@
         <TextBox x:Name="Txt_numFarmacia" HorizontalAlignment="Center" Height="21" Margin="220,165,220,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" FontSize="14" />
         <TextBlock HorizontalAlignment="Center" Margin="276,207,270,0" TextWrapping="Wrap" Text="Usuario:" VerticalAlignment="Top" FontSize="14" Width="auto" />
         <TextBox x:Name="Txt_User" HorizontalAlignment="Center" Height="21" Margin="220,236,220,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" RenderTransformOrigin="0.52,-0.19" FontSize="14" />
-        <Button x:Name="Btn_Loguear" Content="Conectar" HorizontalAlignment="Center" Margin="0,286,0,0" VerticalAlignment="Top" Width="159" Height="38" Click="Button_Login" FontSize="14" />
-        <TextBlock x:Name="login_error" TextWrapping="Wrap" Width="auto" Height="auto" Margin="-1,98,0,207" TextAlignment="Center" Foreground="#FFFF0101"/>
+        <Button x:Name="Btn_Loguear" HorizontalAlignment="Center" Margin="0,286,0,0" VerticalAlignment="Top" Width="159" Height="38" Click="Button_Login" FontSize="14">
+            <WrapPanel Width="150" HorizontalAlignment="Center">
+                <Image Source="Resource/login.png" Margin="0,0,30,0"/>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
+                    Login
+                </TextBlock>
+            </WrapPanel>
+        </Button>
+            <TextBlock x:Name="login_error" HorizontalAlignment="Center" TextWrapping="Wrap" Width="auto" Height="auto" Margin="0,98,0,207" TextAlignment="Center" Foreground="#FFFF0101"/>
         <TextBlock x:Name="label_fecha" Margin="0,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="14" Width="auto"/>
     </Grid>
 </Window>

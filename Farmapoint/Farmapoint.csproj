@@ -145,5 +145,20 @@
   <ItemGroup>
     <Resource Include="Resource\Ges_logo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\login.png" />
+    <Resource Include="Resource\logout.png" />
+    <Resource Include="Resource\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\receta.png" />
+    <Resource Include="Resource\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\show.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
