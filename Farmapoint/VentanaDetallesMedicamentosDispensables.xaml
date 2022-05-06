@@ -28,7 +28,7 @@
         <TextBlock x:Name="label_apellido" HorizontalAlignment="Left" Margin="291,78,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="469,78,0,0" TextWrapping="Wrap" Text="Código SNS:" VerticalAlignment="Top"/>
         <TextBlock x:Name="label_sns" HorizontalAlignment="Left" Margin="540,78,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top"/>
-        <Button HorizontalAlignment="Left" Margin="10,333,0,0" VerticalAlignment="Top" Width="59" Click="btn_volver_click">
+        <Button HorizontalAlignment="Left" Margin="10,333,0,0" VerticalAlignment="Top" Width="59" Click="btn_volver_Click">
             <WrapPanel Width="58" HorizontalAlignment="Center">
                 <Image Source="Resource/back.png" Width="20" Height="20" Margin="2,0,1,0"/>
                 <TextBlock Text="Volver" VerticalAlignment="Center"/>
@@ -38,7 +38,7 @@
         <TextBlock x:Name="importe"  HorizontalAlignment="Left" Margin="555,374,0,0" TextWrapping="NoWrap"  VerticalAlignment="Top"/>
         <Button x:Name="btn_dispensar" IsEnabled="False" HorizontalAlignment="Right" Margin="0,372,10,0" VerticalAlignment="Top" Width="auto" Click="btn_dispensar_Click">
             <WrapPanel HorizontalAlignment="Center">
-                <Image Source="Resource/show.png" Width="20"/>
+                <Image Source="Resource/print.png" Width="20"/>
                 <TextBlock Text="Dispensar" VerticalAlignment="Center"/>
             </WrapPanel>
         </Button>
