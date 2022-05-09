@@ -33,14 +33,13 @@
         <TextBox x:Name="Txt_numFarmacia" HorizontalAlignment="Center" Height="21" Margin="220,154,220,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" FontSize="14" />
         <TextBlock HorizontalAlignment="Center" Margin="278,196,272,0" TextWrapping="NoWrap" Text="Usuario:" VerticalAlignment="Top" FontSize="14" Width="auto" />
         <TextBox x:Name="Txt_User" HorizontalAlignment="Center" Height="21" Margin="220,225,220,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" RenderTransformOrigin="0.52,-0.19" FontSize="14" />
-        <Button x:Name="Btn_Loguear" HorizontalAlignment="Center" Margin="0,286,0,0" VerticalAlignment="Top" Width="159" Height="38" Click="Button_Login" FontSize="14">
+        <Button x:Name="Btn_Loguear" HorizontalAlignment="Center" Margin="0,286,0,0" VerticalAlignment="Top" Width="159" Click="Button_Login" FontSize="14">
             <WrapPanel Width="150" HorizontalAlignment="Center">
-                <Image Source="Resource/login.png" Margin="0,0,30,0"/>
+                <Image Source="Resource/login.png" Width="30" Margin="0,0,10,0"/>
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
-                    Login
+                    Iniciar Sesión
                 </TextBlock>
             </WrapPanel>
         </Button>
-
     </Grid>
 </Window>
