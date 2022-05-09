@@ -24,7 +24,7 @@
         </Border>
         <Image Source="Resource/Ges_logo.png" 
                Margin="34,107,445,106"/>
-        <Image Source="Resource/Logo_Junta_Extremadura.svg.png" 
+        <Image Source="Resource/Logo_Junta_Extremadura.png" 
                Margin="423,107,34,92"/>
         <Label x:Name="Title" Content="FARMAPOINT" HorizontalAlignment="Center" VerticalAlignment="Top" Height="64" Width="auto" RenderTransformOrigin="0.5,0.5" FontSize="36" FontWeight="Bold" FontStyle="Italic" />
         <TextBlock HorizontalAlignment="Center" Margin="261,131,261,0" TextWrapping="Wrap" Text="Nº Farmacia:" VerticalAlignment="Top" RenderTransformOrigin="-2.075,-0.375" FontSize="14"/>

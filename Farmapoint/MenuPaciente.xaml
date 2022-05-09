@@ -25,7 +25,7 @@
         <Label x:Name="Title" Content="FARMAPOINT" HorizontalAlignment="Center" VerticalAlignment="Top" Height="64" Width="auto" RenderTransformOrigin="0.5,0.5" FontSize="36" FontWeight="Bold" FontStyle="Italic" Margin="177.5,0" />
         <Button x:Name="informacion" HorizontalAlignment="Center" Margin="0,99,0,0" VerticalAlignment="Top" Width="258" Height="58" FontSize="20" FontStyle="Italic" Click="informacion_Click">
             <WrapPanel Width="255" HorizontalAlignment="Center">
-                <Image Source="Resource/user.png" Height="45" Width="45" Margin="0,0,10,0"/>
+                <Image Source="Resource/user.png" Height="45" Width="45" Margin="4,0,10,0"/>
                 <TextBlock Text="Información Paciente" VerticalAlignment="Center"/>
             </WrapPanel>
         </Button>
