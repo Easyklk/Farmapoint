@@ -22,10 +22,8 @@
                 <DropShadowEffect />
             </Border.Effect>
         </Border>
-        <Image Source="Resource/Ges_logo.png" 
-               Margin="34,96,445,117"/>
-        <Image Source="Resource/Logo_Junta_Extremadura.png" 
-               Margin="423,96,34,103"/>
+        <Image Source="resources/Ges_logo.png" Margin="34,125,445,88"/>
+        <Image Source="resources/Logo_Junta_Extremadura.png" Margin="435,125,35,88" Width="130" Height="121" />
         <Label x:Name="Title" Content="FARMAPOINT" HorizontalAlignment="Center" VerticalAlignment="Top" Height="64" Width="auto" RenderTransformOrigin="0.5,0.5" FontSize="36" FontWeight="Bold" FontStyle="Italic" />
         <TextBlock x:Name="label_fecha" Margin="0,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="14" Width="auto"/>
         <TextBlock x:Name="login_error" HorizontalAlignment="Center" TextWrapping="Wrap" Width="auto" Height="auto" Margin="0,87,0,218" TextAlignment="Center" Foreground="#FFFF0101"/>
@@ -35,7 +33,7 @@
         <TextBox x:Name="Txt_User" HorizontalAlignment="Center" Height="21" Margin="220,225,220,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" RenderTransformOrigin="0.52,-0.19" FontSize="14" />
         <Button x:Name="Btn_Loguear" HorizontalAlignment="Center" Margin="0,286,0,0" VerticalAlignment="Top" Width="159" Click="Button_Login" FontSize="14">
             <WrapPanel Width="150" HorizontalAlignment="Center">
-                <Image Source="Resource/login.png" Width="30" Margin="0,0,10,0"/>
+                <Image Source="resources/login.png" Width="30" Margin="0,0,10,0"/>
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
                     Iniciar Sesión
                 </TextBlock>

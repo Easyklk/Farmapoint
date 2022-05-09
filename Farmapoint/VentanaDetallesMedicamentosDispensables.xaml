@@ -30,7 +30,7 @@
         <TextBlock x:Name="label_sns" HorizontalAlignment="Left" Margin="540,78,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top"/>
         <Button Margin="10,333,631,43" Click="btn_volver_Click">
             <WrapPanel Width="58" HorizontalAlignment="Center">
-                <Image Source="Resource/back.png" Width="20" Height="20" Margin="2,0,1,0"/>
+                <Image Source="resources/back.png" Width="20" Height="20" Margin="2,0,1,0"/>
                 <TextBlock Text="Volver" VerticalAlignment="Center"/>
             </WrapPanel>
         </Button>
@@ -38,7 +38,7 @@
         <TextBlock x:Name="importe"  HorizontalAlignment="Left" Margin="555,374,0,0" TextWrapping="NoWrap"  VerticalAlignment="Top"/>
         <Button x:Name="btn_dispensar" IsEnabled="False" Margin="612,372,10,4" Width="auto" Click="btn_dispensar_Click">
             <WrapPanel HorizontalAlignment="Center">
-                <Image Source="Resource/print.png" Width="20" Margin="0,0,2,0"/>
+                <Image Source="resources/print.png" Width="20" Margin="0,0,2,0"/>
                 <TextBlock Text="Dispensar" VerticalAlignment="Center"/>
             </WrapPanel>
         </Button>
@@ -48,7 +48,7 @@
         <TextBlock x:Name="label_fecha" HorizontalAlignment="Right" Margin="0,21,42,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14"/>
         <Button Margin="10,372,631,4" Click="btn_salir_click">
             <WrapPanel Width="58" HorizontalAlignment="Center">
-                <Image Source="Resource/logout.png" Height="20" Margin="0,0,5,0"/>
+                <Image Source="resources/logout.png" Height="20" Margin="0,0,5,0"/>
                 <TextBlock Text="Salir" VerticalAlignment="Center"/>
             </WrapPanel>
         </Button>
