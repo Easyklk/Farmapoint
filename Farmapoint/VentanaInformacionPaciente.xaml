@@ -22,10 +22,10 @@
         </Border>
         <Label x:Name="Title" Content="FARMAPOINT" HorizontalAlignment="Center" VerticalAlignment="Top" Height="64" Width="auto" FontSize="36" FontWeight="Bold" FontStyle="Italic"/>
         <TextBlock x:Name="label_fecha" Margin="0,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="16" Width="auto"/>
-        <TextBlock HorizontalAlignment="Left" Margin="92,131,0,0" TextWrapping="Wrap" Text="Nombre:" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="92,194,0,0" TextWrapping="Wrap" Text="Apellidos:" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="430,131,0,0" TextWrapping="Wrap" Text="Código SNS:" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="430,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Text="Saldo:"/>
+        <TextBlock HorizontalAlignment="Left" Margin="92,131,0,0" TextWrapping="Wrap" Text="Nombre:" VerticalAlignment="Top" FontSize="16" TextDecorations="{x:Null}" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="92,194,0,0" TextWrapping="Wrap" Text="Apellidos:" VerticalAlignment="Top" FontSize="16" TextDecorations="{x:Null}" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="430,131,0,0" TextWrapping="Wrap" Text="Código SNS:" VerticalAlignment="Top" FontSize="16" TextDecorations="{x:Null}" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="430,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Text="Saldo:" TextDecorations="{x:Null}" FontWeight="Bold"/>
         <TextBlock x:Name="label_nombrePaciente" HorizontalAlignment="Left" Margin="172,131,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" FontSize="16"/>
         <TextBlock x:Name="label_apellidosPaciente" HorizontalAlignment="Left" Margin="181,194,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" FontSize="16"/>
         <TextBlock x:Name="label_saldoPaciente" HorizontalAlignment="Left" Margin="494,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16"/>
