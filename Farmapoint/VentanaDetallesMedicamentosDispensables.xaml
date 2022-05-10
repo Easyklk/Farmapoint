@@ -11,7 +11,7 @@
         Background="#FFA6FF72"
         Closing="Window_Closing" 
         Loaded="Window_Loaded">
-    <Grid Width="700" Height="400">
+    <Grid Width="1000" Height="400">
         <Border BorderBrush="Black"
                 Background="White"
                 BorderThickness="1"
