@@ -9,46 +9,48 @@
         WindowState="Maximized"
         ResizeMode="NoResize"
         Background="#FFA6FF72"
+        Width="1500"
         Closing="Window_Closing" 
         Loaded="Window_Loaded">
-    <Grid Width="1000" Height="400">
+    <Grid Height="477" VerticalAlignment="Top"
+          Margin="0,25,0,0" Width="1000">
         <Border BorderBrush="Black"
                 Background="White"
                 BorderThickness="1"
-                CornerRadius="10">
+                CornerRadius="10" >
             <Border.Effect>
                 <DropShadowEffect />
             </Border.Effect>
         </Border>
         <Label x:Name="Title" Content="FARMAPOINT" HorizontalAlignment="Center" VerticalAlignment="Top" Height="64" Width="auto" FontSize="36" FontWeight="Bold" FontStyle="Italic"/>
-        <DataGrid x:Name="grdDatos" AutoGeneratingColumn="grdDatos_AutoGeneratingColumn" Height="250" VerticalAlignment="Center" Loaded="DataRow_Loaded" IsReadOnly="True" BorderBrush="#FFA397A4" RowBackground="WhiteSmoke" Margin="75,119,75,31" SelectionChanged="grdDatos_SelectionChanged" />
-        <TextBlock HorizontalAlignment="Left" Margin="75,78,0,0" TextWrapping="Wrap" Text="Nombre:" VerticalAlignment="Top"/>
-        <TextBlock x:Name="label_nombre" HorizontalAlignment="Left" Margin="124,78,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="237,78,0,0" TextWrapping="Wrap" Text="Apellidos:" VerticalAlignment="Top"/>
-        <TextBlock x:Name="label_apellido" HorizontalAlignment="Left" Margin="291,78,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="469,78,0,0" TextWrapping="Wrap" Text="Código SNS:" VerticalAlignment="Top"/>
-        <TextBlock x:Name="label_sns" HorizontalAlignment="Left" Margin="540,78,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top"/>
-        <Button Margin="10,333,631,43" Click="btn_volver_Click">
-            <WrapPanel Width="58" HorizontalAlignment="Center">
+        <DataGrid FontSize="18" x:Name="grdDatos" AutoGeneratingColumn="grdDatos_AutoGeneratingColumn" Height="200" Margin="0,100,0,100" Width="800" VerticalAlignment="Center" HorizontalAlignment="Center" Loaded="DataRow_Loaded" IsReadOnly="True" BorderBrush="#FFA397A4" RowBackground="WhiteSmoke"  SelectionChanged="grdDatos_SelectionChanged" />
+        <TextBlock HorizontalAlignment="Left" Margin="100,100,0,0" TextWrapping="Wrap" Text="Nombre:" VerticalAlignment="Top" FontSize="22 px"/>
+        <TextBlock x:Name="label_nombre" HorizontalAlignment="Left" Margin="190,100,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top" FontSize="22 px"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,100,230,0" TextWrapping="Wrap" Text="Apellidos:" VerticalAlignment="Top" FontSize="22 px"/>
+        <TextBlock x:Name="label_apellido" HorizontalAlignment="Center" Margin="30,100,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top" FontSize="22 px"/>
+        <TextBlock HorizontalAlignment="Right" Margin="0,100,250,0" TextWrapping="Wrap" Text="Código SNS:" VerticalAlignment="Top" FontSize="22 px"/>
+        <TextBlock x:Name="label_sns" HorizontalAlignment="Right" Margin="0,100,40,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top" FontSize="22 px"/>
+        <Button Margin="50,410,0,30" Click="btn_volver_Click" FontSize="20" HorizontalAlignment="Left">
+            <WrapPanel Width="78" HorizontalAlignment="Center" Height="auto">
                 <Image Source="resources/back.png" Width="20" Height="20" Margin="2,0,1,0"/>
                 <TextBlock Text="Volver" VerticalAlignment="Center"/>
             </WrapPanel>
         </Button>
-        <TextBlock Text="Importe Total:" HorizontalAlignment="Left" Margin="477,374,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock x:Name="importe"  HorizontalAlignment="Left" Margin="555,374,0,0" TextWrapping="NoWrap"  VerticalAlignment="Top"/>
-        <Button x:Name="btn_dispensar" IsEnabled="False" Margin="612,372,10,4" Width="auto" Click="btn_dispensar_Click">
-            <WrapPanel HorizontalAlignment="Center">
+        <TextBlock FontSize="22" Text="Importe Total:" HorizontalAlignment="Right" Margin="0,0,290,30" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
+        <TextBlock x:Name="importe" FontSize="22"  HorizontalAlignment="Left" Margin="710,0,0,30" TextWrapping="NoWrap"  VerticalAlignment="Bottom"/>
+        <Button x:Name="btn_dispensar" IsEnabled="False" Margin="0,410,50,30" HorizontalAlignment="Right"  FontSize="20" Click="btn_dispensar_Click">
+            <WrapPanel  HorizontalAlignment="Center" VerticalAlignment="Top">
                 <Image Source="resources/print.png" Width="20" Margin="0,0,2,0"/>
                 <TextBlock Text="Dispensar" VerticalAlignment="Center"/>
             </WrapPanel>
         </Button>
-        <TextBlock Text="Saldo Restante:" HorizontalAlignment="Left" Margin="102,374,0,0" TextWrapping="NoWrap" VerticalAlignment="Top"/>
-        <TextBlock x:Name="label_saldo" HorizontalAlignment="Left" Margin="186,374,0,0" TextWrapping="NoWrap"  VerticalAlignment="Top"/>
-        <TextBlock x:Name="label_error" HorizontalAlignment="Center" Margin="0,375,0,0" TextWrapping="NoWrap"  VerticalAlignment="Top" Foreground="Red"/>
-        <TextBlock x:Name="label_fecha" HorizontalAlignment="Right" Margin="0,21,42,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14"/>
-        <Button Margin="10,372,631,4" Click="btn_salir_click">
-            <WrapPanel Width="58" HorizontalAlignment="Center">
-                <Image Source="resources/logout.png" Height="20" Margin="0,0,5,0"/>
+        <TextBlock Text="Saldo Restante:" FontSize="22" HorizontalAlignment="Left" Margin="180,0,0,30" TextWrapping="NoWrap" VerticalAlignment="Bottom"/>
+        <TextBlock x:Name="label_saldo" FontSize="22" HorizontalAlignment="Left" Margin="330,0,0,30" TextWrapping="NoWrap"  VerticalAlignment="Bottom"/>
+        <TextBlock x:Name="label_error" FontSize="22" HorizontalAlignment="Center" Margin="0,375,0,0" TextWrapping="NoWrap"  VerticalAlignment="Top" Foreground="Red"/>
+        <TextBlock x:Name="label_fecha" FontSize="22" HorizontalAlignment="Right" Margin="0,21,42,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Button Margin="50,30,0,410" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" Click="btn_salir_click">
+            <WrapPanel Width="78" VerticalAlignment="Top" HorizontalAlignment="Center" Height="auto">
+                <Image Source="resources/logout.png" Height="20" Margin="0,0,8,0"/>
                 <TextBlock Text="Salir" VerticalAlignment="Center"/>
             </WrapPanel>
         </Button>

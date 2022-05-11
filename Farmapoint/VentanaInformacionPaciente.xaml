@@ -11,7 +11,8 @@
         Title="Información Paciente" 
         Height="450" Width="800" 
         Loaded="Window_Loaded" Closing="Window_Closing">
-    <Grid Width="700" Height="315" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Grid Width="700" Height="315" HorizontalAlignment="Center" 
+          VerticalAlignment="Top" Margin="0,25,0,0">
         <Border BorderBrush="Black"
                 Background="White"
                 BorderThickness="1"

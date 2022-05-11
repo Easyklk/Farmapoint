@@ -29,7 +29,7 @@
                 <TextBlock Text="INGRESAR POR CÓDIGO SNS" VerticalAlignment="Center"/>
             </WrapPanel>
         </Button>
-        <TextBlock x:Name="sns_error" TextWrapping="NoWrap" Width="auto" Height="auto" VerticalAlignment="Center" Foreground="Red" Margin="254,168,49,146" FontSize="20"/>
+        <TextBlock x:Name="sns_error" TextWrapping="NoWrap" Width="auto" Height="auto" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red" Margin="0,168,0,146" FontSize="20"/>
         <TextBlock TextWrapping="NoWrap" Text="Ingrese su código SNS:" HorizontalAlignment="Center" FontSize="20" VerticalAlignment="Center" Width="auto" Height="auto" Margin="58,223,370,117"/>
         <TextBox x:Name="Txt_SNS" MaxLength="16" Width="300" Height="auto" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" FontSize="22" Margin="252,223,48,116"/>
         <Button FontSize="22" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="590" Height="60" Click="Button_TarjetaSanitaria" Margin="5,300,5,11">
