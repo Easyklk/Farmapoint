@@ -8,12 +8,20 @@
         Title="Receta Dispensables"
         WindowState="Maximized"
         ResizeMode="NoResize"
-        Background="#FFA6FF72" 
         Width="1500"
+        WindowStyle="None"
         Closing="Window_Closing" 
         Loaded="Window_Loaded">
+    <Window.Background>
+        <LinearGradientBrush  EndPoint="0.5,1"  >
+            <GradientStop Color="#FF2DA622" Offset="0"/>
+            <GradientStop Color="#FF3E7038" Offset="0.461"/>
+            <GradientStop Color="#FF5C9355" Offset="0.61"/>
+            <GradientStop Color="#FF526150" Offset="0.803"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid Height="477" VerticalAlignment="Top"
-          Margin="0,25s,0,0" Width="1000">
+          Margin="0,25,0,0" Width="1000">
         <Border BorderBrush="Black"
                 Background="White"
                 BorderThickness="1"
@@ -22,14 +30,14 @@
                 <DropShadowEffect />
             </Border.Effect>
         </Border>
-        <Label x:Name="Title" Content="FARMAPOINT" HorizontalAlignment="Center" VerticalAlignment="Top" Height="64" Width="auto" FontSize="36" FontWeight="Bold" FontStyle="Italic"/>
+        <Label x:Name="Title" Content="FARMAPOINT" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Height="64" Width="auto" FontSize="36" FontWeight="Bold" FontStyle="Italic"/>
         <DataGrid FontSize="18" x:Name="grdDatos" AutoGeneratingColumn="grdDatos_AutoGeneratingColumn" Height="200" Margin="0,100,0,100" Width="800" VerticalAlignment="Center" HorizontalAlignment="Center" Loaded="DataRow_Loaded" IsReadOnly="True" BorderBrush="#FFA397A4" RowBackground="WhiteSmoke"  SelectionChanged="grdDatos_SelectionChanged" AreRowDetailsFrozen="True" GridLinesVisibility="Vertical" SelectionMode="Single" />
-        <TextBlock HorizontalAlignment="Left" Margin="100,100,0,0" TextWrapping="Wrap" Text="Nombre:" VerticalAlignment="Top" FontSize="22 px"/>
-        <TextBlock x:Name="label_nombre" HorizontalAlignment="Left" Margin="190,100,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top" FontSize="22 px"/>
+        <TextBlock HorizontalAlignment="Left" Margin="100,100,0,0" TextWrapping="Wrap" Text="Nombre:" VerticalAlignment="Top" FontSize="22"/>
+        <TextBlock x:Name="label_nombre" HorizontalAlignment="Left" Margin="190,100,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top" FontSize="22"/>
         <TextBlock HorizontalAlignment="Center" Margin="0,100,230,0" TextWrapping="Wrap" Text="Apellidos:" VerticalAlignment="Top" FontSize="22 px"/>
-        <TextBlock x:Name="label_apellido" HorizontalAlignment="Center" Margin="30,100,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top" FontSize="22 px"/>
+        <TextBlock x:Name="label_apellido" HorizontalAlignment="Center" Margin="30,100,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top" FontSize="22"/>
         <TextBlock HorizontalAlignment="Right" Margin="0,100,250,0" TextWrapping="Wrap" Text="Código SNS:" VerticalAlignment="Top" FontSize="22 px"/>
-        <TextBlock x:Name="label_sns" HorizontalAlignment="Right" Margin="0,100,40,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top" FontSize="22 px"/>
+        <TextBlock x:Name="label_sns" HorizontalAlignment="Right" Margin="0,100,40,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top" FontSize="22"/>
         <Button Margin="50,410,0,30" Click="btn_volver_click" Width="auto" FontSize="18" Height="auto" HorizontalAlignment="Left">
             <WrapPanel  HorizontalAlignment="Center">
                 <Image Source="resources/back.png" Width="20" Height="20" Margin="2,0,1,0"/>

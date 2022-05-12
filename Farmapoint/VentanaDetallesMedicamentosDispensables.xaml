@@ -8,10 +8,17 @@
         Title="Medicamentos Detallados" 
         WindowState="Maximized"
         ResizeMode="NoResize"
-        Background="#FFA6FF72"
         Width="1500"
         Closing="Window_Closing" 
         Loaded="Window_Loaded">
+    <Window.Background>
+        <LinearGradientBrush  EndPoint="0.5,1"  >
+            <GradientStop Color="#FF2DA622" Offset="0"/>
+            <GradientStop Color="#FF3E7038" Offset="0.461"/>
+            <GradientStop Color="#FF5C9355" Offset="0.61"/>
+            <GradientStop Color="#FF526150" Offset="0.803"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid Height="477" VerticalAlignment="Top"
           Margin="0,25,0,0" Width="1000">
         <Border BorderBrush="Black"
@@ -22,7 +29,7 @@
                 <DropShadowEffect />
             </Border.Effect>
         </Border>
-        <Label x:Name="Title" Content="FARMAPOINT" HorizontalAlignment="Center" VerticalAlignment="Top" Height="64" Width="auto" FontSize="36" FontWeight="Bold" FontStyle="Italic"/>
+        <Label x:Name="Title" Content="FARMAPOINT" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Height="64" Width="auto" FontSize="36" FontWeight="Bold" FontStyle="Italic"/>
         <DataGrid FontSize="18" x:Name="grdDatos" AutoGeneratingColumn="grdDatos_AutoGeneratingColumn" Height="200" Margin="0,100,0,100" Width="800" VerticalAlignment="Center" HorizontalAlignment="Center" Loaded="DataRow_Loaded" IsReadOnly="True" BorderBrush="#FFA397A4" RowBackground="WhiteSmoke"  SelectionChanged="grdDatos_SelectionChanged" />
         <TextBlock HorizontalAlignment="Left" Margin="100,100,0,0" TextWrapping="Wrap" Text="Nombre:" VerticalAlignment="Top" FontSize="22 px"/>
         <TextBlock x:Name="label_nombre" HorizontalAlignment="Left" Margin="190,100,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top" FontSize="22 px"/>

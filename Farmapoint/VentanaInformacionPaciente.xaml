@@ -5,13 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Farmapoint"
         mc:Ignorable="d"
-        Background="#FFA6FF72"
         WindowState="Maximized"
         ResizeMode="NoResize"
         Title="Información Paciente" 
-        Height="450" Width="800" 
-        Loaded="Window_Loaded" Closing="Window_Closing">
-    <Grid Width="700" Height="315" HorizontalAlignment="Center" 
+        Height="450" Width="1500" 
+        WindowStyle="None"
+        Loaded="Window_Loaded" 
+        Closing="Window_Closing">
+    <Window.Background>
+        <LinearGradientBrush  EndPoint="0.5,1"  >
+            <GradientStop Color="#FF2DA622" Offset="0"/>
+            <GradientStop Color="#FF3E7038" Offset="0.461"/>
+            <GradientStop Color="#FF5C9355" Offset="0.61"/>
+            <GradientStop Color="#FF526150" Offset="0.803"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid Width="800" Height="315" HorizontalAlignment="Center" 
           VerticalAlignment="Top" Margin="0,25,0,0">
         <Border BorderBrush="Black"
                 Background="White"
@@ -21,17 +30,17 @@
                 <DropShadowEffect />
             </Border.Effect>
         </Border>
-        <Label x:Name="Title" Content="FARMAPOINT" HorizontalAlignment="Center" VerticalAlignment="Top" Height="64" Width="auto" FontSize="36" FontWeight="Bold" FontStyle="Italic"/>
-        <TextBlock x:Name="label_fecha" Margin="0,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="16" Width="auto"/>
-        <TextBlock HorizontalAlignment="Left" Margin="92,131,0,0" TextWrapping="Wrap" Text="Nombre:" VerticalAlignment="Top" FontSize="16" TextDecorations="{x:Null}" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="92,194,0,0" TextWrapping="Wrap" Text="Apellidos:" VerticalAlignment="Top" FontSize="16" TextDecorations="{x:Null}" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="430,131,0,0" TextWrapping="Wrap" Text="Código SNS:" VerticalAlignment="Top" FontSize="16" TextDecorations="{x:Null}" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="430,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Text="Saldo:" TextDecorations="{x:Null}" FontWeight="Bold"/>
-        <TextBlock x:Name="label_nombrePaciente" HorizontalAlignment="Left" Margin="172,131,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" FontSize="16"/>
-        <TextBlock x:Name="label_apellidosPaciente" HorizontalAlignment="Left" Margin="181,194,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" FontSize="16"/>
-        <TextBlock x:Name="label_saldoPaciente" HorizontalAlignment="Left" Margin="494,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16"/>
-        <TextBlock x:Name="label_snsPaciente" HorizontalAlignment="Left" Margin="534,131,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" FontSize="16"/>
-        <Button x:Name="btn_volver" HorizontalAlignment="Left" Margin="10,281,0,0" VerticalAlignment="Top" Width="75" FontSize="15" Click="btn_volver_Click">
+        <Label x:Name="Title" Content="FARMAPOINT" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Width="auto" FontSize="45" FontWeight="Bold" FontStyle="Italic"/>
+        <TextBlock x:Name="label_fecha" Margin="0,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="20" Width="auto"/>
+        <TextBlock HorizontalAlignment="Left" Margin="130,131,0,0" TextWrapping="Wrap" Text="Nombre:" VerticalAlignment="Top" FontSize="22" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="118,194,0,0" TextWrapping="Wrap" Text="Apellidos:" VerticalAlignment="Top" FontSize="22" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Right" Margin="0,131,240,0" TextWrapping="Wrap" Text="Código SNS:" VerticalAlignment="Top" FontSize="22"  FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Right" Margin="0,194,240,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" Text="Saldo:" FontWeight="Bold"/>
+        <TextBlock x:Name="label_nombrePaciente" HorizontalAlignment="Left" Margin="225,131,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" FontSize="22"/>
+        <TextBlock x:Name="label_apellidosPaciente" HorizontalAlignment="Left" Margin="225,194,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" FontSize="22"/>
+        <TextBlock x:Name="label_saldoPaciente" HorizontalAlignment="left" Margin="565,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22"/>
+        <TextBlock x:Name="label_snsPaciente" HorizontalAlignment="Left" Margin="565,131,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" FontSize="22"/>
+        <Button x:Name="btn_volver" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" FontSize="18" Click="btn_volver_Click">
             <WrapPanel Width="74" HorizontalAlignment="Center">
                 <Image Source="resources/back.png" Width="20" Margin="1,0,3,0"/>
                 <TextBlock Text="Volver" VerticalAlignment="Center"/>

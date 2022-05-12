@@ -8,8 +8,15 @@
         Title="Busqueda Paciente"
         WindowState="Maximized" 
         ResizeMode="NoResize"
-        Background="#FFA6FF72"
         Closing="Window_Closing" Loaded="Window_Loaded" WindowStyle="None">
+    <Window.Background>
+        <LinearGradientBrush  EndPoint="0.5,1"  >
+            <GradientStop Color="#FF2DA622" Offset="0"/>
+            <GradientStop Color="#FF3E7038" Offset="0.461"/>
+            <GradientStop Color="#FF5C9355" Offset="0.61"/>
+            <GradientStop Color="#FF526150" Offset="0.803"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid Width="900" Height="467" 
           Margin="0,25,0,0"
           HorizontalAlignment="Center"

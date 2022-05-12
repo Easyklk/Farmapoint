@@ -5,12 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Farmapoint"
         mc:Ignorable="d"
-        Background="#FFA6FF72"
         WindowState="Maximized"
         ResizeMode="NoResize"
         Title="Menu Paciente" 
         Height="450" Width="1000" 
         Loaded="Window_Loaded" Closing="Window_Closing" WindowStyle="None">
+    <Window.Background>
+        <LinearGradientBrush  EndPoint="0.5,1"  >
+            <GradientStop Color="#FF2DA622" Offset="0"/>
+            <GradientStop Color="#FF3E7038" Offset="0.461"/>
+            <GradientStop Color="#FF5C9355" Offset="0.61"/>
+            <GradientStop Color="#FF526150" Offset="0.803"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid HorizontalAlignment="Center" 
           VerticalAlignment="Top"
           Margin="0,25,0,0"

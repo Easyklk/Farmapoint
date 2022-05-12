@@ -46,9 +46,8 @@ namespace Farmapoint
                     {
                         VentanaBusquedaPaciente ventanaLogeado = new VentanaBusquedaPaciente();
                         ventanaLogeado.Show();
-
+                        Hide();
                         conexion.Close();
-                        this.Hide();
                     }
                     else
                     {
