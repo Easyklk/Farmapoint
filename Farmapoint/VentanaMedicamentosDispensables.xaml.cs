@@ -78,9 +78,9 @@ namespace Farmapoint
 
         private void btn_volver_click(object sender, RoutedEventArgs e)
         {
-            VentanaBusquedaPaciente ventanaLogeado = new VentanaBusquedaPaciente();
+            MenuPaciente menuPaciente = new MenuPaciente(codigoSns);
             this.Hide();
-            ventanaLogeado.Show();
+            menuPaciente.Show();
         }
 
         private void grdDatos_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -178,8 +178,18 @@ namespace Farmapoint
             string id_paciente = Obtener_Paciente().propId_Paciente;
             string cite = Obtener_Paciente().propCite;
             string id_consulta = "";
+            string recetaDispensadaId = "";
 
             OleDbConnection con = ConexionDb.AbrirConexion();
+            string consultaSelectNotificarDispensacion = "SELECT CNotificarDispensacionIN.RecetaDispensada " +
+                "FROM CNotificarDispensacionIN WHERE(((CNotificarDispensacionIN.Codigo_SNS) = '" + codigoSns + "'))";
+            OleDbCommand commandSelectNotificarDispensacion = new OleDbCommand(consultaSelectNotificarDispensacion, con);
+            OleDbDataReader readerSelectNotificarDispensacion = commandSelectNotificarDispensacion.ExecuteReader();
+            if (readerSelectNotificarDispensacion.Read())
+            {
+                recetaDispensadaId = readerSelectNotificarDispensacion["RecetaDispensada"].ToString();
+            }
+
             string consultaFechaPrescripcion = "SELECT CRecetaCDA.duracionTratamiento, CRecetaCDA.Identificador_Receta " +
                 "FROM CPaciente INNER JOIN((CReceta INNER JOIN CDetalleRecetaIN ON CReceta.Identificador_Receta = CDetalleRecetaIN.Receta) " +
                 "INNER JOIN CRecetaCDA ON CReceta.Identificador_Receta = CRecetaCDA.Identificador_Receta) ON CPaciente.ID_Paciente = CDetalleRecetaIN.ID_Paciente " +
@@ -195,24 +205,27 @@ namespace Farmapoint
                     if (duracionTratamiento.CompareTo(DateTime.Today.ToString("d")) == -1)
                     {
                         string identificadorReceta = readerConsulta["Identificador_Receta"].ToString();
-                        string consultaBusquedaPacienteOUT = "SELECT CBusquedaPacienteOUT.ID_Consulta " +
-                       "FROM CPaciente INNER JOIN CBusquedaPacienteOUT ON CPaciente.ID_Paciente = CBusquedaPacienteOUT.Paciente " +
-                       "WHERE (((CPaciente.ID_Paciente) = '" + id_paciente + "')); ";
-                        OleDbCommand commandBusquedaPaciente = new OleDbCommand(consultaBusquedaPacienteOUT, con);
-                        OleDbDataReader readerConsultaBusqeudaPaciente = commandBusquedaPaciente.ExecuteReader();
-                        if (readerConsultaBusqeudaPaciente.Read())
+                        if (identificadorReceta != recetaDispensadaId)
                         {
-                            id_consulta = readerConsultaBusqeudaPaciente["ID_Consulta"].ToString();
-                        }
-                        command.Connection = con;
-                        command.CommandType = CommandType.Text;
-                        command.CommandText = "INSERT INTO CNotificarDispensacionIN (ID_Paciente, CITE, ID_Consulta, Codigo_SNS, RecetaDispensada, Localizador_Hoja)" +
-                                              "VALUES ('" + id_paciente + "','" + cite + "'," + id_consulta + ", '" + codigoSns + "','" + identificadorReceta + "'," + 0 + ")";
-                        command.ExecuteNonQuery();
+                            string consultaBusquedaPacienteOUT = "SELECT CBusquedaPacienteOUT.ID_Consulta " +
+                           "FROM CPaciente INNER JOIN CBusquedaPacienteOUT ON CPaciente.ID_Paciente = CBusquedaPacienteOUT.Paciente " +
+                           "WHERE (((CPaciente.ID_Paciente) = '" + id_paciente + "')); ";
+                            OleDbCommand commandBusquedaPaciente = new OleDbCommand(consultaBusquedaPacienteOUT, con);
+                            OleDbDataReader readerConsultaBusqeudaPaciente = commandBusquedaPaciente.ExecuteReader();
+                            if (readerConsultaBusqeudaPaciente.Read())
+                            {
+                                id_consulta = readerConsultaBusqeudaPaciente["ID_Consulta"].ToString();
+                            }
+                            command.Connection = con;
+                            command.CommandType = CommandType.Text;
+                            command.CommandText = "INSERT INTO CNotificarDispensacionIN (ID_Paciente, CITE, ID_Consulta, Codigo_SNS, RecetaDispensada, Localizador_Hoja)" +
+                                                  "VALUES ('" + id_paciente + "','" + cite + "'," + id_consulta + ", '" + codigoSns + "','" + identificadorReceta + "'," + 0 + ")";
+                            command.ExecuteNonQuery();
 
-                        command.CommandType = CommandType.Text;
-                        command.CommandText = "UPDATE CRecetaDispensable SET Dispensada=TRUE WHERE Identificador_Receta='" + identificadorReceta + "';";
-                        command.ExecuteNonQuery();
+                            command.CommandType = CommandType.Text;
+                            command.CommandText = "UPDATE CRecetaDispensable SET Dispensada=TRUE WHERE Identificador_Receta='" + identificadorReceta + "';";
+                            command.ExecuteNonQuery();
+                        }
                     }
                 }
             }

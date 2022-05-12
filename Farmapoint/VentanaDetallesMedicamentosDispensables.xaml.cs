@@ -54,9 +54,9 @@ namespace Farmapoint
 
         private void btn_volver_Click(object sender, RoutedEventArgs e)
         {
-            VentanaMedicamentosDispensables ventanaLogeado = new VentanaMedicamentosDispensables(codigoSns);
+            VentanaMedicamentosDispensables ventanaMedicacmentosDispensables = new VentanaMedicamentosDispensables(codigoSns);
             this.Hide();
-            ventanaLogeado.Show();
+            ventanaMedicacmentosDispensables.Show();
         }
 
         private void DataRow_Loaded(object sender, RoutedEventArgs e)
