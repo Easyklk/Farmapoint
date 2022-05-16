@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Data.OleDb;
+using System.IO;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -33,7 +35,45 @@ namespace Farmapoint
 
         private void Button_TarjetaSanitaria(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            try
+            {
+                StreamReader streamReader = new StreamReader("c:\\Datos2.txt");
+                ArrayList arrayList = new ArrayList();
+                string str;
+                do
+                {
+                    str = streamReader.ReadLine();
+                    if (str != null)
+                        arrayList.Add((object)str);
+                }
+                while (str != null);
+                streamReader.Close();
+                try
+                {
+                    File.Delete("c:\\Datos2.txt");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                MessageBox.Show((string)arrayList[0]);
+                //this.LblNombre.Text = Conversions.ToString(arrayList[0]);
+                //this.LblTipoUsr.Text = Conversions.ToString(arrayList[1]);
+                //this.LblFechaCad.Text = Conversions.ToString(arrayList[2]);
+                //this.LblCpAuton.Text = Conversions.ToString(arrayList[3]);
+                //this.LblFechaNac.Text = Conversions.ToString(arrayList[4]);
+                //this.LblSexo.Text = Conversions.ToString(arrayList[5]);
+                //this.LblNivelDependencia.Text = Conversions.ToString(arrayList[6]);
+                //this.LblGradoDependencia.Text = Conversions.ToString(arrayList[7]);
+            }
+            catch (Exception ex)
+            {
+                int num = (int)MessageBox.Show(ex.ToString(), "Error");
+                MessageBox.Show(ex.ToString());
+            }
+
+
+            //this.Hide();
             //Window2 ventanaTarjetaSanitaria = new Window2();
             //ventanaTarjetaSanitaria.Show();
         }

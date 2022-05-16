@@ -21,8 +21,7 @@
             <GradientStop Color="#FF526150" Offset="0.803"/>
         </LinearGradientBrush>
     </Window.Background>
-    <Grid x:Name="panel_login" 
-          HorizontalAlignment="Center" 
+    <Grid HorizontalAlignment="Center" 
           Margin="0,25,0,0"
           VerticalAlignment="Top" 
           Height="467" Width="840">

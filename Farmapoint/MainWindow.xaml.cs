@@ -44,8 +44,11 @@ namespace Farmapoint
                     OleDbDataReader dr = adapter.ExecuteReader();
                     if (dr.Read())
                     {
-                        VentanaBusquedaPaciente ventanaLogeado = new VentanaBusquedaPaciente();
-                        ventanaLogeado.Show();
+                        VentanaBusquedaPaciente ventanaBusquedaPaciente = new VentanaBusquedaPaciente();
+                        App.Current.MainWindow = ventanaBusquedaPaciente;
+
+                        ventanaBusquedaPaciente.ShowDialog();
+                        ventanaBusquedaPaciente.Activate();
                         Hide();
                         conexion.Close();
                     }

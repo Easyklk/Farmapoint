@@ -31,7 +31,7 @@
             </Border.Effect>
         </Border>
         <Label x:Name="Title" Content="FARMAPOINT" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Height="64" Width="auto" FontSize="36" FontWeight="Bold" FontStyle="Italic"/>
-        <DataGrid FontSize="18" x:Name="grdDatos" AutoGeneratingColumn="grdDatos_AutoGeneratingColumn" Height="200" Margin="0,100,0,100" Width="800" VerticalAlignment="Center" HorizontalAlignment="Center" Loaded="DataRow_Loaded" IsReadOnly="True" BorderBrush="#FFA397A4" RowBackground="WhiteSmoke"  SelectionChanged="grdDatos_SelectionChanged" AreRowDetailsFrozen="True" GridLinesVisibility="Vertical" SelectionMode="Single" />
+        <DataGrid FontSize="18" x:Name="grdDatos" AutoGeneratingColumn="grdDatos_AutoGeneratingColumn" Height="200" Margin="0,100,0,100" Width="800" VerticalAlignment="Center" HorizontalAlignment="Center" Loaded="DataRow_Loaded" IsReadOnly="True" BorderBrush="#FFA397A4" RowBackground="WhiteSmoke"  SelectionChanged="grdDatos_SelectionChanged" AreRowDetailsFrozen="True" SelectionMode="Single" />
         <TextBlock HorizontalAlignment="Left" Margin="100,100,0,0" TextWrapping="Wrap" Text="Nombre:" VerticalAlignment="Top" FontSize="22"/>
         <TextBlock x:Name="label_nombre" HorizontalAlignment="Left" Margin="190,100,0,0" TextWrapping="Wrap" Width="auto" VerticalAlignment="Top" FontSize="22"/>
         <TextBlock HorizontalAlignment="Center" Margin="0,100,230,0" TextWrapping="Wrap" Text="Apellidos:" VerticalAlignment="Top" FontSize="22 px"/>
