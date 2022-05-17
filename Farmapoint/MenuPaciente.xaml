@@ -8,7 +8,7 @@
         WindowState="Maximized"
         ResizeMode="NoResize"
         Title="Menu Paciente" 
-        Height="450" Width="1000" 
+        Height="502" Width="1007" 
         Loaded="Window_Loaded" Closing="Window_Closing" WindowStyle="None">
     <Window.Background>
         <LinearGradientBrush  EndPoint="0.5,1"  >
@@ -44,9 +44,9 @@
                 <TextBlock Text="Receta" VerticalAlignment="Center"/>
             </WrapPanel>
         </Button>
-        <Button  HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" Margin="10,0,0,10" Click="Button_Click">
-            <WrapPanel Width="75" HorizontalAlignment="Center">
-                <Image Source="resources/logout.png" Width="20"  Margin="0,0,10,0"/>
+        <Button  HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="100" Margin="15,0,0,15" Click="Button_Click">
+            <WrapPanel Width="99" HorizontalAlignment="Center">
+                <Image Source="resources/logout.png" Width="25"  Margin="0,0,10,0"/>
                 <TextBlock Text="Salir" VerticalAlignment="Center"/>
             </WrapPanel>
         </Button>
