@@ -1,16 +1,27 @@
 ﻿using System;
-using System.Data;
-using System.Data.OleDb;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Data;
+using System.Data.OleDb;
 using System.Windows.Threading;
 
 namespace Farmapoint
 {
     /// <summary>
-    /// Lógica de interacción para VentanaDetallesMedicamentosDispensables.xaml
+    /// Lógica de interacción para PageDetallesMedicamentosDispensables.xaml
     /// </summary>
-    public partial class VentanaDetallesMedicamentosDispensables : Window
+    public partial class PageDetallesMedicamentosDispensables : Page
     {
         private OleDbDataAdapter adapter = new OleDbDataAdapter();
         private OleDbCommand command = new OleDbCommand();
@@ -21,7 +32,7 @@ namespace Farmapoint
         private string tipoAportacion;
         private decimal importeTotal = 0m;
 
-        public VentanaDetallesMedicamentosDispensables(CRecetaDispensable recetaDispensable, string codigoSns)
+        public PageDetallesMedicamentosDispensables(CRecetaDispensable recetaDispensable, string codigoSns)
         {
             InitializeComponent();
             this.codigoSns = codigoSns;
@@ -54,9 +65,8 @@ namespace Farmapoint
 
         private void btn_volver_Click(object sender, RoutedEventArgs e)
         {
-            VentanaMedicamentosDispensables ventanaMedicacmentosDispensables = new VentanaMedicamentosDispensables(codigoSns);
-            this.Hide();
-            ventanaMedicacmentosDispensables.Show();
+            PageMedicamentosDispensables pageMedicamentosDispensables = new PageMedicamentosDispensables(codigoSns);
+            this.NavigationService.Navigate(pageMedicamentosDispensables);
         }
 
         private void DataRow_Loaded(object sender, RoutedEventArgs e)
@@ -181,9 +191,8 @@ namespace Farmapoint
                 MessageBox.Show(ex.ToString());
             }
 
-            this.Hide();
-            VentanaMedicamentosDispensables VentanaMedicamentoDispensable = new VentanaMedicamentosDispensables(codigoSns);
-            VentanaMedicamentoDispensable.Show();
+            PageMedicamentosDispensables pageMedicamentosDispensables = new PageMedicamentosDispensables(codigoSns);
+            this.NavigationService.Navigate(pageMedicamentosDispensables);
         }
 
         private void grdDatos_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
@@ -294,9 +303,8 @@ namespace Farmapoint
 
         private void btn_salir_click(object sender, RoutedEventArgs e)
         {
-            Hide();
-            VentanaBusquedaPaciente ventanaBusquedaPaciente = new VentanaBusquedaPaciente();
-            ventanaBusquedaPaciente.Show();
+            PageBusquedaPaciente pageBusquedaPaciente = new PageBusquedaPaciente();
+            this.NavigationService.Navigate(pageBusquedaPaciente);
         }
     }
 }

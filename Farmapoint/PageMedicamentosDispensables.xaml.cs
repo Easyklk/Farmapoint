@@ -1,16 +1,27 @@
 ﻿using System;
-using System.Data;
-using System.Data.OleDb;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Data;
+using System.Data.OleDb;
 using System.Windows.Threading;
 
 namespace Farmapoint
 {
     /// <summary>
-    /// Lógica de interacción para Window2.xaml
+    /// Lógica de interacción para PageMedicamentosDispensables.xaml
     /// </summary>
-    public partial class VentanaMedicamentosDispensables : Window
+    public partial class PageMedicamentosDispensables : Page
     {
         private OleDbConnection conexion = ConexionDb.AbrirConexion();
         private OleDbDataAdapter adapter = new OleDbDataAdapter();
@@ -19,7 +30,7 @@ namespace Farmapoint
         private string codigoSns;
         private CRecetaDispensable recetaDispensable;
 
-        public VentanaMedicamentosDispensables(string codigoSns)
+        public PageMedicamentosDispensables(string codigoSns)
         {
             this.codigoSns = codigoSns;
             InitializeComponent();
@@ -78,9 +89,8 @@ namespace Farmapoint
 
         private void btn_volver_click(object sender, RoutedEventArgs e)
         {
-            MenuPaciente menuPaciente = new MenuPaciente(codigoSns);
-            this.Hide();
-            menuPaciente.Show();
+            PageMenuPaciente pageMenuPaciente = new PageMenuPaciente(codigoSns);
+            this.NavigationService.Navigate(pageMenuPaciente);
         }
 
         private void grdDatos_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -121,9 +131,8 @@ namespace Farmapoint
             if (!reader.Read())
             {
                 con.Close();
-                VentanaDetallesMedicamentosDispensables ventanaDetallesMedicamentosDispensables = new VentanaDetallesMedicamentosDispensables(recetaDispensable, codigoSns);
-                this.Hide();
-                ventanaDetallesMedicamentosDispensables.Show();
+                PageDetallesMedicamentosDispensables pageDetallesMedicamentosDispensables = new PageDetallesMedicamentosDispensables(recetaDispensable, codigoSns);
+                this.NavigationService.Navigate(pageDetallesMedicamentosDispensables);
             }
 
         }
@@ -234,15 +243,13 @@ namespace Farmapoint
 
         private void btn_salir_click(object sender, RoutedEventArgs e)
         {
-            Hide();
-            VentanaBusquedaPaciente ventanaBusquedaPaciente = new VentanaBusquedaPaciente();
-            ventanaBusquedaPaciente.Show();
+            PageBusquedaPaciente pageBusquedaPaciente = new PageBusquedaPaciente();
+            this.NavigationService.Navigate(pageBusquedaPaciente);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Application.Current.Shutdown();
         }
-
     }
 }

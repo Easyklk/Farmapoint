@@ -1,18 +1,30 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Data.OleDb;
-using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Collections;
+using System.IO;
 using System.Windows.Threading;
 
 namespace Farmapoint
 {
     /// <summary>
-    /// Lógica de interacción para Window1.xaml
+    /// Lógica de interacción para PageBusquedaPaciente.xaml
     /// </summary>
-    public partial class VentanaBusquedaPaciente : Window
+    public partial class PageBusquedaPaciente : Page
     {
-        public VentanaBusquedaPaciente()
+        public PageBusquedaPaciente()
         {
             InitializeComponent();
         }
@@ -94,9 +106,8 @@ namespace Farmapoint
                 if (dr.Read())
                 {
                     conexion.Close();
-                    Hide();
-                    MenuPaciente menuPaciente = new MenuPaciente(Txt_SNS.Text);
-                    menuPaciente.Show();
+                    PageMenuPaciente pageMenuPaciente = new PageMenuPaciente(Txt_SNS.Text);
+                    this.NavigationService.Navigate(pageMenuPaciente);
                 }
                 else
                 {
@@ -111,6 +122,5 @@ namespace Farmapoint
             Application.Current.Shutdown();
 
         }
-
     }
 }

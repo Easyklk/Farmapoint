@@ -10,19 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace Farmapoint
 {
     /// <summary>
-    /// Lógica de interacción para MenuPaciente.xaml
+    /// Lógica de interacción para PageMenuPaciente.xaml
     /// </summary>
-    public partial class MenuPaciente : Window
+    public partial class PageMenuPaciente : Page
     {
         private string codigoSns;
-
-        public MenuPaciente(string codigoSns)
+        public PageMenuPaciente(string codigoSns)
         {
             this.codigoSns = codigoSns;
             InitializeComponent();
@@ -46,9 +46,8 @@ namespace Farmapoint
 
         private void informacion_Click(object sender, RoutedEventArgs e)
         {
-            Hide();
-            VentanaInformacionPaciente ventanaInformacionPaciente = new VentanaInformacionPaciente(codigoSns);
-            ventanaInformacionPaciente.Show();
+            PageInformacionPaciente pageInformacionPaciente = new PageInformacionPaciente(codigoSns);
+            this.NavigationService.Navigate(pageInformacionPaciente);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -58,16 +57,14 @@ namespace Farmapoint
 
         private void recetas_Click(object sender, RoutedEventArgs e)
         {
-            Hide();
-            VentanaMedicamentosDispensables ventanaMedicamentoDispensable = new VentanaMedicamentosDispensables(codigoSns);
-            ventanaMedicamentoDispensable.Show();
+            PageMedicamentosDispensables pageMedicamentosDispensables = new PageMedicamentosDispensables(codigoSns);
+            this.NavigationService.Navigate(pageMedicamentosDispensables);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Salir_Click(object sender, RoutedEventArgs e)
         {
-            Hide();
-            VentanaBusquedaPaciente ventanaBusquedaPaciente = new VentanaBusquedaPaciente();
-            ventanaBusquedaPaciente.Show();
+            PageBusquedaPaciente pageBusquedaPaciente = new PageBusquedaPaciente();
+            this.NavigationService.Navigate(pageBusquedaPaciente);
         }
     }
 }

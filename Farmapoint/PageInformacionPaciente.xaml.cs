@@ -1,17 +1,29 @@
 ﻿using System;
-using System.Data.OleDb;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Data.OleDb;
 using System.Windows.Threading;
 
 namespace Farmapoint
 {
     /// <summary>
-    /// Lógica de interacción para VentanaInformacionPaciente.xaml
+    /// Lógica de interacción para PageInformacionPaciente.xaml
     /// </summary>
-    public partial class VentanaInformacionPaciente : Window
+    public partial class PageInformacionPaciente : Page
     {
         private string codigoSns;
-        public VentanaInformacionPaciente(string codigoSns)
+        public PageInformacionPaciente(string codigoSns)
         {
             this.codigoSns = codigoSns;
             InitializeComponent();
@@ -64,9 +76,8 @@ namespace Farmapoint
 
         private void btn_volver_Click(object sender, RoutedEventArgs e)
         {
-            MenuPaciente menuPaciente= new MenuPaciente(codigoSns);
-            Hide();
-            menuPaciente.Show();
+            PageMenuPaciente pageMenuPaciente = new PageMenuPaciente(codigoSns);
+            this.NavigationService.Navigate(pageMenuPaciente);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
